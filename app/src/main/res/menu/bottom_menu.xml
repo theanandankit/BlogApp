@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_black_18dp">
+    </item>
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="Search"
+        android:icon="@drawable/baseline_search_black_18dp">
+    </item>
+
+    <item
+        android:id="@+id/menu_add"
+        android:title="Blog"
+        android:icon="@drawable/baseline_add_circle_outline_black_18dp">
+    </item>
+
+    <item
+        android:id="@+id/menu_activity"
+        android:title="Activity"
+        android:icon="@drawable/baseline_local_activity_black_18dp">
+    </item>
+
+    <item
+        android:id="@+id/menu_profile"
+        android:title="Profile"
+        android:icon="@drawable/baseline_person_pin_black_18dp">
+    </item>
+
+</menu>
