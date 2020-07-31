@@ -53,104 +53,103 @@
     </TextView>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:background="@color/white"
-        app:cardElevation="5dp"
         android:id="@+id/login_cardview"
-        app:cardCornerRadius="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        >
+        android:background="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/login_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/login_text"
-                android:textColor="@color/black"
-                android:fontFamily="@font/poppins"
-                android:text="Please enter the valid Email or Signup."
-                android:textSize="12dp"
-                android:gravity="left"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="left"
+                android:text="Please enter the valid Email or Signup."
+                android:textColor="@color/black"
+                android:textSize="12dp">
 
             </TextView>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:backgroundTint="@color/white"
-                android:id="@+id/login_email"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:inputType="text"
-                    android:includeFontPadding="false"
                     android:backgroundTint="@color/white"
+                    android:hint="Email"
+                    android:includeFontPadding="false"
+                    android:inputType="text"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:id="@+id/login_password"
-                android:backgroundTint="@color/white"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:backgroundTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:includeFontPadding="false"
                     android:backgroundTint="@color/white"
+                    android:hint="Password"
+                    android:includeFontPadding="false"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/login_forget_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password ?"
-                android:id="@+id/login_forget_password"
-                android:textSize="14dp"
-                android:textColor="@color/black"
                 android:layout_gravity="right"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="30dp"
                 android:fontFamily="@font/poppins"
-                android:layout_marginTop="10dp">
+                android:text="Forgot Password ?"
+                android:textColor="@color/black"
+                android:textSize="14dp">
 
             </TextView>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:id="@+id/login_button"
-                android:layout_marginTop="20dp"
-                app:cornerRadius="10dp"
-                android:textAllCaps="false"
-                android:fontFamily="@font/poppins"
-                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginBottom="15dp"
-                android:backgroundTint="@color/black">
+                android:backgroundTint="@color/black"
+                android:fontFamily="@font/poppins"
+                android:text="Login"
+                android:textAllCaps="false"
+                app:cornerRadius="10dp">
 
             </com.google.android.material.button.MaterialButton>
 

@@ -28,7 +28,6 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.ho
     public void onBindViewHolder(@NonNull HomeScreenAdapter.homescreenholder holder, int position) {
 
     }
-
     @Override
     public int getItemCount() {
         return 7;
