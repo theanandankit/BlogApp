@@ -11,17 +11,14 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class SignUpScreen extends AppCompatActivity {
-
     TextInputLayout email,password,repassword,username,firstname,lastname;
     MaterialButton button;
     TextView text;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_screen);
         init();
-
     }
     public void init()
     {
@@ -45,8 +42,6 @@ public class SignUpScreen extends AppCompatActivity {
                 }
             }
         });
-
-
     }
     public void initial_condition()
     {
