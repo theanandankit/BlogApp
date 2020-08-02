@@ -3,9 +3,14 @@ package com.example.blogappdjangorest.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
 
 import com.example.blogappdjangorest.Fragment.ActivityFragment;
 import com.example.blogappdjangorest.Fragment.AddBlogFragment;
@@ -24,7 +29,11 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         init();
+
+
     }
+
+
     private void init()
     {
         bottomNavigationView=findViewById(R.id.homescreenbottom);
@@ -63,4 +72,5 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
     }
+
 }

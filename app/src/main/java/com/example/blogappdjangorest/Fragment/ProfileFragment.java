@@ -67,7 +67,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         viewPager = (ViewPager)view.findViewById(R.id.pager);
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getParentFragmentManager(), tabLayout.getTabCount());
+        Pager adapter = new Pager(getFragmentManager(), tabLayout.getTabCount());
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
