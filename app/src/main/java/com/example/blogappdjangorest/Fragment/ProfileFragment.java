@@ -1,30 +1,21 @@
 package com.example.blogappdjangorest.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
 import com.example.blogappdjangorest.Adapter.Pager;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.EditProfile;
 import com.google.android.material.tabs.TabLayout;
-
-import org.w3c.dom.Text;
 
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
@@ -52,7 +43,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         super.onViewCreated(view, savedInstanceState);
 
         // When swiping between pages, select the
-// corresponding tab.
+        // corresponding tab.
 
         //Initializing the tablayout
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
@@ -67,7 +58,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         viewPager = (ViewPager)view.findViewById(R.id.pager);
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getParentFragmentManager(), tabLayout.getTabCount());
+        Pager adapter = new Pager(getFragmentManager(), tabLayout.getTabCount());
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
@@ -91,7 +82,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-//actionBar.setSelectedNavigationItem(postion);
+         //actionBar.setSelectedNavigationItem(postion);
                 tabLayout.setScrollPosition(position,0,true);
                 tabLayout.setSelected(true);
 
