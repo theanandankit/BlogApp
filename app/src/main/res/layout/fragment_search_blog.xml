@@ -28,7 +28,6 @@
         android:layout_below="@id/Search_blog_button"
         android:layout_marginTop="5dp"
         android:id="@+id/Search_blog_recycle"
-        android:layout_marginLeft="10dp"
         tools:listitem="@layout/blog_main_item"
         android:layout_marginRight="10dp">
 
