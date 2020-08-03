@@ -2,10 +2,12 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
     android:elevation="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,30 +60,21 @@
 
         </LinearLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Education"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
                 android:layout_marginRight="10dp"
-                app:strokeWidth="2dp"
-                app:strokeColor="@color/black"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="0dp"
-                >
+                android:textSize="12dp"
+                android:background="@drawable/tag_background"
+                android:padding="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Education"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/black">
+            </TextView>
 
-                </TextView>
-
-
-            </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 
     </LinearLayout>
@@ -106,7 +99,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="School always play important role."
                 android:layout_marginLeft="10dp"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/black"
                 android:layout_marginRight="10dp">
@@ -119,7 +112,8 @@
                     android:layout_height="wrap_content"
                     android:text="9 min"
                     android:fontFamily="@font/poppins"
-                    android:layout_marginLeft="10dp">
+                    android:layout_marginLeft="10dp"
+                    android:textSize="10dp">
 
                 </TextView>
 
