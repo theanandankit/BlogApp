@@ -58,18 +58,30 @@
 
         </LinearLayout>
 
-            <TextView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Education"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/black"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/black"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
+                >
 
-            </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Education"
+                    android:layout_margin="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black">
 
+                </TextView>
+
+
+            </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 
     </LinearLayout>
@@ -95,7 +107,6 @@
                 android:text="School always play important role."
                 android:layout_marginLeft="10dp"
                 android:textSize="16dp"
-                android:textStyle="bold"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/black"
                 android:layout_marginRight="10dp">
