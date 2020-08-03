@@ -29,8 +29,6 @@ import org.w3c.dom.Text;
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     TextView EditProfileBtn;
-
-
    TabLayout tabLayout;
 
     //This is our viewPager
