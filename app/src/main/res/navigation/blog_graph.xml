@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/blog_graph"
+    app:startDestination="@id/createBlog">
+
+    <fragment
+        android:id="@+id/createBlog"
+        android:name="com.example.blogappdjangorest.Blog.CreateBlog"
+        android:label="CreateBlog" >
+        <action
+            android:id="@+id/action_createBlog_to_blogCategory"
+            app:destination="@id/blogCategory" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogCategory"
+        android:name="com.example.blogappdjangorest.Blog.blogCategory"
+        android:label="fragment_blog_category"
+        tools:layout="@layout/fragment_blog_category" >
+        <action
+            android:id="@+id/action_blogCategory_to_blogPrivacy"
+            app:destination="@id/blogPrivacy" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogGroup"
+        android:name="com.example.blogappdjangorest.Blog.blogGroup"
+        android:label="fragment_blog_group"
+        tools:layout="@layout/fragment_blog_group" >
+        <action
+            android:id="@+id/action_blogGroup_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blogPrivacy"
+        android:name="com.example.blogappdjangorest.Blog.BlogPrivacy"
+        android:label="fragment_blog_privacy"
+        tools:layout="@layout/fragment_blog_privacy" >
+        <action
+            android:id="@+id/action_blogPrivacy_to_blogGroup"
+            app:destination="@id/blogGroup" />
+        <action
+            android:id="@+id/action_blogPrivacy_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.blogappdjangorest.Fragment.HomeFragment"
+        android:label="HomeFragment" />
+</navigation>

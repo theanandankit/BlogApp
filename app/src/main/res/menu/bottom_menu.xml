@@ -20,9 +20,9 @@
     </item>
 
     <item
-        android:id="@+id/menu_activity"
-        android:title="Activity"
-        android:icon="@drawable/baseline_local_activity_black_18dp">
+        android:id="@+id/menu_groups"
+        android:title="Your Groups"
+        android:icon="@drawable/ic_baseline_group_24">
     </item>
 
     <item

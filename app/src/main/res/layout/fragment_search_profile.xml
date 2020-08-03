@@ -2,15 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     xmlns:tools="http://schemas.android.com/tools">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/blog_main_item"
-        android:id="@+id/recycleView">
+        android:id="@+id/recycleView"
+        tools:listitem="@layout/search_profile_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 
