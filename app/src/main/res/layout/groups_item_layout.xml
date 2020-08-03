@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    android:layout_marginVertical="5dp"
+    android:layout_marginHorizontal="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/group_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/group_profile"
+            app:civ_border_width="0dp"
+            app:civ_border_color="#FF000000"
+            android:layout_gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/group_name"
+                android:text="Group Name"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:layout_marginVertical="5dp"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins"
+
+                />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
