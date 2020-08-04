@@ -167,8 +167,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         tools:listitem="@layout/blog_main_item"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:id="@+id/recycleView">
 
     </androidx.recyclerview.widget.RecyclerView>
 
