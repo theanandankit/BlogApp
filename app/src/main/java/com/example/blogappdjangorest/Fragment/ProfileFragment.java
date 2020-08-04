@@ -20,8 +20,6 @@ import com.google.android.material.tabs.TabLayout;
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     TextView EditProfileBtn;
-
-
    TabLayout tabLayout;
 
     //This is our viewPager
