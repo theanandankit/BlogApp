@@ -18,8 +18,6 @@ import com.example.blogappdjangorest.activities.EditProfile;
 import com.google.android.material.tabs.TabLayout;
 
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
-
-    TextView EditProfileBtn;
    TabLayout tabLayout;
 
     //This is our viewPager
@@ -63,19 +61,6 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.addOnTabSelectedListener(this);
-
-
-
-        EditProfileBtn = view.findViewById(R.id.EditProfileBtn);
-
-        EditProfileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getContext(), EditProfile.class);
-                getContext().startActivity(intent);
-            }
-        });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
