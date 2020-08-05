@@ -26,19 +26,20 @@
 
     </de.hdodenhof.circleimageview.CircleImageView>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:fontFamily="@font/poppins"
-        android:text="Follower"
-        android:textColor="@color/black"
+        <TextView
+            android:id="@+id/followerbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:clickable="true"
+            android:fontFamily="@font/poppins"
 
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-        app:layout_constraintStart_toEndOf="@+id/circleImageView" />
+            android:text="Follower"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+            app:layout_constraintStart_toEndOf="@+id/circleImageView" />
 
     <TextView
         android:id="@+id/textView4"
@@ -82,8 +83,8 @@
 
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        app:layout_constraintBottom_toBottomOf="@+id/followerbtn"
+        app:layout_constraintStart_toEndOf="@+id/followerbtn" />
 
         <TextView
             android:id="@+id/textView5"
@@ -93,9 +94,9 @@
             android:text="235"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="@+id/textView2"
-            app:layout_constraintStart_toStartOf="@+id/textView2" />
+            app:layout_constraintBottom_toTopOf="@+id/followerbtn"
+            app:layout_constraintEnd_toEndOf="@+id/followerbtn"
+            app:layout_constraintStart_toStartOf="@+id/followerbtn" />
 
         <TextView
             android:id="@+id/textView6"
@@ -134,26 +135,16 @@
         android:textColor="#222121"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" /><![CDATA[
 
-        <TextView
-            android:id="@+id/EditProfileBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/bg_profile"
-            android:clickable="true"
-            android:paddingStart="30px"
-            android:paddingTop="5dp"
-            android:paddingEnd="30px"
-            android:paddingBottom="5dp"
-            android:text="Edit Profile"
-            android:textColor="#fff"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
+
+    app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+    ]]>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout
