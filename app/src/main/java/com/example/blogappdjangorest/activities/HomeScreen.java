@@ -1,21 +1,16 @@
 package com.example.blogappdjangorest.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
 
-import com.example.blogappdjangorest.Fragment.GroupFragment;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.blogappdjangorest.Fragment.AddBlogFragment;
+import com.example.blogappdjangorest.Fragment.GroupFragment;
 import com.example.blogappdjangorest.Fragment.HomeFragment;
 import com.example.blogappdjangorest.Fragment.ProfileFragment;
 import com.example.blogappdjangorest.Fragment.SearchFragment;
