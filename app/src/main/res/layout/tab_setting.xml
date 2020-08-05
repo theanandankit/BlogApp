@@ -1,15 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/TabSetting1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    tools:context=".Fragment.TabSetting">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/EditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Settings"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/edit_profile"
+        android:textSize="12dp" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/changePassward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/poppins"
+        android:text="Change Passward" />
+
+    <TextView
+        android:id="@+id/JoinGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/poppins"
+        android:text="Join Group"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/Creategrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="210dp"
+        android:fontFamily="@font/poppins"
+        android:text="Create group"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/Createdgrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="260dp"
+        android:fontFamily="@font/poppins"
+        android:text="Created groups"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/Logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="310dp"
+        android:fontFamily="@font/poppins"
+        android:text="Logout"
+        android:textSize="12dp" />
+
+</FrameLayout>
+

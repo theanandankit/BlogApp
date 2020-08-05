@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.ForgetPassward3Fragment">
+    tools:context=".Fragment.ChangePasswardFragment">
 
     <TextView
-        android:id="@+id/followerbtn"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:fontFamily="@font/poppins"
-        android:text="Reset Passward"
+        android:text="Change Passward"
         android:textAlignment="center"
         android:textSize="12dp" />
 

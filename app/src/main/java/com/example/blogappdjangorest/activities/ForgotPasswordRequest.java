@@ -16,9 +16,5 @@ public class ForgotPasswordRequest extends AppCompatActivity {
         setContentView(R.layout.forget_passward);
         getSupportFragmentManager().beginTransaction().replace(R.id.ForgetPasswardFragment,new ForgetPasswardFragment()).commit();
 
-
-
-
-
     }
 }
