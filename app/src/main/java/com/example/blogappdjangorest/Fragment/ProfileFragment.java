@@ -29,7 +29,6 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
     TextView EditProfileBtn;
     TextView FollowerBtn;
     RecyclerView recyclerView;
-
    TabLayout tabLayout;
     //This is our viewPager
    ViewPager viewPager;

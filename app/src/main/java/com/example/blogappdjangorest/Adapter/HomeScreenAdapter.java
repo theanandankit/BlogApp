@@ -1,6 +1,7 @@
 package com.example.blogappdjangorest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.activities.Blog_view;
+import com.example.blogappdjangorest.activities.ProfileView;
 
 public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.homescreenholder> {
     private Context context;
@@ -26,6 +29,13 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.ho
 
     @Override
     public void onBindViewHolder(@NonNull HomeScreenAdapter.homescreenholder holder, int position) {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(new Intent(context, Blog_view.class));
+            }
+        });
 
     }
     @Override
