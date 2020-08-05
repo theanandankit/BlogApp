@@ -5,13 +5,11 @@
     android:id="@+id/connstraint"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="#C1C1C1"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C1C1C1"
         android:paddingBottom="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -151,7 +149,6 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#c1c1c1"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
