@@ -16,15 +16,9 @@ public class CreatedGroupsAdapter extends RecyclerView.Adapter<CreatedGroupsAdap
     private Context mContext;
     androidx.fragment.app.FragmentManager fm;
 
-
-
     public CreatedGroupsAdapter(Context context){
         mContext = context;
         fm =((FragmentActivity) mContext).getSupportFragmentManager();
-
-
-
-
     }
 
     @NonNull

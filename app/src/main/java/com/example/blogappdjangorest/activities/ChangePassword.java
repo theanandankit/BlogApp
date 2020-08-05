@@ -6,12 +6,11 @@ import android.os.Bundle;
 
 import com.example.blogappdjangorest.R;
 
-public class Blog_view extends AppCompatActivity {
+public class ChangePassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blog_view);
-
+        setContentView(R.layout.activity_change_password);
     }
 }

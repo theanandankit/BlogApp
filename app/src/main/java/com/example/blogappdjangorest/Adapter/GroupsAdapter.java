@@ -27,9 +27,6 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
         mContext = context;
         fm =((FragmentActivity) mContext).getSupportFragmentManager();
 
-
-
-
     }
 
     @NonNull

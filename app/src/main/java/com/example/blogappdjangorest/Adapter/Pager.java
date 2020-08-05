@@ -1,18 +1,9 @@
 package com.example.blogappdjangorest.Adapter;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.PagerTitleStrip;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.blogappdjangorest.Fragment.TabBlog;
-import com.example.blogappdjangorest.Fragment.TabSetting;
 import com.example.blogappdjangorest.followernfollowing.Follower;
 import com.example.blogappdjangorest.followernfollowing.Following;
 
