@@ -5,26 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.blogappdjangorest.Dialog.CreateGroup;
 import com.example.blogappdjangorest.Dialog.JoinGroup;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.ChangePassword;
 import com.example.blogappdjangorest.activities.EditProfile;
-import com.example.blogappdjangorest.activities.HomeScreen;
 import com.example.blogappdjangorest.activities.LoginScreen;
-
-import org.w3c.dom.Text;
 
 public class TabSetting extends Fragment {
     RelativeLayout logout,changePassward,joinGroup,createdGroups,createGroup,editProfile;
@@ -52,6 +42,13 @@ public class TabSetting extends Fragment {
         create=new CreateGroup(getContext());
 
         createdGroups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.homescreenfragment,new CreatedGroupsFragment()).addToBackStack("Profile").commit();
+            }
+        });
+
+        createGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 create.show();

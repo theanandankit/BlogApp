@@ -21,9 +21,6 @@ public class CreatedGroupsFragment extends Fragment {
     GroupsAdapter groupsAdapter;
     TextView title;
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +43,6 @@ public class CreatedGroupsFragment extends Fragment {
         groups.setAdapter(groupsAdapter);
         shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
-
 
     }
 }
