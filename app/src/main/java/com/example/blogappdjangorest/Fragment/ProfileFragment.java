@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
 import com.example.blogappdjangorest.Adapter.Pager;
+import com.example.blogappdjangorest.Adapter.ProfileBlogAdapter;
 import com.example.blogappdjangorest.Adapter.ProfileTabLayoutAdapter;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.EditProfile;
@@ -53,31 +54,29 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 
         FollowerBtn = view.findViewById(R.id.followerbtn);
 
-        FollowerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(getContext());
-                dialog.setContentView(R.layout.followers_dialog);
-
-
-
-                Button dialogButton = (Button) dialog.findViewById(R.id.CloseBtn);
-                // if button is clicked, close the custom dialog
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                recyclerView=dialog.findViewById(R.id.recycler_follower);
-                HomeScreenAdapter homeScreenAdapter=new HomeScreenAdapter(getContext());
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(homeScreenAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-
-                dialog.show();
-            }
-        });
+//        FollowerBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final Dialog dialog = new Dialog(getContext());
+//                dialog.setContentView(R.layout.followers_dialog);
+//
+//                Button dialogButton = (Button) dialog.findViewById(R.id.CloseBtn);
+//                // if button is clicked, close the custom dialog
+//                dialogButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                recyclerView=dialog.findViewById(R.id.recycler_follower);
+//                ProfileBlogAdapter profileBlogAdapter=new ProfileBlogAdapter(getContext());
+//                recyclerView.setHasFixedSize(true);
+//                recyclerView.setAdapter(profileBlogAdapter);
+//                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+//
+//                dialog.show();
+//            }
+//        });
   FollowerBtn = view.findViewById(R.id.followerbtn);
 
         FollowerBtn.setOnClickListener(new View.OnClickListener() {

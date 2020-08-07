@@ -78,7 +78,7 @@ public class LoginScreen extends AppCompatActivity {
 
                 if (response.code()==200)
                 {
-                    if (!response.body().getToken().isEmpty()) {
+                    if (!response.body().toString().isEmpty()) {
                         preferencesHelper.setToken(response.body().getToken());
                         preferencesHelper.setid(response.body().getId());
                         waitingDialog.dismiss();
