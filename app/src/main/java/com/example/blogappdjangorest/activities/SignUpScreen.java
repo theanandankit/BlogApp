@@ -159,7 +159,7 @@ public class SignUpScreen extends AppCompatActivity {
 
                 if (response.code()==200)
                 {
-                    if (!response.body().getToken().isEmpty())
+                    if (!response.body().toString().isEmpty())
                     {
                         waitingDialog.dismiss();
                         Toast.makeText(getApplicationContext(),"Successfully registered",Toast.LENGTH_LONG).show();

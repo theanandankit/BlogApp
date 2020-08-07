@@ -32,4 +32,14 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getString("id","NA");
     }
+    public boolean islogin()
+    {
+        return sharedPreferences.getBoolean("islogin",false);
+    }
+    public void setlogin()
+    {
+        editor=sharedPreferences.edit();
+        editor.putBoolean("islogin",true);
+        editor.apply();
+    }
 }
