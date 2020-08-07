@@ -1,6 +1,8 @@
 package com.example.blogappdjangorest.Retrofit;
 
+import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
 
@@ -25,4 +27,14 @@ public interface RetrofitInterface {
 
     @GET("public-blog")
     Call<ArrayList<PublicBlogResponse>> public_blog();
+
+    @GET("search-blog/")
+    Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search);
+
+    @GET("search-profile/")
+    Call<ArrayList<ProfileSearchResponse>> profilesearch(@Query("search") String search);
+
+    @GET("blog-info/")
+    Call<ArrayList<BlogInfoResponse>> bloginfo(@Query("id") String id);
+
 }
