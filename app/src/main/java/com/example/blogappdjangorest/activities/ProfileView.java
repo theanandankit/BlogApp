@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
+import com.example.blogappdjangorest.Adapter.ProfileViewBlogAdapter;
 import com.example.blogappdjangorest.R;
 
 public class ProfileView extends AppCompatActivity {
@@ -19,9 +20,9 @@ public class ProfileView extends AppCompatActivity {
         setContentView(R.layout.activity_profile_view);
 
         recyclerView=findViewById(R.id.recycleView);
-        HomeScreenAdapter homeScreenAdapter=new HomeScreenAdapter(getApplicationContext());
+        ProfileViewBlogAdapter profileViewBlogAdapter=new ProfileViewBlogAdapter(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(homeScreenAdapter);
+        recyclerView.setAdapter(profileViewBlogAdapter);
     }
 }

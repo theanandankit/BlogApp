@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.blogappdjangorest.Adapter.FollowListAdapter;
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
 import com.example.blogappdjangorest.R;
 public class Following extends Fragment {
@@ -28,10 +29,10 @@ public class Following extends Fragment {
         View view = inflater.inflate(R.layout.fragment_following, container, false);
 
         recyclerView=view.findViewById(R.id.followingrecycle);
-        HomeScreenAdapter homeScreenAdapter=new HomeScreenAdapter(getActivity());
+        FollowListAdapter followListAdapter=new FollowListAdapter(getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(homeScreenAdapter);
+        recyclerView.setAdapter(followListAdapter);
         return view;
 
     }

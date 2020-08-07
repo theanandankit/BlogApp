@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
+import com.example.blogappdjangorest.Adapter.SearchBlogAdapter;
 import com.example.blogappdjangorest.R;
 import com.google.android.material.button.MaterialButton;
 
@@ -29,10 +30,10 @@ public class SearchBlogFragment extends Fragment {
 
         recyclerView=v.findViewById(R.id.Search_blog_recycle);
         button=v.findViewById(R.id.Search_blog_button);
-        HomeScreenAdapter homeScreenAdapter=new HomeScreenAdapter(getContext());
+        SearchBlogAdapter searchBlogAdapter=new SearchBlogAdapter(getContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(homeScreenAdapter);
+        recyclerView.setAdapter(searchBlogAdapter);
 
 
 
