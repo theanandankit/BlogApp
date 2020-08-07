@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.blogappdjangorest.Adapter.CreatedGroupsAdapter;
 import com.example.blogappdjangorest.Adapter.GroupsAdapter;
 import com.example.blogappdjangorest.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -18,11 +19,8 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 public class CreatedGroupsFragment extends Fragment {
     ShimmerFrameLayout shimmerFrameLayout;
     RecyclerView groups;
-    GroupsAdapter groupsAdapter;
+    CreatedGroupsAdapter groupsAdapter;
     TextView title;
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,13 +38,12 @@ public class CreatedGroupsFragment extends Fragment {
     private void initViews(View view) {
         shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
         groups = view.findViewById(R.id.groups);
-        groupsAdapter = new GroupsAdapter(getContext());
+        groupsAdapter = new CreatedGroupsAdapter(getContext());
         title = view.findViewById(R.id.title);
         title.setText("Created By You");
         groups.setAdapter(groupsAdapter);
         shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
-
 
     }
 }

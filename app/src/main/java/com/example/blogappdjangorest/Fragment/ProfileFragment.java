@@ -19,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
 import com.example.blogappdjangorest.Adapter.Pager;
+import com.example.blogappdjangorest.Adapter.ProfileTabLayoutAdapter;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.EditProfile;
 import com.example.blogappdjangorest.activities.FollowersNFollowing;
@@ -105,26 +106,13 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         viewPager = (ViewPager)view.findViewById(R.id.pager);
 
         //Creating our pager adapter
-        Pager adapter = new Pager(getFragmentManager(), tabLayout.getTabCount());
+        ProfileTabLayoutAdapter profileTabLayoutAdapter=new ProfileTabLayoutAdapter(getFragmentManager());
 
         //Adding adapter to pager
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(profileTabLayoutAdapter);
 
         //Adding onTabSelectedListener to swipe views
         tabLayout.addOnTabSelectedListener(this);
-
-
-
-        EditProfileBtn = view.findViewById(R.id.EditProfileBtn);
-
-        EditProfileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getContext(), EditProfile.class);
-                getContext().startActivity(intent);
-            }
-        });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

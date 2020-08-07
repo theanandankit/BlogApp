@@ -5,13 +5,11 @@
     android:id="@+id/connstraint"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="#C1C1C1"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C1C1C1"
         android:paddingBottom="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -135,53 +133,22 @@
         android:textColor="#222121"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" /><![CDATA[
 
-        <TextView
-            android:id="@+id/EditProfileBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:clickable="true"
-            android:paddingStart="30px"
-            android:paddingTop="5dp"
-            android:paddingEnd="30px"
-            android:paddingBottom="5dp"
-            android:text="Edit Profile"
-            android:textColor="#fff"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/Setting"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <TextView
-        android:id="@+id/Setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:paddingStart="30px"
-        android:paddingTop="5dp"
-        android:paddingEnd="30px"
 
-        android:paddingBottom="5dp"
-        android:text="Settings"
-        android:textColor="#fff"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/EditProfileBtn" />
-
-        app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
-      
+
+
+    ]]>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#c1c1c1"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
