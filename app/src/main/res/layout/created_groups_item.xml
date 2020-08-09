@@ -40,18 +40,6 @@
                 android:fontFamily="@font/poppins"
 
                 />
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/group_description"
-                android:text="ABCDEGHIJKLMNOFUYUHIODRFTGYUHIJRDFTGYHUJIFGTHJY"
-                android:textSize="12dp"
-                android:textColor="@color/grey"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:drawablePadding="10dp"
-                android:fontFamily="@font/poppins"
-                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,8 +51,8 @@
                     android:layout_height="wrap_content"
                     android:text="Created On : "
                     android:textSize="12dp"
+                    android:id="@+id/group_date"
                     android:textColor="@color/grey"
-
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/poppins"
                     />
@@ -80,38 +68,13 @@
                     />
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginVertical="2dp"
-                >
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Members : "
-                    android:textSize="12dp"
-                    android:textColor="@color/grey"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
-                    />
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/total_members"
-                    android:text="20"
-                    android:textSize="12dp"
-                    android:textColor="@color/grey"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins"
-                    />
 
-            </LinearLayout>
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:text="@string/view_group_code"
+                android:id="@+id/group_button"
                 android:fontFamily="@font/poppins"
                 android:textAllCaps="false"
                 android:includeFontPadding="false"/>

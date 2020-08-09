@@ -59,6 +59,7 @@
            android:layout_marginRight="10dp"
            android:layout_marginTop="10dp"
            android:hint="Group Name*"
+           android:id="@+id/group_name"
            android:fontFamily="@font/poppins"
            android:textSize="14dp">
 

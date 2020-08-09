@@ -101,15 +101,15 @@ public class AddBlogFragment extends Fragment {
                     add_blog();
                     dialog.dismiss();
                 } else {
-                    showGroupDialog();
                     if (group.length==0)
                     {
                         Toast.makeText(getContext(),"No group to show, please Create the group or publish it public",Toast.LENGTH_LONG).show();
                     }
                     else
                     {
-                        add_blog();
+                        showGroupDialog();
                         dialog.dismiss();
+
                     }
                 }
             }
@@ -137,6 +137,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                add_blog();
                 dialog.dismiss();
             }
         });
@@ -214,12 +215,17 @@ public class AddBlogFragment extends Fragment {
                     {
                         Toast.makeText(getContext(),"Successfully Added",Toast.LENGTH_LONG).show();
                     }
+                    else
+                        Log.e("ok","q");
                 }
+                else
+                Log.e("ok","r");
             }
 
             @Override
             public void onFailure(Call<AddBlogResponse> call, Throwable t) {
 
+                Log.e("ok","w");
             }
         });
     }
