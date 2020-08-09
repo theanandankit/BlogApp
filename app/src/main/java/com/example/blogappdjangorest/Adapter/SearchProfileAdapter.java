@@ -50,7 +50,10 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
         holder.name.setText(responses.get(position).getFirst_name()+" "+responses.get(position).getLast_name());
         holder.username.setText(responses.get(position).getUsername());
-        holder.description.setText(responses.get(position).getUser_details()[0].getDescription());
+        if (!(responses.get(position).getUser_details().length ==0))
+          holder.description.setText(responses.get(position).getUser_details()[0].getDescription());
+        else
+            holder.description.setText("Check my new Blogs and learn something new");
     }
 
     @Override

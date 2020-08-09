@@ -35,8 +35,6 @@ public class Blog_view extends AppCompatActivity {
         init();
         progressBar.setVisibility(View.VISIBLE);
         call();
-
-
     }
     private void init()
     {

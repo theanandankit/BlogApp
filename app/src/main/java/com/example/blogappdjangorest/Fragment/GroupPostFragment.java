@@ -14,14 +14,23 @@ import android.widget.TextView;
 
 import com.example.blogappdjangorest.Adapter.GroupsAdapter;
 import com.example.blogappdjangorest.Adapter.GroupsPostAdapter;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GroupPostFragment extends Fragment {
     ShimmerFrameLayout shimmerFrameLayout;
     RecyclerView groupPosts;
     GroupsPostAdapter groupsPostAdapter;
     TextView title;
+    ApiClient apiClient;
 
 
     @Nullable
@@ -41,13 +50,38 @@ public class GroupPostFragment extends Fragment {
     private void initViews(View view) {
         shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
         groupPosts = view.findViewById(R.id.groupPosts);
-        groupsPostAdapter = new GroupsPostAdapter(getContext());
+
         title = view.findViewById(R.id.title);
         title.setText("Group Blogs");
-        groupPosts.setAdapter(groupsPostAdapter);
-        shimmerFrameLayout.stopShimmer();
-        shimmerFrameLayout.setVisibility(View.GONE);
+        apiClient=new ApiClient();
+        get_blog();
+
+    }
+
+    private void get_blog()
+    {
+        Call<ArrayList<GroupBlogResponse>> call=apiClient.getApiinterface().get_group_blog("1");
+        call.enqueue(new Callback<ArrayList<GroupBlogResponse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<GroupBlogResponse>> call, Response<ArrayList<GroupBlogResponse>> response) {
 
 
+                if (response.code()==200)
+                {
+                    if (!(response.body().isEmpty()))
+                    {
+                        groupsPostAdapter = new GroupsPostAdapter(getContext(),response.body().get(0).getGroup());
+                        groupPosts.setAdapter(groupsPostAdapter);
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<GroupBlogResponse>> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.example.blogappdjangorest.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Adapter.GroupsAdapter;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class GroupFragment extends Fragment {
     ShimmerFrameLayout shimmerFrameLayout;
     RecyclerView groups;
     GroupsAdapter groupsAdapter;
     TextView title;
+    ApiClient apiClient;
 
 
     @Nullable
@@ -39,13 +49,38 @@ public class GroupFragment extends Fragment {
     private void initViews(View view) {
         shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
         groups = view.findViewById(R.id.groups);
-        groupsAdapter = new GroupsAdapter(getContext());
+
         title = view.findViewById(R.id.title);
         title.setText("My Groups");
-        groups.setAdapter(groupsAdapter);
-        shimmerFrameLayout.stopShimmer();
-        shimmerFrameLayout.setVisibility(View.GONE);
 
+        apiClient=new ApiClient();
+        get_group();
+    }
 
+    private void get_group()
+    {
+        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group("10");
+        call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<GroupListResponse>> call, Response<ArrayList<GroupListResponse>> response) {
+
+                if (response.code()==200)
+                {
+                    if (!(response.body().size() ==0))
+                    {
+                        groupsAdapter = new GroupsAdapter(getContext(),response.body());
+                        groups.setAdapter(groupsAdapter);
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<GroupListResponse>> call, Throwable t) {
+
+            }
+        });
     }
 }

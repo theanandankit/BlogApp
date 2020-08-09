@@ -11,7 +11,7 @@
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"
         app:backgroundTint="@color/white"
-        android:text="Technology"
+        android:text="Fetching Data..."
         android:textColor="@color/black"
         app:cornerRadius="10dp"
         android:id="@+id/Search_blog_button"
@@ -35,13 +35,39 @@
         tools:listitem="@layout/blog_main_item"
         android:layout_marginRight="10dp"/>
 
-        <ProgressBar
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:id="@+id/progress">
+            android:orientation="vertical">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress"
+            android:layout_gravity="center">
 
         </ProgressBar>
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:id="@+id/caution"
+                android:background="@drawable/caution">
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Something went wrong"
+                android:gravity="center"
+                android:fontFamily="@font/poppins"
+                android:id="@+id/error">
+
+            </TextView>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

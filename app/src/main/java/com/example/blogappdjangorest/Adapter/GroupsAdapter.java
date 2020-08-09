@@ -7,6 +7,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,18 +16,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Fragment.GroupPostFragment;
 import com.example.blogappdjangorest.Fragment.HomeFragment;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemHolder> {
     private Context mContext;
+    ArrayList<GroupListResponse> responses;
     androidx.fragment.app.FragmentManager fm;
 
 
 
-    public GroupsAdapter(Context context){
+
+    public GroupsAdapter(Context context, ArrayList<GroupListResponse> responses){
         mContext = context;
         fm =((FragmentActivity) mContext).getSupportFragmentManager();
-
+        this.responses=responses;
     }
 
     @NonNull
@@ -41,10 +49,11 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
     @Override
     public void onBindViewHolder (@NonNull GroupItemHolder holder,final int position){
         setOnClickListener(holder, position);
+        holder.group_name.setText(responses.get(position).getGroup_description());
 
     }
 
-    private void setOnClickListener(GroupItemHolder holder, int position) {
+    private void setOnClickListener(final GroupItemHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +66,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
 
     @Override
     public int getItemCount () {
-        return 15;
+        return responses.size();
 
     }
 
@@ -73,13 +82,17 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
 
     class GroupItemHolder extends RecyclerView.ViewHolder {
 
-
-
+        CircleImageView image;
+        TextView group_name;
 
         private GroupItemHolder(@NonNull View itemView) {
             super(itemView);
             setGlobals(itemView);
             //setOnClickListeners();
+
+            image=itemView.findViewById(R.id.group_image);
+            group_name=itemView.findViewById(R.id.group_name);
+
         }
 
         private void setGlobals(View itemView) {
