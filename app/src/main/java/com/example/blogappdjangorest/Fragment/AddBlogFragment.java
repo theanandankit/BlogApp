@@ -155,7 +155,7 @@ public class AddBlogFragment extends Fragment {
                     if (!(response.body().size() == 0)) {
                         category.setEnabled(true);
                         for (int a = 0; a < response.body().size(); a++) {
-                            value[a]=(response.body().get(a).getCategory_name());git
+                            value[a]=(response.body().get(a).getCategory_name());
                         }
                     } else {
                         category.setText("Something Went Wrong");
