@@ -5,45 +5,45 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
-import com.example.blogappdjangorest.Adapter.SearchBlogAdapter;
 import com.example.blogappdjangorest.R;
 import com.google.android.material.button.MaterialButton;
 
 public class SearchBlogFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    MaterialButton button;
+    public static RecyclerView blog_recyclerView;
+    public static MaterialButton blog_button;
+    public static ProgressBar blog_progress;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_search_blog,container,false);
 
-        recyclerView=v.findViewById(R.id.Search_blog_recycle);
-        button=v.findViewById(R.id.Search_blog_button);
-        SearchBlogAdapter searchBlogAdapter=new SearchBlogAdapter(getContext());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(searchBlogAdapter);
+        blog_recyclerView=v.findViewById(R.id.Search_blog_recycle);
+        blog_button=v.findViewById(R.id.Search_blog_button);
+        blog_progress=v.findViewById(R.id.progress);
+        blog_progress.setVisibility(View.INVISIBLE);
+//        SearchBlogAdapter searchBlogAdapter=new SearchBlogAdapter(getContext());
+//        blog_recyclerView.setHasFixedSize(true);
+//        blog_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        blog_recyclerView.setAdapter(searchBlogAdapter);
 
 
 
-        button.setOnClickListener(new View.OnClickListener() {
+        blog_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFilterDialog();
             }
         });
-
 
 
         return v;

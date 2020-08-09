@@ -28,7 +28,8 @@
                 android:background="@null"
                 android:textSize="14dp"
                 android:hint="Search here..."
-                android:layout_toLeftOf="@id/monitor_search">
+                android:layout_toLeftOf="@id/monitor_search"
+                android:id="@+id/search_field">
 
             </EditText>
 
