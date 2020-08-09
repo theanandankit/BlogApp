@@ -5,8 +5,10 @@ import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -27,6 +29,9 @@ public interface RetrofitInterface {
 
     @GET("public-blog")
     Call<ArrayList<PublicBlogResponse>> public_blog();
+
+    @GET("full-profile-info/")
+    Call<ArrayList<ProfileUser>> profileUser(@Query("user_id") int userid);
 
     @GET("search-blog/")
     Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search);
