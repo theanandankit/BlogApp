@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,17 +22,30 @@ import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
 import com.example.blogappdjangorest.Adapter.Pager;
 import com.example.blogappdjangorest.Adapter.ProfileBlogAdapter;
 import com.example.blogappdjangorest.Adapter.ProfileTabLayoutAdapter;
+import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.activities.EditProfile;
 import com.example.blogappdjangorest.activities.FollowersNFollowing;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     TextView EditProfileBtn;
-    TextView FollowerBtn;
+    TextView FollowerBtn,biodescr,blogcount,flowwercount,name;
     RecyclerView recyclerView;
    TabLayout tabLayout;
+   ApiClient apiClient;
     //This is our viewPager
    ViewPager viewPager;
 
@@ -130,6 +144,36 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
+        biodescr = view.findViewById(R.id.biodescr);
+        blogcount = view.findViewById(R.id.blogcount);
+        name = view.findViewById(R.id.nameprofile);
+        flowwercount = view.findViewById(R.id.followercount);
+
+
+        Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(10);
+        call.enqueue(new Callback<ArrayList<ProfileUser>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ProfileUser>> call, Response<ArrayList<ProfileUser>> response) {
+                if (!response.isSuccessful()){
+                    Log.d("manik",response.code() + "");
+                    return;
+                }
+                Log.d("mannik",response.body().get(0).getFirstName()+ "");
+                biodescr.setText(response.body().get(0).getUserDetails().get(0).getDescription().toString());
+                flowwercount.setText(response.body().get(0).getPersonList2().size() + "");
+                blogcount.setText(response.body().get(0).getAuthorName().size() + "");
+                name.setText(response.body().get(0).getFirstName().toString() + " " + response.body().get(0).getLastName().toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProfileUser>> call, Throwable t) {
+
+                Log.d("manik",t.getMessage() + "");
+            }
+        });
+
 
 
     }
