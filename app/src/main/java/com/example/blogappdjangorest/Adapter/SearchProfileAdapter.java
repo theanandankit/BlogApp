@@ -39,7 +39,7 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchProfileAdapter.blogviewhloder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchProfileAdapter.blogviewhloder holder, final int position) {
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +54,15 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
           holder.description.setText(responses.get(position).getUser_details()[0].getDescription());
         else
             holder.description.setText("Check my new Blogs and learn something new");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(context,ProfileView.class);
+                intent.putExtra("user_id",responses.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

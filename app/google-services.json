@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "680874350343",
+    "firebase_url": "https://blogappdjangorest.firebaseio.com",
+    "project_id": "blogappdjangorest",
+    "storage_bucket": "blogappdjangorest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680874350343:android:8d97bb487b2a8d129157a2",
+        "android_client_info": {
+          "package_name": "com.example.blogappdjangorest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680874350343-6gvqv0c97ff40u59i960bocoki8eg0kf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blogappdjangorest",
+            "certificate_hash": "2f77578652707d1a0f74f1d73573f69cbfbd3528"
+          }
+        },
+        {
+          "client_id": "680874350343-3dahrnjsqjthp2q11e3seufq656f5ls7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blogappdjangorest",
+            "certificate_hash": "79e1a713feaff24e189ccd9c2fa2aa8c56189a80"
+          }
+        },
+        {
+          "client_id": "680874350343-i407mcqojh8fodki2jd150cjgelm8vre.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlM_CT88HV4HkF4KsEMz9kbTcPUL5tMFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680874350343-i407mcqojh8fodki2jd150cjgelm8vre.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

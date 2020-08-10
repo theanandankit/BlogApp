@@ -3,6 +3,7 @@ package com.example.blogappdjangorest.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -26,6 +27,8 @@ public class Blog_view extends AppCompatActivity {
     TextView name,date,category,title,body;
     ApiClient apiClient;
     ProgressBar progressBar;
+    String blog_id;
+    int process;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,11 @@ public class Blog_view extends AppCompatActivity {
 
         init();
         progressBar.setVisibility(View.VISIBLE);
+        blog_id=getIntent().getStringExtra("blog_id");
+        process=getIntent().getIntExtra("process",1);
+        Log.e("oki",blog_id);
         call();
+
     }
     private void init()
     {
@@ -50,7 +57,7 @@ public class Blog_view extends AppCompatActivity {
     }
     private void call()
     {
-        Call<ArrayList<BlogInfoResponse>> call=apiClient.getApiinterface().bloginfo("1");
+        Call<ArrayList<BlogInfoResponse>> call=apiClient.getApiinterface().bloginfo(blog_id);
 
         call.enqueue(new Callback<ArrayList<BlogInfoResponse>>() {
             @Override
@@ -67,6 +74,10 @@ public class Blog_view extends AppCompatActivity {
                         body.setText(response.body().get(0).getBody());
                         date.setText(response.body().get(0).getDate());
                     }
+                }
+                else
+                {
+                    body.setText("Something Went Wrong\n Please check your internet connection");
                 }
             }
 

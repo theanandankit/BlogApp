@@ -33,6 +33,7 @@ public class ProfileView extends AppCompatActivity {
     TextView name,follow,following,blog,description;
     MaterialButton follow_button;
     ApiClient apiClient;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class ProfileView extends AppCompatActivity {
         description=findViewById(R.id.description);
         follow_button=findViewById(R.id.follow_button);
         apiClient=new ApiClient();
+        user_id=getIntent().getStringExtra("user_id");
 
 
         recyclerView=findViewById(R.id.recycleView);
@@ -62,7 +64,7 @@ public class ProfileView extends AppCompatActivity {
 
     private void get_info()
     {
-        Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(10);
+        Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(Integer.parseInt(user_id));
         call.enqueue(new Callback<ArrayList<ProfileUser>>() {
             @Override
             public void onResponse(Call<ArrayList<ProfileUser>> call, Response<ArrayList<ProfileUser>> response) {
@@ -71,12 +73,16 @@ public class ProfileView extends AppCompatActivity {
                 {
                     if (!(response.body().size() ==0))
                     {
-                        ProfileViewBlogAdapter profileViewBlogAdapter=new ProfileViewBlogAdapter(getApplicationContext(),response.body().get(0).getAuthorName());
+                        ProfileViewBlogAdapter profileViewBlogAdapter=new ProfileViewBlogAdapter(ProfileView.this,response.body().get(0).getAuthorName());
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(profileViewBlogAdapter);
                         set_profile(response.body().get(0));
                     }
+                }
+                else
+                {
+
                 }
             }
 

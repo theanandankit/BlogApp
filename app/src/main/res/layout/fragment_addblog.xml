@@ -34,20 +34,22 @@
 
         </com.google.android.material.button.MaterialButton>
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:background="@drawable/ic_baseline_image_24"
+        android:id="@+id/image"
+        android:src="@drawable/ic_baseline_image_24"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp">
 
-    </ImageView>
+    </de.hdodenhof.circleimageview.CircleImageView>
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Image"
             android:textAllCaps="false"
+            android:id="@+id/add_image"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">

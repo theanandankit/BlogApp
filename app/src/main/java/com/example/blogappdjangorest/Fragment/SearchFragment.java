@@ -1,9 +1,11 @@
 package com.example.blogappdjangorest.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static androidx.core.content.ContextCompat.getSystemService;
 import static com.example.blogappdjangorest.Fragment.SearchBlogFragment.blog_button;
 import static com.example.blogappdjangorest.Fragment.SearchBlogFragment.blog_caution_image;
 import static com.example.blogappdjangorest.Fragment.SearchBlogFragment.blog_caution_text;
@@ -50,7 +53,7 @@ public class SearchFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         viewPager = view.findViewById(R.id.viewpager);
         tabLayout = view.findViewById(R.id.tabLayout);
@@ -64,6 +67,13 @@ public class SearchFragment extends Fragment {
         bbcardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                View view1=getActivity().getCurrentFocus();
+                if (view!=null)
+                {
+                    InputMethodManager inputMethodManager= (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(view1.getWindowToken(),0);
+                }
 
                 blog_progress.setVisibility(View.VISIBLE);
                 profile_progress.setVisibility(View.VISIBLE);

@@ -1,11 +1,14 @@
 package com.example.blogappdjangorest.Fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,17 +23,26 @@ import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.WaitingDialog;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class AddBlogFragment extends Fragment {
 
-    MaterialButton button,category;
+    MaterialButton button,category,add_image;
     String[] value=new String[22];
     ApiClient apiClient;
     AlertDialog.Builder builder;
@@ -38,6 +50,10 @@ public class AddBlogFragment extends Fragment {
     TextView title,body;
     String category_text,status,group_text;
     String[] group,group_id;
+    Uri uri;
+    CircleImageView image;
+    StorageReference folder;
+    WaitingDialog waitingDialog;
 
 
     @Nullable
@@ -49,7 +65,10 @@ public class AddBlogFragment extends Fragment {
         category=view.findViewById(R.id.cat_button);
         title=view.findViewById(R.id.title);
         body=view.findViewById(R.id.body);
+        add_image=view.findViewById(R.id.add_image);
+        image=view.findViewById(R.id.image);
         apiClient=new ApiClient();
+        waitingDialog=new WaitingDialog(getContext());
         get_cat();
         get_group();
 
@@ -65,6 +84,16 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 showpublishDialog();
+            }
+        });
+
+        add_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -98,7 +127,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (status.equals("public")) {
-                    add_blog();
+                    upload();
                     dialog.dismiss();
                 } else {
                     if (group.length==0)
@@ -137,7 +166,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                add_blog();
+                upload();
                 dialog.dismiss();
             }
         });
@@ -201,9 +230,9 @@ public class AddBlogFragment extends Fragment {
 
         dialog.show();
     }
-    private void add_blog()
+    private void add_blog(Uri uri)
     {
-        Call<AddBlogResponse> call=apiClient.getApiinterface().add_blog("hgytf",title.getText().toString(),body.getText().toString(),category_text,"10",status,group_text);
+        Call<AddBlogResponse> call=apiClient.getApiinterface().add_blog(String.valueOf(uri),title.getText().toString(),body.getText().toString(),category_text,"10",status,group_text);
 
         call.enqueue(new Callback<AddBlogResponse>() {
             @Override
@@ -263,5 +292,47 @@ public class AddBlogFragment extends Fragment {
 
             }
         });
+    }
+
+    private void upload()
+    {
+        folder= FirebaseStorage.getInstance().getReference().child("ImageFolder");
+        final StorageReference image_store = folder.child("image" + uri.getLastPathSegment());
+        UploadTask uploadTask=image_store.putFile(uri);
+        waitingDialog.SetDialog("Uploading Your\nfile...");
+
+        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                double progress=(100 * taskSnapshot.getBytesTransferred()) /taskSnapshot.getTotalByteCount();
+                waitingDialog.setext((int) progress +" % completed");
+            }
+        });
+
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                image_store.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        add_blog(uri);
+                    }
+                });
+            }
+        });
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null)
+        {
+            uri=data.getData();
+            image.setImageURI(uri);
+            add_image.setText("Edit Image");
+        }
     }
 }
