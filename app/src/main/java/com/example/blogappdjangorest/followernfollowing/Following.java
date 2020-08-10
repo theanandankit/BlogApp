@@ -11,11 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.blogappdjangorest.Adapter.FollowListAdapter;
+import com.example.blogappdjangorest.Adapter.FollowingListAdapter;
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
+import com.example.blogappdjangorest.Models.RetrofitModels.follower.followerList;
+import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.Retrofit.ApiClient;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Following extends Fragment {
 
     RecyclerView recyclerView;
+    ApiClient apiClient;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,10 +42,27 @@ public class Following extends Fragment {
         View view = inflater.inflate(R.layout.fragment_following, container, false);
 
         recyclerView=view.findViewById(R.id.followingrecycle);
-        FollowListAdapter followListAdapter=new FollowListAdapter(getContext());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(followListAdapter);
+
+
+        apiClient=new ApiClient();
+        Call<ArrayList<FollowingList>> call=apiClient.getApiinterface().followinglistthing(10);
+        call.enqueue(new Callback<ArrayList<FollowingList>>() {
+            @Override
+            public void onResponse(Call<ArrayList<FollowingList>> call, Response<ArrayList<FollowingList>> response) {
+                if(response.code()==200){
+                    FollowingListAdapter followingListAdapter=new FollowingListAdapter(getContext(),response.body());
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    recyclerView.setAdapter(followingListAdapter);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<FollowingList>> call, Throwable t) {
+
+            }
+        });
         return view;
 
     }

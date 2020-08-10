@@ -22,7 +22,7 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
+                android:id="@+id/profileimage"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
             </de.hdodenhof.circleimageview.CircleImageView>
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/nameprofile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
