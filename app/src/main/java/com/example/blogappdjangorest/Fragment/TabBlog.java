@@ -37,9 +37,9 @@ public class TabBlog extends Fragment {
 
         View view=inflater.inflate(R.layout.tab_blog,container,false);
 
-        apiClient=new ApiClient();
-        recyclerView=view.findViewById(R.id.recycler_blog);
 
+        recyclerView=view.findViewById(R.id.recycler_blog);
+        apiClient=new ApiClient();
         Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(10);
 
         call.enqueue(new Callback<ArrayList<ProfileUser>>() {
