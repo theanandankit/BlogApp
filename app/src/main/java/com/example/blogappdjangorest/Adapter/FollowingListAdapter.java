@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
+import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 import com.example.blogappdjangorest.R;
 
 import org.w3c.dom.Text;
@@ -20,13 +21,13 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FollowListAdapter extends RecyclerView.Adapter<FollowListAdapter.followholder>{
+public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdapter.followingholder>{
 
     Context context;
-    ArrayList<followerList> response;
+    ArrayList<FollowingList> response;
 
 
-    public FollowListAdapter(Context context,ArrayList<followerList> response)
+    public FollowingListAdapter(Context context,ArrayList<FollowingList> response)
     {
         this.context=context;
         this.response=response;
@@ -34,31 +35,31 @@ public class FollowListAdapter extends RecyclerView.Adapter<FollowListAdapter.fo
 
     @NonNull
     @Override
-    public FollowListAdapter.followholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FollowingListAdapter.followingholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.search_profile_item, parent, false);
-        return new followholder(view);
+        return new followingholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FollowListAdapter.followholder holder, int position) {
+    public void onBindViewHolder(@NonNull FollowingListAdapter.followingholder holder, int position) {
 
-        holder.ussername_follow.setText("@" + response.get(0).getPersonList2Follower().get(0).getWho().getUsername().toString());
-        holder.name_follow.setText(response.get(0).getPersonList2Follower().get(0).getWho().getFirstName().toString() + " " + response.get(0).getPersonList2Follower().get(0).getWho().getLastName().toString());
-        holder.bio_follow.setText(response.get(0).getPersonList2Follower().get(0).getWho().getEmail().toString());
+        holder.ussername_follow.setText("@" + response.get(0).getPersonList1Follow().get(0).getWhom().getUsername().toString());
+        holder.name_follow.setText(response.get(0).getPersonList1Follow().get(0).getWhom().getFirstName().toString() + " " + response.get(0).getPersonList1Follow().get(0).getWhom().getLastName().toString());
+        holder.bio_follow.setText(response.get(0).getPersonList1Follow().get(0).getWhom().getEmail().toString());
 
     }
 
     @Override
     public int getItemCount() {
-        return response.get(0).getPersonList2Follower().size();
+        return response.get(0).getPersonList1Follow().size();
     }
 
-    class followholder extends RecyclerView.ViewHolder {
+    class followingholder extends RecyclerView.ViewHolder {
 
         TextView name_follow,bio_follow,ussername_follow;
         CircleImageView follow_img;
-        public followholder(@NonNull View itemView) {
+        public followingholder(@NonNull View itemView) {
             super(itemView);
             name_follow=itemView.findViewById(R.id.name_follow);
             bio_follow=itemView.findViewById(R.id.bio_follow);
