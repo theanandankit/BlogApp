@@ -4,29 +4,34 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.Group_related;
 import com.example.blogappdjangorest.R;
+
+import java.security.acl.Group;
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.GroupPostItemHolder> {
     private Context mContext;
+    Group_related[] responses;
 
-
-
-    public GroupsPostAdapter(Context context){
+    public GroupsPostAdapter(Context context, Group_related[] responses){
         mContext = context;
-
-
-
-
+        this.responses=responses;
     }
 
     @NonNull
     @Override
-    public GroupPostItemHolder onCreateViewHolder (@NonNull ViewGroup parent,
-                                                                                                   int viewType){
+    public GroupPostItemHolder onCreateViewHolder (@NonNull ViewGroup parent, int viewType){
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.blog_main_item, parent, false);
         return new GroupPostItemHolder(view);
@@ -35,14 +40,16 @@ public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.Gr
     @Override
     public void onBindViewHolder (@NonNull GroupPostItemHolder holder, final int position){
 
+        holder.name.setText(responses[position].getAuthor());
+        holder.date.setText(responses[position].getDate());
+        holder.category.setText(responses[position].getCategory());
+        holder.body.setText(responses[position].getBody());
+
     }
-
-
-
 
     @Override
     public int getItemCount () {
-        return 15;
+        return responses.length;
 
     }
 
@@ -58,13 +65,21 @@ public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.Gr
 
     class GroupPostItemHolder extends RecyclerView.ViewHolder {
 
-
-
+        CircleImageView photo;
+        ImageView blog_photo;
+        TextView name,date,category,body;
 
         private GroupPostItemHolder(@NonNull View itemView) {
             super(itemView);
             setGlobals(itemView);
             //setOnClickListeners();
+
+            photo=itemView.findViewById(R.id.image);
+            blog_photo=itemView.findViewById(R.id.body_image);
+            name=itemView.findViewById(R.id.name);
+            date=itemView.findViewById(R.id.date);
+            category=itemView.findViewById(R.id.category);
+            body=itemView.findViewById(R.id.text);
         }
 
         private void setGlobals(View itemView) {

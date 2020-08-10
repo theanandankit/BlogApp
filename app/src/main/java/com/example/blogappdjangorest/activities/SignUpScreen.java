@@ -1,15 +1,19 @@
 package com.example.blogappdjangorest.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.chaos.view.PinView;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
+import com.example.blogappdjangorest.Models.model.SignupFirestoreModel;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.Services.Otp_verification;
+import com.example.blogappdjangorest.Services.SignUpupload;
 import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.material.button.MaterialButton;
@@ -19,13 +23,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpScreen extends AppCompatActivity {
-    TextInputLayout email,password,repassword,username,firstname,lastname;
+public class SignUpScreen extends AppCompatActivity implements Otp_verification.OnSuccess, SignUpupload.OnSuccess {
+    TextInputLayout email,password,username,firstname,phone;
     MaterialButton button;
     TextView text;
     WaitingDialog waitingDialog;
     PreferencesHelper preferencesHelper;
     ApiClient apiClient;
+    PinView pinView;
+    SignUpupload signUpupload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,47 +42,39 @@ public class SignUpScreen extends AppCompatActivity {
     {
         email=findViewById(R.id.signup_email_layout);
         password=findViewById(R.id.signup_password_layout);
-        repassword=findViewById(R.id.signup_reenter_email_layout);
         username=findViewById(R.id.signup_username_layout);
         firstname=findViewById(R.id.signup_first_layout);
-        lastname=findViewById(R.id.signup_Last_layout);
+        phone=findViewById(R.id.signup_phone_layout);
         text=findViewById(R.id.signup_main_text);
         button=findViewById(R.id.signup_register);
         preferencesHelper=new PreferencesHelper(getApplicationContext());
         waitingDialog=new WaitingDialog(SignUpScreen.this);
         apiClient=new ApiClient();
+        pinView=findViewById(R.id.otp_input);
+        signUpupload=new SignUpupload(SignUpScreen.this);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (email.getVisibility()==View.VISIBLE&&check_initial())
-                    final_condition();
+                if (email.getVisibility()==View.VISIBLE&&check_initial()&&check_final())
+                    signUpupload.exist(email.getEditText().getText().toString());
                 else
                 {
-                    if (check_final())
-                    {
-                        register();
-                    }
+//                    if (check_final())
+//                    { signUpupload.exist(email.getEditText().getText().toString());
+//                    }
+
                 }
             }
         });
-    }
-    public void initial_condition()
-    {
-        username.setVisibility(View.GONE);
-        firstname.setVisibility(View.GONE);
-        lastname.setVisibility(View.GONE);
-        email.setVisibility(View.VISIBLE);
-        password.setVisibility(View.VISIBLE);
-        repassword.setVisibility(View.VISIBLE);
     }
     public void final_condition()
     {
         email.setVisibility(View.GONE);
         password.setVisibility(View.GONE);
-        repassword.setVisibility(View.GONE);
-        username.setVisibility(View.VISIBLE);
-        firstname.setVisibility(View.VISIBLE);
-        lastname.setVisibility(View.VISIBLE);
+        username.setVisibility(View.GONE);
+        firstname.setVisibility(View.GONE);
+        phone.setVisibility(View.GONE);
+        pinView.setVisibility(View.VISIBLE);
     }
     private boolean check_initial()
     {
@@ -84,26 +82,7 @@ public class SignUpScreen extends AppCompatActivity {
         {
             if (!password.getEditText().getText().toString().isEmpty())
             {
-                if (!repassword.getEditText().getText().toString().isEmpty())
-                {
-                    if (password.getEditText().getText().toString().equals(repassword.getEditText().getText().toString()))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        repassword.setError("Password must be same");
-                        repassword.getEditText().setText("");
-                        repassword.requestFocus();
-                        return false;
-                    }
-                }
-                else
-                {
-                    repassword.setError("password is required");
-                    repassword.requestFocus();
-                    return false;
-                }
+                return true;
             }
             else
             {
@@ -125,14 +104,14 @@ public class SignUpScreen extends AppCompatActivity {
         {
             if (!firstname.getEditText().getText().toString().isEmpty())
             {
-                if (!lastname.getEditText().getText().toString().isEmpty())
+                if ((!phone.getEditText().getText().toString().isEmpty())&&phone.getEditText().getText().length()==10)
                 {
                     return true;
                 }
                 else
                 {
-                    lastname.setError("This field Is required");
-                    lastname.requestFocus();
+                    phone.setError("This field Is required");
+                    phone.requestFocus();
                     return false;
                 }
             }
@@ -152,7 +131,7 @@ public class SignUpScreen extends AppCompatActivity {
     }
     private void register()
     {
-        Call<SignUpResponse> call=apiClient.getApiinterface().register(email.getEditText().getText().toString(),password.getEditText().getText().toString(),username.getEditText().getText().toString(),firstname.getEditText().getText().toString(),lastname.getEditText().getText().toString());
+        Call<SignUpResponse> call=apiClient.getApiinterface().register(email.getEditText().getText().toString(),password.getEditText().getText().toString(),username.getEditText().getText().toString(),firstname.getEditText().getText().toString(),"");
         call.enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
@@ -161,9 +140,7 @@ public class SignUpScreen extends AppCompatActivity {
                 {
                     if (!response.body().toString().isEmpty())
                     {
-                        waitingDialog.dismiss();
-                        Toast.makeText(getApplicationContext(),"Successfully registered",Toast.LENGTH_LONG).show();
-                        finish();
+                        signUpupload.upload(new SignupFirestoreModel(email.getEditText().getText().toString(),response.body().getToken(),phone.getEditText().getText().toString(),firstname.getEditText().getText().toString()));
                     }
                 }
             }
@@ -173,5 +150,30 @@ public class SignUpScreen extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void completed() {
+        register();
+    }
+
+    @Override
+    public void success() {
+        Toast.makeText(getApplicationContext(),"successfully added",Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    @Override
+    public void exist(boolean value) {
+        if (value)
+        {
+            Toast.makeText(getApplicationContext(),"user already exist",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            final_condition();
+            Otp_verification otp=new Otp_verification();
+            otp.verify("+91"+phone.getEditText().getText().toString(),getApplicationContext(),pinView,SignUpScreen.this);
+        }
     }
 }

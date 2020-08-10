@@ -1,22 +1,30 @@
 package com.example.blogappdjangorest.Retrofit;
 
+import com.example.blogappdjangorest.Models.RetrofitModels.AddBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.ChangePasswordResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.JoinGroupResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.StartFollowResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.Models.RetrofitModels.follower.followerList;
 import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface RetrofitInterface {
@@ -37,7 +45,7 @@ public interface RetrofitInterface {
 
 
     @GET("search-blog/")
-    Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search);
+    Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search,@Query("category") String category);
 
     @GET("search-profile/")
     Call<ArrayList<ProfileSearchResponse>> profilesearch(@Query("search") String search);
@@ -46,10 +54,41 @@ public interface RetrofitInterface {
     Call<ArrayList<BlogInfoResponse>> bloginfo(@Query("id") String id);
 
 
+    @GET("get-categories")
+    Call<ArrayList<CategoryResponse>> get_categories();
+
+    @GET("group-list/")
+    Call<ArrayList<GroupListResponse>> get_group(@Query("user_id") String user_id);
+
+    @GET("group-blog")
+    Call<ArrayList<GroupBlogResponse>> get_group_blog(@Query("group_id") String group_id);
+
+    @POST("add-blog/")
+    @FormUrlEncoded
+    Call<AddBlogResponse> add_blog(@Field("url") String url,@Field("title") String title,@Field("body") String body,@Field("category") String category,@Field("author") String author,@Field("Status") String status,@Field("group") String group);
+
+    @POST("start-follow")
+    @FormUrlEncoded
+    Call<StartFollowResponse> follow(@Field("who") String who,@Field("whom") String whom);
+
+    @POST("join-group/")
+    @FormUrlEncoded
+    Call<JoinGroupResponse> join_group(@Header("Authorization") String Authorization,@Field("group_code") String group_code);
+
+    @POST("create-group/")
+    @FormUrlEncoded
+    Call<String> create_group(@Field("group_id") String group_id,@Field("group_description") String group_description,@Field("creator_id") String creator_id,@Field("group_code") String group_code);
+
+    @PUT("change-password/")
+    @FormUrlEncoded
+    Call<ChangePasswordResponse> change_password(@Header("Authorization") String Authorization,@Field("old_password") String old_password,@Field("new_password") String new_password);
+
+
     @GET("follow-list/")
     Call<ArrayList<followerList>> followerlistthing(@Query("id") int id);
 
     @GET("following-list/")
     Call<ArrayList<FollowingList>> followinglistthing(@Query("id") int id_following);
+
 
 }

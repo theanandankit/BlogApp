@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.Services.SignUpupload;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     ApiClient apiClient;
     HomeScreenAdapter homeScreenAdapter;
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -34,7 +37,9 @@ public class HomeFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_home,container,false);
 
         recyclerView=view.findViewById(R.id.recycleView);
+        progressBar=view.findViewById(R.id.progress);
         apiClient=new ApiClient();
+        progressBar.setVisibility(View.VISIBLE);
 
 
         Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();
@@ -44,6 +49,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<ArrayList<PublicBlogResponse>> call, Response<ArrayList<PublicBlogResponse>> response) {
                 if (response.code()==200)
                 {
+                    progressBar.setVisibility(View.INVISIBLE);
                     homeScreenAdapter=new HomeScreenAdapter(getActivity(),response.body());
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
