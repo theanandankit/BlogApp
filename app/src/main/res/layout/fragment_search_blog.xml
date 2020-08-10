@@ -22,16 +22,27 @@
     </com.google.android.material.button.MaterialButton>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/Search_blog_button">
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/Search_blog_button"
         android:layout_marginTop="5dp"
         android:id="@+id/Search_blog_recycle"
         tools:listitem="@layout/blog_main_item"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"/>
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/progress">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </ProgressBar>
+
+    </RelativeLayout>
 
 </RelativeLayout>

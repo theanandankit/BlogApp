@@ -1,6 +1,8 @@
 package com.example.blogappdjangorest.Retrofit;
 
+import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
@@ -33,9 +35,21 @@ public interface RetrofitInterface {
     @GET("full-profile-info/")
     Call<ArrayList<ProfileUser>> profileUser(@Query("user_id") int userid);
 
+
+    @GET("search-blog/")
+    Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search);
+
+    @GET("search-profile/")
+    Call<ArrayList<ProfileSearchResponse>> profilesearch(@Query("search") String search);
+
+    @GET("blog-info/")
+    Call<ArrayList<BlogInfoResponse>> bloginfo(@Query("id") String id);
+
+
     @GET("follow-list/")
     Call<ArrayList<followerList>> followerlistthing(@Query("id") int id);
 
     @GET("following-list/")
     Call<ArrayList<FollowingList>> followinglistthing(@Query("id") int id_following);
+
 }

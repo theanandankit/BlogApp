@@ -5,20 +5,28 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.ProfileView;
+
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdapter.blogviewhloder> {
 
     private Context context;
+    ArrayList<ProfileSearchResponse> responses;
 
-    public SearchProfileAdapter(Context context)
+    public SearchProfileAdapter(Context context,ArrayList<ProfileSearchResponse> responses)
     {
         this.context=context;
+        this.responses=responses;
     }
 
 
@@ -39,16 +47,29 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
                 context.startActivity(new Intent(context, ProfileView.class));
             }
         });
+
+        holder.name.setText(responses.get(position).getFirst_name()+" "+responses.get(position).getLast_name());
+        holder.username.setText(responses.get(position).getUsername());
+        holder.description.setText(responses.get(position).getUser_details()[0].getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return responses.size();
     }
 
+
+
     class blogviewhloder extends RecyclerView.ViewHolder {
+        CircleImageView circleImageView;
+        TextView name,username,description;
         public blogviewhloder(@NonNull View itemView) {
             super(itemView);
+
+            circleImageView=itemView.findViewById(R.id.image);
+            name=itemView.findViewById(R.id.name);
+            username=itemView.findViewById(R.id.username);
+            description=itemView.findViewById(R.id.description);
 
         }
     }

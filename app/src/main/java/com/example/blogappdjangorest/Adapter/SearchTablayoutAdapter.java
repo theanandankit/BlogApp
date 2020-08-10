@@ -7,9 +7,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.blogappdjangorest.Fragment.SearchBlogFragment;
+import com.example.blogappdjangorest.Fragment.SearchFragment;
 import com.example.blogappdjangorest.Fragment.SearchProfileFragment;
 
 public class SearchTablayoutAdapter extends FragmentStatePagerAdapter {
+
+    Fragment fragment;
 
     public SearchTablayoutAdapter(@NonNull FragmentManager fm) {
         super(fm);
@@ -19,10 +22,14 @@ public class SearchTablayoutAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return new SearchBlogFragment();
-            case 1:
-                return new SearchProfileFragment();
+            case 0: {
+                fragment = new SearchBlogFragment();
+                return fragment;
+            }
+            case 1: {
+                fragment = new SearchProfileFragment();
+                return fragment;
+            }
         }
         return null;
     }
@@ -43,5 +50,9 @@ public class SearchTablayoutAdapter extends FragmentStatePagerAdapter {
             default:
                 return null;
         }
+    }
+    public Fragment get_Fragment()
+    {
+        return fragment;
     }
 }
