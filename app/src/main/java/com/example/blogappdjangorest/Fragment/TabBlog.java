@@ -1,6 +1,7 @@
 package com.example.blogappdjangorest.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class TabBlog extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<ProfileUser>> call, Throwable t) {
-
+                Log.d("maniik",t.getMessage() + "");
             }
         });
 

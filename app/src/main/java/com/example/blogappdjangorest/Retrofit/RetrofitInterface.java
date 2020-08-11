@@ -92,11 +92,12 @@ public interface RetrofitInterface {
     @GET("following-list/")
     Call<ArrayList<FollowingList>> followinglistthing(@Query("id") int id_following);
 
-    @GET("following-list/")
+    @GET("get-user-info/")
     Call<ArrayList<EditBlogList>> EditBlogthing(@Query("user_id") int id_blog);
 
     @PUT("add-user-info/")
-    Call<Editblogput> EditBlogPut(@Header("Auhorization") String Authorization,@Field("description") String Descr);
+    @FormUrlEncoded
+    Call<Editblogput> EditBlogPut(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
 
 
 }
