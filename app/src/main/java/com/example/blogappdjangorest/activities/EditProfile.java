@@ -66,8 +66,6 @@ public class EditProfile extends AppCompatActivity {
 
                 Log.d("mannik",response.toString());
 
-
-
             }
 
             @Override
@@ -99,27 +97,15 @@ public class EditProfile extends AppCompatActivity {
                             Log.d("men", response.toString());
 
                             finish();
-
                         }
-
                         @Override
                         public void onFailure(Call<Editblogput> call, Throwable t) {
 
                         }
                     });
                 }
-
-
-
-
             }
         });
-
-
-
-
-
-
 
         Chngephotobtn = (TextView) findViewById(R.id.Chngephotobtn);
         Chngephotobtn.setOnClickListener(new View.OnClickListener() {

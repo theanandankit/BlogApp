@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.Services.SignUpupload;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -30,6 +33,7 @@ public class HomeFragment extends Fragment {
     ApiClient apiClient;
     HomeScreenAdapter homeScreenAdapter;
     ProgressBar progressBar;
+    TextView nothingtoshow;
 
     @Nullable
     @Override
@@ -40,6 +44,8 @@ public class HomeFragment extends Fragment {
         progressBar=view.findViewById(R.id.progress);
         apiClient=new ApiClient();
         progressBar.setVisibility(View.VISIBLE);
+        nothingtoshow = view.findViewById(R.id.nothingtoshow);
+        nothingtoshow.setVisibility(View.INVISIBLE);
 
 
         Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();
@@ -49,11 +55,18 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<ArrayList<PublicBlogResponse>> call, Response<ArrayList<PublicBlogResponse>> response) {
                 if (response.code()==200)
                 {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    homeScreenAdapter=new HomeScreenAdapter(getActivity(),response.body());
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setAdapter(homeScreenAdapter);
+                    if (response.body().size()==0){
+
+                        nothingtoshow.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        nothingtoshow.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        homeScreenAdapter = new HomeScreenAdapter(getActivity(), response.body());
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setAdapter(homeScreenAdapter);
+                    }
                 }
             }
 
