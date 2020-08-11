@@ -78,10 +78,10 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
         public blogviewhloder(@NonNull View itemView) {
             super(itemView);
 
-            circleImageView=itemView.findViewById(R.id.image);
-            name=itemView.findViewById(R.id.name);
-            username=itemView.findViewById(R.id.username);
-            description=itemView.findViewById(R.id.description);
+            circleImageView=itemView.findViewById(R.id.follow_img);
+            name=itemView.findViewById(R.id.name_follow);
+            username=itemView.findViewById(R.id.ussername_follow);
+            description=itemView.findViewById(R.id.bio_follow);
 
         }
     }
