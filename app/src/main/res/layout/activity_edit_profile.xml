@@ -109,6 +109,8 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:hint="UserName"
+                        android:clickable="false"
+
                         android:includeFontPadding="false"
                         android:inputType="text"
                         android:singleLine="true" />
