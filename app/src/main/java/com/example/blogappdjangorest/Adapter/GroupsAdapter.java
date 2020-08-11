@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,11 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm.beginTransaction().replace(R.id.homescreenfragment,new GroupPostFragment()).addToBackStack("Groups").commit();
-
+                Fragment fragment=new GroupPostFragment();
+                fm.beginTransaction().replace(R.id.homescreenfragment,fragment).addToBackStack("Groups").commit();
+                Bundle data=new Bundle();
+                data.putString("group_id",responses.get(position).getGroup_id());
+                fragment.setArguments(data);
             }
         });
     }

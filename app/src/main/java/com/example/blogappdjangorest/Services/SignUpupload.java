@@ -1,9 +1,12 @@
 package com.example.blogappdjangorest.Services;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.blogappdjangorest.Models.model.SignupFirestoreModel;
+import com.example.blogappdjangorest.activities.LoginScreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -15,11 +18,13 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class SignUpupload {
 
     OnSuccess onSuccess;
+    Context context;
 
     public SignUpupload(OnSuccess onSuccess)
     {
         this.onSuccess=onSuccess;
     }
+
 
     public void upload(SignupFirestoreModel signupFirestoreModel)
     {
@@ -62,9 +67,11 @@ public class SignUpupload {
         });
     }
 
+
     public interface OnSuccess
     {
         void success();
         void exist(boolean value);
     }
+
 }

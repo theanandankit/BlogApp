@@ -127,6 +127,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (status.equals("public")) {
+                    group_text="1";
                     upload();
                     dialog.dismiss();
                 } else {
@@ -204,10 +205,10 @@ public class AddBlogFragment extends Fragment {
     }
     private void build_dialog()
     {
+        category_text="Technology";
         category.setText("Technology");
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Search By:");
-        Log.e("ok","po");
         builder.setSingleChoiceItems(value, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -232,6 +233,8 @@ public class AddBlogFragment extends Fragment {
     }
     private void add_blog(Uri uri)
     {
+
+        waitingDialog.setext("Saving the data...");
         Call<AddBlogResponse> call=apiClient.getApiinterface().add_blog(String.valueOf(uri),title.getText().toString(),body.getText().toString(),category_text,"10",status,group_text);
 
         call.enqueue(new Callback<AddBlogResponse>() {
@@ -243,6 +246,7 @@ public class AddBlogFragment extends Fragment {
                     if (!response.body().toString().isEmpty())
                     {
                         Toast.makeText(getContext(),"Successfully Added",Toast.LENGTH_LONG).show();
+                        waitingDialog.dismiss();
                     }
                     else
                         Log.e("ok","q");
@@ -300,6 +304,7 @@ public class AddBlogFragment extends Fragment {
         final StorageReference image_store = folder.child("image" + uri.getLastPathSegment());
         UploadTask uploadTask=image_store.putFile(uri);
         waitingDialog.SetDialog("Uploading Your\nfile...");
+        waitingDialog.show();
 
         uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override

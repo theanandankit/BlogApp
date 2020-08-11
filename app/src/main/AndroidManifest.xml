@@ -23,11 +23,12 @@
         </activity>
         <activity android:name=".activities.ForgotPasswordRequest" />
         <activity android:name=".activities.SignUpScreen">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity android:name=".activities.LoginScreen">
         </activity>

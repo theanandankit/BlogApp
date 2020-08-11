@@ -2,6 +2,7 @@ package com.example.blogappdjangorest.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.ProfileView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -50,6 +52,14 @@ public class SearchProfileAdapter extends RecyclerView.Adapter<SearchProfileAdap
 
         holder.name.setText(responses.get(position).getFirst_name()+" "+responses.get(position).getLast_name());
         holder.username.setText(responses.get(position).getUsername());
+        try {
+            Log.e("og",responses.get(position).getUser_details()[0].getUrl());
+            Picasso.get().load(responses.get(position).getUser_details()[0].getUrl()).into(holder.circleImageView);
+            Log.e("ok","ha bhai");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("ok","na bhai");
+        }
         if (!(responses.get(position).getUser_details().length ==0))
           holder.description.setText(responses.get(position).getUser_details()[0].getDescription());
         else

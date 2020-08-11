@@ -4,22 +4,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.chaos.view.PinView;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.Services.LoginFirebase;
+import com.example.blogappdjangorest.Services.Otp_verification;
+import com.example.blogappdjangorest.Services.SignUpupload;
 import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginScreen extends AppCompatActivity implements Otp_verification.OnSuccess, LoginFirebase.LoginSuccess, SignUpupload.OnSuccess {
 
     MaterialButton login;
     TextInputLayout email,password;
@@ -27,6 +34,10 @@ public class LoginScreen extends AppCompatActivity {
     ApiClient apiClient;
     WaitingDialog waitingDialog;
     PreferencesHelper preferencesHelper;
+    PinView pinView;
+    Otp_verification otp_verification;
+    LoginFirebase loginFirebase;
+    SignUpupload signUpupload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +52,20 @@ public class LoginScreen extends AppCompatActivity {
         password=findViewById(R.id.login_password);
         forgot=findViewById(R.id.login_forget_password);
         signup=findViewById(R.id.login_signup_text);
+        pinView = findViewById(R.id.otp_input);
         apiClient = new ApiClient();
         waitingDialog= new WaitingDialog(LoginScreen.this);
         preferencesHelper=new PreferencesHelper(getApplicationContext());
+        otp_verification=new Otp_verification();
+        loginFirebase=new LoginFirebase(LoginScreen.this);
+        signUpupload=new SignUpupload(LoginScreen.this);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (check()) {
                     waitingDialog.SetDialog("Authenticating...");
                     waitingDialog.show();
-                    upload();
+                    signUpupload.exist(email.getEditText().getText().toString());
                 }
             }
         });
@@ -82,7 +97,7 @@ public class LoginScreen extends AppCompatActivity {
                         preferencesHelper.setToken(response.body().getToken());
                         preferencesHelper.setid(response.body().getId());
                         waitingDialog.dismiss();
-                        startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                        startActivity(new Intent(getApplicationContext(),HomeScreen.class));
                     }
                 }
             }
@@ -114,5 +129,43 @@ public class LoginScreen extends AppCompatActivity {
             email.requestFocus();
             return false;
         }
+    }
+
+    @Override
+    public void completed() {
+
+        Toast.makeText(getApplicationContext(),"successfully Login",Toast.LENGTH_LONG).show();
+        upload();
+    }
+
+    @Override
+    public void get_phone(String Phone) {
+
+        final_confition();
+        otp_verification.verify("+91"+Phone,LoginScreen.this,pinView,LoginScreen.this);
+    }
+
+    @Override
+    public void success() {
+
+    }
+
+    @Override
+    public void exist(boolean value) {
+
+        if (value)
+        {
+            loginFirebase.phone_get(email.getEditText().getText().toString());
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Email does not registered",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void final_confition()
+    {
+        email.setVisibility(View.INVISIBLE);
+        password.setVisibility(View.INVISIBLE);
+        pinView.setVisibility(View.VISIBLE);
     }
 }

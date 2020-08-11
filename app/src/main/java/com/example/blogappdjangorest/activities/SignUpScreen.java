@@ -32,6 +32,7 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
     ApiClient apiClient;
     PinView pinView;
     SignUpupload signUpupload;
+    Otp_verification otp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,18 +52,21 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
         waitingDialog=new WaitingDialog(SignUpScreen.this);
         apiClient=new ApiClient();
         pinView=findViewById(R.id.otp_input);
+        otp=new Otp_verification();
         signUpupload=new SignUpupload(SignUpScreen.this);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (email.getVisibility()==View.VISIBLE&&check_initial()&&check_final())
+                if (email.getVisibility()==View.VISIBLE&&check_initial()&&check_final()) {
                     signUpupload.exist(email.getEditText().getText().toString());
-                else
-                {
-//                    if (check_final())
-//                    { signUpupload.exist(email.getEditText().getText().toString());
-//                    }
+                    waitingDialog.SetDialog("Creating you account\nPlease wait..");
 
+                }else
+                {
+                    if(pinView.getText().toString().length()==6)
+                    {
+                        otp.check(pinView.getText().toString());
+                    }
                 }
             }
         });
@@ -141,6 +145,7 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
                     if (!response.body().toString().isEmpty())
                     {
                         signUpupload.upload(new SignupFirestoreModel(email.getEditText().getText().toString(),response.body().getToken(),phone.getEditText().getText().toString(),firstname.getEditText().getText().toString()));
+
                     }
                 }
             }
@@ -155,11 +160,13 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
     @Override
     public void completed() {
         register();
+        waitingDialog.show();
     }
 
     @Override
     public void success() {
         Toast.makeText(getApplicationContext(),"successfully added",Toast.LENGTH_LONG).show();
+        waitingDialog.dismiss();
         finish();
     }
 
@@ -172,7 +179,6 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
         else
         {
             final_condition();
-            Otp_verification otp=new Otp_verification();
             otp.verify("+91"+phone.getEditText().getText().toString(),getApplicationContext(),pinView,SignUpScreen.this);
         }
     }

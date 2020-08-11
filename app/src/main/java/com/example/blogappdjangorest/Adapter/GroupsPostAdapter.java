@@ -1,6 +1,7 @@
 package com.example.blogappdjangorest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.Group_related;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.activities.Blog_view;
 
 import java.security.acl.Group;
 import java.util.ArrayList;
@@ -44,6 +46,15 @@ public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.Gr
         holder.date.setText(responses[position].getDate());
         holder.category.setText(responses[position].getCategory());
         holder.body.setText(responses[position].getBody());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(mContext, Blog_view.class);
+                intent.putExtra("blog_id",responses[position].getId().toString());
+                mContext.startActivity(intent);
+            }
+        });
 
     }
 

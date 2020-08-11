@@ -31,6 +31,7 @@ public class GroupPostFragment extends Fragment {
     GroupsPostAdapter groupsPostAdapter;
     TextView title;
     ApiClient apiClient;
+    String group_id;
 
 
     @Nullable
@@ -43,6 +44,7 @@ public class GroupPostFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        group_id=getArguments().getString("group_id");
         initViews(view);
 
     }
@@ -60,11 +62,10 @@ public class GroupPostFragment extends Fragment {
 
     private void get_blog()
     {
-        Call<ArrayList<GroupBlogResponse>> call=apiClient.getApiinterface().get_group_blog("1");
+        Call<ArrayList<GroupBlogResponse>> call=apiClient.getApiinterface().get_group_blog(group_id);
         call.enqueue(new Callback<ArrayList<GroupBlogResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<GroupBlogResponse>> call, Response<ArrayList<GroupBlogResponse>> response) {
-
 
                 if (response.code()==200)
                 {
