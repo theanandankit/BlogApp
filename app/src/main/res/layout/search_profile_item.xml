@@ -25,7 +25,6 @@
                 android:id="@+id/follow_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/image"
                 android:background="@drawable/baseline_person_pin_black_18dp">
 
             </de.hdodenhof.circleimageview.CircleImageView>

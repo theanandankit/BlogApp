@@ -13,6 +13,8 @@ import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.StartFollowResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
+import com.example.blogappdjangorest.Models.RetrofitModels.editblog.EditBlogList;
+import com.example.blogappdjangorest.Models.RetrofitModels.editblog.Editblogput;
 import com.example.blogappdjangorest.Models.RetrofitModels.follower.followerList;
 import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 
@@ -89,6 +91,12 @@ public interface RetrofitInterface {
 
     @GET("following-list/")
     Call<ArrayList<FollowingList>> followinglistthing(@Query("id") int id_following);
+
+    @GET("following-list/")
+    Call<ArrayList<EditBlogList>> EditBlogthing(@Query("user_id") int id_blog);
+
+    @PUT("add-user-info/")
+    Call<Editblogput> EditBlogPut(@Header("Auhorization") String Authorization,@Field("description") String Descr);
 
 
 }
