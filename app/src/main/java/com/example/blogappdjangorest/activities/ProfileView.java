@@ -40,7 +40,7 @@ public class ProfileView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_view);
 
-        image=findViewById(R.id.circleImageView);
+        image=findViewById(R.id.profileimage);
         name=findViewById(R.id.name);
         follow=findViewById(R.id.follower);
         following=findViewById(R.id.following);

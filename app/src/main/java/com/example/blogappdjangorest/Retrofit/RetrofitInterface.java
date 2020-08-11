@@ -13,6 +13,10 @@ import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.StartFollowResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
+import com.example.blogappdjangorest.Models.RetrofitModels.editblog.EditBlogList;
+import com.example.blogappdjangorest.Models.RetrofitModels.editblog.Editblogput;
+import com.example.blogappdjangorest.Models.RetrofitModels.follower.followerList;
+import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 
 import java.util.ArrayList;
 
@@ -41,6 +45,7 @@ public interface RetrofitInterface {
     @GET("full-profile-info/")
     Call<ArrayList<ProfileUser>> profileUser(@Query("user_id") int userid);
 
+
     @GET("search-blog/")
     Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search,@Query("category") String category);
 
@@ -49,6 +54,7 @@ public interface RetrofitInterface {
 
     @GET("blog-info/")
     Call<ArrayList<BlogInfoResponse>> bloginfo(@Query("id") String id);
+
 
     @GET("get-categories")
     Call<ArrayList<CategoryResponse>> get_categories();
@@ -78,5 +84,19 @@ public interface RetrofitInterface {
     @PUT("change-password/")
     @FormUrlEncoded
     Call<ChangePasswordResponse> change_password(@Header("Authorization") String Authorization,@Field("old_password") String old_password,@Field("new_password") String new_password);
+
+
+    @GET("follow-list/")
+    Call<ArrayList<followerList>> followerlistthing(@Query("id") int id);
+
+    @GET("following-list/")
+    Call<ArrayList<FollowingList>> followinglistthing(@Query("id") int id_following);
+
+    @GET("following-list/")
+    Call<ArrayList<EditBlogList>> EditBlogthing(@Query("user_id") int id_blog);
+
+    @PUT("add-user-info/")
+    Call<Editblogput> EditBlogPut(@Header("Auhorization") String Authorization,@Field("description") String Descr);
+
 
 }

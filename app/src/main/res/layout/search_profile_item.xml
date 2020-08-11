@@ -22,9 +22,9 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/follow_img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:id="@+id/image"
                 android:background="@drawable/baseline_person_pin_black_18dp">
 
             </de.hdodenhof.circleimageview.CircleImageView>
@@ -43,21 +43,21 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/name_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Medhavi Srivastava"
-                        android:id="@+id/name"
                         android:fontFamily="@font/poppins"
+                        android:text="Medhavi Srivastava"
                         android:textSize="12dp">
 
                     </TextView>
 
                     <TextView
+                        android:id="@+id/ussername_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" @Medhavi.16"
-                        android:id="@+id/username"
                         android:fontFamily="@font/poppins"
+                        android:text=" @Medhavi.16"
                         android:textSize="12dp">
 
                     </TextView>
@@ -69,14 +69,14 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/bio_follow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is my description. This field is required and must be filled"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/description"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/poppins"
-            android:layout_marginBottom="5dp">
+            android:text="This is my description. This field is required and must be filled">
 
         </TextView>
 
