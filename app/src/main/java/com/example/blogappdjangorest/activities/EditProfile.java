@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.Models.RetrofitModels.editblog.EditBlogList;
@@ -84,23 +85,31 @@ public class EditProfile extends AppCompatActivity {
 
                 Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token b0eec2b06da57b0cc5b84e16dd0d484f1044e802",10,descr_blog.getText().toString(),"evef");
 
-                callput.enqueue(new Callback<Editblogput>() {
-                    @Override
-                    public void onResponse(Call<Editblogput> call, Response<Editblogput> response) {
-                        if (response.code()==201){
-                            Log.d("men",response.body().getDescription().toString());
+                if(descr_blog.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Description cannot be empty",Toast.LENGTH_LONG).show();
+
+                }
+                else {
+                    callput.enqueue(new Callback<Editblogput>() {
+                        @Override
+                        public void onResponse(Call<Editblogput> call, Response<Editblogput> response) {
+                            if (response.code() == 201) {
+                                Log.d("men", response.body().getDescription().toString());
+                            }
+                            Log.d("men", response.toString());
+
+                            finish();
+
                         }
-                        Log.d("men",response.toString());
 
-                        finish();
+                        @Override
+                        public void onFailure(Call<Editblogput> call, Throwable t) {
 
-                    }
+                        }
+                    });
+                }
 
-                    @Override
-                    public void onFailure(Call<Editblogput> call, Throwable t) {
 
-                    }
-                });
 
 
             }

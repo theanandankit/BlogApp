@@ -156,10 +156,9 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
             @Override
             public void onResponse(Call<ArrayList<ProfileUser>> call, Response<ArrayList<ProfileUser>> response) {
                 if (!response.isSuccessful()){
-                    Log.d("manik",response.code() + "");
+                    Log.d("maniik",response.code() + "");
                     return;
                 }
-                Log.d("mannik",response.body().get(0).getFirstName()+ "");
                 biodescr.setText(response.body().get(0).getUserDetails().get(0).getDescription().toString());
                 flowwercount.setText(response.body().get(0).getPersonList2().size() + "");
                 blogcount.setText(response.body().get(0).getAuthorName().size() + "");
@@ -170,7 +169,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
             @Override
             public void onFailure(Call<ArrayList<ProfileUser>> call, Throwable t) {
 
-                Log.d("manik",t.getMessage() + "");
+                Log.d("maniik",t.getMessage() + "");
             }
         });
 
