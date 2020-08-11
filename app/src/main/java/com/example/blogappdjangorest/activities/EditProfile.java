@@ -39,6 +39,12 @@ public class EditProfile extends AppCompatActivity {
         descr_blog = findViewById(R.id.descr_blog);
         button_save = findViewById(R.id.button_save);
 
+        username_blog.setEnabled(false);
+        firstname_blog.setEnabled(false);
+        lastname_blog.setEnabled(false);
+        email_blog.setEnabled(false);
+
+
         apiClient=new ApiClient();
         Call<ArrayList<EditBlogList>> call=apiClient.getApiinterface().EditBlogthing(10);
 
@@ -72,14 +78,22 @@ public class EditProfile extends AppCompatActivity {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token b0eec2b06da57b0cc5b84e16dd0d484f1044e802",descr_blog.toString());
+
+                Log.d("men",descr_blog.getText().toString());
+
+
+                Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token b0eec2b06da57b0cc5b84e16dd0d484f1044e802",10,descr_blog.getText().toString(),"evef");
 
                 callput.enqueue(new Callback<Editblogput>() {
                     @Override
                     public void onResponse(Call<Editblogput> call, Response<Editblogput> response) {
-                        if (response.code()==200){
-                            Log.d("man",response.body().getDescription().toString());
+                        if (response.code()==201){
+                            Log.d("men",response.body().getDescription().toString());
                         }
+                        Log.d("men",response.toString());
+
+                        finish();
+
                     }
 
                     @Override
@@ -87,6 +101,7 @@ public class EditProfile extends AppCompatActivity {
 
                     }
                 });
+
 
             }
         });
