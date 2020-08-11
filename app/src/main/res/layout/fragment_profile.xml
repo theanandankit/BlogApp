@@ -7,6 +7,9 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+    <include layout="@layout/groups_header">
+    </include>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -17,6 +17,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.Blog_view;
 import com.example.blogappdjangorest.activities.ProfileView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,8 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.ho
         holder.date.setText(response.get(position).getDate());
         holder.category.setText(response.get(position).getCategory());
         holder.body.setText(response.get(position).getTitle());
-
+        Picasso.get().load(response.get(position).getAuthor().getUser_details()[0].getUrl()).into(holder.photo);
+        Picasso.get().load(response.get(position).getUrl()).into(holder.blog_photo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +56,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.ho
                 Intent intent=new Intent(new Intent(context, Blog_view.class));
                 intent.putExtra("process",1);
                 intent.putExtra("blog_id",response.get(position).getId());
-                Log.e("id",response.get(position).getId());
+                intent.putExtra("url",response.get(position).getAuthor().getUser_details()[0].getUrl());
                 context.startActivity(intent);
             }
         });
@@ -68,7 +70,7 @@ public class HomeScreenAdapter extends RecyclerView.Adapter<HomeScreenAdapter.ho
     class homescreenholder extends RecyclerView.ViewHolder {
 
         CircleImageView photo;
-        ImageView blog_photo;
+        CircleImageView blog_photo;
         TextView name,date,category,body;
         public homescreenholder(@NonNull View itemView) {
             super(itemView);

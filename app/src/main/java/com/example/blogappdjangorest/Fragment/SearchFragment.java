@@ -95,7 +95,7 @@ public class SearchFragment extends Fragment {
                             {
                                 blog_caution_image.setVisibility(View.VISIBLE);
                                 blog_caution_text.setVisibility(View.VISIBLE);
-                                blog_caution_text.setText("No Blog related to "+editText.getText().toString()+"\nplease try something else");
+                                blog_caution_text.setText("No Blog related to "+editText.getText().toString()+"in "+blog_button.getText().toString()+"\nplease try something else");
                             }
 
                             SearchBlogAdapter searchBlogAdapter = new SearchBlogAdapter(getContext(), response.body());
@@ -134,7 +134,7 @@ public class SearchFragment extends Fragment {
                             {
                                 profile_caution_image.setVisibility(View.VISIBLE);
                                 profile_caution_text.setVisibility(View.VISIBLE);
-                                profile_caution_text.setText("No Profile related to \"+editText.getText().toString()+\"\\nplease try something else");
+                                profile_caution_text.setText("No Profile related to "+editText.getText().toString()+"\nplease try something else");
                             }
                             SearchProfileAdapter searchProfileAdapter = new SearchProfileAdapter(getContext(),response.body());
                             profile_recyclerView.setHasFixedSize(true);

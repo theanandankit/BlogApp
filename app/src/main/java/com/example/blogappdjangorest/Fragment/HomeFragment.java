@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     ApiClient apiClient;
     HomeScreenAdapter homeScreenAdapter;
     ProgressBar progressBar;
+    TextView title;
 
     @Nullable
     @Override
@@ -40,7 +42,8 @@ public class HomeFragment extends Fragment {
         progressBar=view.findViewById(R.id.progress);
         apiClient=new ApiClient();
         progressBar.setVisibility(View.VISIBLE);
-
+        title=view.findViewById(R.id.title);
+        title.setText("Home");
 
         Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();
 

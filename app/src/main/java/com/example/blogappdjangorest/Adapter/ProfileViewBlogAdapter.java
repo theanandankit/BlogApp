@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.AuthorName;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.Blog_view;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +45,10 @@ public class ProfileViewBlogAdapter extends RecyclerView.Adapter<ProfileViewBlog
     @Override
     public void onBindViewHolder(@NonNull ProfileViewBlogAdapter.profileholder holder, final int position) {
 
-        holder.name.setText(String.valueOf(response.get(position).getAuthor()));
+        holder.name.setText(String.valueOf(response.get(position).getAuthor().getFirst_name()));
         holder.category.setText(String.valueOf(response.get(position).getCategory()));
         holder.body.setText(String.valueOf(response.get(position).getTitle()));
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

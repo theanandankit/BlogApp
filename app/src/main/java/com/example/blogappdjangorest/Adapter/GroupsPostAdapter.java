@@ -16,6 +16,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.Group_related;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.Blog_view;
+import com.squareup.picasso.Picasso;
 
 import java.security.acl.Group;
 import java.util.ArrayList;
@@ -42,16 +43,19 @@ public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.Gr
     @Override
     public void onBindViewHolder (@NonNull GroupPostItemHolder holder, final int position){
 
-        holder.name.setText(responses[position].getAuthor());
+        holder.name.setText(responses[position].getAuthor().getFirst_name());
         holder.date.setText(responses[position].getDate());
         holder.category.setText(responses[position].getCategory());
         holder.body.setText(responses[position].getBody());
+        Picasso.get().load(responses[position].getUrl()).into(holder.blog_photo);
+        Picasso.get().load(responses[position].getAuthor().getUser_details()[0].getUrl()).into(holder.photo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(mContext, Blog_view.class);
                 intent.putExtra("blog_id",responses[position].getId().toString());
+                intent.putExtra("url",responses[position].getAuthor().getUser_details()[0].getUrl());
                 mContext.startActivity(intent);
             }
         });
@@ -77,7 +81,7 @@ public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.Gr
     class GroupPostItemHolder extends RecyclerView.ViewHolder {
 
         CircleImageView photo;
-        ImageView blog_photo;
+        CircleImageView blog_photo;
         TextView name,date,category,body;
 
         private GroupPostItemHolder(@NonNull View itemView) {

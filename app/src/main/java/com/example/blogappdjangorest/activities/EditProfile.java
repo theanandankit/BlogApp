@@ -91,12 +91,6 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
         Chngephotobtn = (TextView) findViewById(R.id.Chngephotobtn);
         Chngephotobtn.setOnClickListener(new View.OnClickListener() {
 

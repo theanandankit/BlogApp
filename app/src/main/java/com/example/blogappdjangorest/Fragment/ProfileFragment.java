@@ -29,10 +29,14 @@ import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.activities.EditProfile;
 import com.example.blogappdjangorest.activities.FollowersNFollowing;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +52,8 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
    ApiClient apiClient;
     //This is our viewPager
    ViewPager viewPager;
+   TextView title;
+   CircleImageView image;
 
 
 
@@ -66,7 +72,10 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 
         super.onViewCreated(view, savedInstanceState);
 
+        title=view.findViewById(R.id.title);
+        title.setText("Profile");
         FollowerBtn = view.findViewById(R.id.followerbtn);
+        image=view.findViewById(R.id.profileimage);
 
 //        FollowerBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -164,6 +173,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
                 flowwercount.setText(response.body().get(0).getPersonList2().size() + "");
                 blogcount.setText(response.body().get(0).getAuthorName().size() + "");
                 name.setText(response.body().get(0).getFirstName().toString() + " " + response.body().get(0).getLastName().toString());
+                Picasso.get().load(response.body().get(0).getUserDetails().get(0).getUrl()).into(image);
 
             }
 

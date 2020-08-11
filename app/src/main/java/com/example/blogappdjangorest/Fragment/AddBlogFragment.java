@@ -54,6 +54,7 @@ public class AddBlogFragment extends Fragment {
     CircleImageView image;
     StorageReference folder;
     WaitingDialog waitingDialog;
+    TextView header_title;
 
 
     @Nullable
@@ -69,6 +70,9 @@ public class AddBlogFragment extends Fragment {
         image=view.findViewById(R.id.image);
         apiClient=new ApiClient();
         waitingDialog=new WaitingDialog(getContext());
+        category.setEnabled(false);
+        header_title=view.findViewById(R.id.title);
+        header_title.setText("Add Blog");
         get_cat();
         get_group();
 
@@ -193,6 +197,7 @@ public class AddBlogFragment extends Fragment {
                         category.setEnabled(false);
                     }
                     build_dialog();
+
                 }
 
             }
@@ -216,7 +221,6 @@ public class AddBlogFragment extends Fragment {
                 category_text=value[which];
             }
         });
-
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

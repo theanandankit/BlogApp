@@ -96,7 +96,7 @@ public interface RetrofitInterface {
     Call<ArrayList<EditBlogList>> EditBlogthing(@Query("user_id") int id_blog);
 
     @PUT("add-user-info/")
-    Call<Editblogput> EditBlogPut(@Header("Auhorization") String Authorization,@Field("description") String Descr);
+    Call<Editblogput> EditBlogPut(@Header("Authorization") String Authorization,@Field("description") String Descr);
 
 
 }

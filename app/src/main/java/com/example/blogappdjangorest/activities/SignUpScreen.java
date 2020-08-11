@@ -144,6 +144,7 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
                 {
                     if (!response.body().toString().isEmpty())
                     {
+
                         signUpupload.upload(new SignupFirestoreModel(email.getEditText().getText().toString(),response.body().getToken(),phone.getEditText().getText().toString(),firstname.getEditText().getText().toString()));
 
                     }
