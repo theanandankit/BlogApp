@@ -20,6 +20,8 @@ import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.Services.SignUpupload;
 import com.example.blogappdjangorest.resources.PreferencesHelper;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -32,7 +34,11 @@ public class HomeFragment extends Fragment {
     ApiClient apiClient;
     HomeScreenAdapter homeScreenAdapter;
     ProgressBar progressBar;
+
     TextView title;
+
+    TextView nothingtoshow;
+
 
     @Nullable
     @Override
@@ -43,8 +49,14 @@ public class HomeFragment extends Fragment {
         progressBar=view.findViewById(R.id.progress);
         apiClient=new ApiClient();
         progressBar.setVisibility(View.VISIBLE);
+
         title=view.findViewById(R.id.title);
         title.setText("Home");
+
+        nothingtoshow = view.findViewById(R.id.nothingtoshow);
+        nothingtoshow.setVisibility(View.INVISIBLE);
+
+
 
         Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();
 
@@ -53,11 +65,18 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<ArrayList<PublicBlogResponse>> call, Response<ArrayList<PublicBlogResponse>> response) {
                 if (response.code()==200)
                 {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    homeScreenAdapter=new HomeScreenAdapter(getActivity(),response.body());
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setAdapter(homeScreenAdapter);
+                    if (response.body().size()==0){
+
+                        nothingtoshow.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        nothingtoshow.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        homeScreenAdapter = new HomeScreenAdapter(getActivity(), response.body());
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setAdapter(homeScreenAdapter);
+                    }
                 }
             }
 

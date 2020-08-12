@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.blogappdjangorest.Adapter.FollowListAdapter;
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
@@ -30,6 +31,10 @@ public class Follower extends Fragment {
     ApiClient apiClient;
     PreferencesHelper preferencesHelper;
 
+
+    TextView nothingtoshow;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,21 +45,33 @@ public class Follower extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_follower, container, false);
+
         recyclerView=view.findViewById(R.id.followerrecycle);
         preferencesHelper = new PreferencesHelper(getContext());
+        nothingtoshow = view.findViewById(R.id.nothingtoshowfollower);
 
+        nothingtoshow.setVisibility(View.INVISIBLE);
 
         apiClient=new ApiClient();
         Call<ArrayList<followerList>> call=apiClient.getApiinterface().followerlistthing(Integer.parseInt(preferencesHelper.getid()));
         call.enqueue(new Callback<ArrayList<followerList>>() {
+
+
             @Override
             public void onResponse(Call<ArrayList<followerList>> call, Response<ArrayList<followerList>> response) {
                 if(response.code()==200){
-                    FollowListAdapter followListAdapter=new FollowListAdapter(getContext(),response.body());
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setAdapter(followListAdapter);
 
+                    if (response.body().size()==0){
+
+                        nothingtoshow.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        nothingtoshow.setVisibility(View.INVISIBLE);
+                        FollowListAdapter followListAdapter = new FollowListAdapter(getContext(), response.body());
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setAdapter(followListAdapter);
+                    }
                 }
             }
 
