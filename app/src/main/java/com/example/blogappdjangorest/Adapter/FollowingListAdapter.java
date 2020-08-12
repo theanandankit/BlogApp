@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 import com.example.blogappdjangorest.R;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -44,9 +45,10 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListAdap
     @Override
     public void onBindViewHolder(@NonNull FollowingListAdapter.followingholder holder, int position) {
 
-        holder.ussername_follow.setText("@" + response.get(0).getPersonList1Follow().get(0).getWhom().getUsername().toString());
-        holder.name_follow.setText(response.get(0).getPersonList1Follow().get(0).getWhom().getFirstName().toString() + " " + response.get(0).getPersonList1Follow().get(0).getWhom().getLastName().toString());
-        holder.bio_follow.setText(response.get(0).getPersonList1Follow().get(0).getWhom().getEmail().toString());
+        holder.ussername_follow.setText("@" +response.get(0).getPersonList1Follow().get(position).getWhom().getUsername());
+        holder.name_follow.setText(response.get(0).getPersonList1Follow().get(position).getWhom().getFirst_name()+" "+response.get(0).getPersonList1Follow().get(position).getWhom().getLast_name());
+        holder.bio_follow.setText(response.get(0).getPersonList1Follow().get(position).getWhom().getUser_details()[0].getDescription());
+        Picasso.get().load(response.get(0).getPersonList1Follow().get(position).getWhom().getUser_details()[0].getUrl()).into(holder.follow_img);
 
     }
 

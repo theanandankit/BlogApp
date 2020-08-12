@@ -16,6 +16,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 
 import java.util.ArrayList;
 
@@ -27,12 +28,7 @@ public class TabBlog extends Fragment {
 
     RecyclerView recyclerView;
     ApiClient apiClient;
-
-
-
-
-
-
+    PreferencesHelper preferencesHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -41,7 +37,8 @@ public class TabBlog extends Fragment {
 
         recyclerView=view.findViewById(R.id.recycler_blog);
         apiClient=new ApiClient();
-        Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(10);
+        preferencesHelper=new PreferencesHelper(getContext());
+        Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(Integer.parseInt(preferencesHelper.getid()));
 
         call.enqueue(new Callback<ArrayList<ProfileUser>>() {
             @Override

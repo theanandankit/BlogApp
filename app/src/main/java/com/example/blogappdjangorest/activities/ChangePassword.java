@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.example.blogappdjangorest.Models.RetrofitModels.ChangePasswordResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
+import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -21,6 +23,8 @@ public class ChangePassword extends AppCompatActivity {
     TextInputLayout old,newp,renewp;
     MaterialButton button;
     ApiClient apiClient;
+    WaitingDialog waitingDialog;
+    PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,11 @@ public class ChangePassword extends AppCompatActivity {
         old=findViewById(R.id.current_password);
         newp=findViewById(R.id.new_password);
         renewp=findViewById(R.id.re_new_password);
+        button=findViewById(R.id.change);
         apiClient=new ApiClient();
+        waitingDialog=new WaitingDialog(ChangePassword.this);
+        waitingDialog.SetDialog("Please Wait...");
+        preferencesHelper=new PreferencesHelper(getApplicationContext());
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +51,8 @@ public class ChangePassword extends AppCompatActivity {
 
     private void change()
     {
-        Call<ChangePasswordResponse> call=apiClient.getApiinterface().change_password("Token b0eec2b06da57b0cc5b84e16dd0d484f1044e802",old.getEditText().getText().toString(),newp.getEditText().getText().toString());
+        waitingDialog.show();
+        Call<ChangePasswordResponse> call=apiClient.getApiinterface().change_password("Token "+preferencesHelper.gettoken(),old.getEditText().getText().toString(),newp.getEditText().getText().toString());
         call.enqueue(new Callback<ChangePasswordResponse>() {
             @Override
             public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
@@ -52,6 +61,7 @@ public class ChangePassword extends AppCompatActivity {
                 {
                     if (response.body().getResponse().equals("Password change"))
                     {
+                        waitingDialog.dismiss();
                         Toast.makeText(getApplicationContext(),"Successfully password Updated",Toast.LENGTH_LONG).show();
                         finish();
                     }

@@ -18,6 +18,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.Services.SignUpupload;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 
 import org.w3c.dom.Text;
 
@@ -33,7 +34,11 @@ public class HomeFragment extends Fragment {
     ApiClient apiClient;
     HomeScreenAdapter homeScreenAdapter;
     ProgressBar progressBar;
+
+    TextView title;
+
     TextView nothingtoshow;
+
 
     @Nullable
     @Override
@@ -44,8 +49,13 @@ public class HomeFragment extends Fragment {
         progressBar=view.findViewById(R.id.progress);
         apiClient=new ApiClient();
         progressBar.setVisibility(View.VISIBLE);
+
+        title=view.findViewById(R.id.title);
+        title.setText("Home");
+
         nothingtoshow = view.findViewById(R.id.nothingtoshow);
         nothingtoshow.setVisibility(View.INVISIBLE);
+
 
 
         Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();

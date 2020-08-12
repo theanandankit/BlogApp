@@ -3,6 +3,8 @@ package com.example.blogappdjangorest.resources;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class PreferencesHelper {
     public static SharedPreferences sharedPreferences;
     public static final String PREF_NAME = "Blog_data";
@@ -22,6 +24,7 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getString("token","NA");
     }
+
     public void setid(String id)
     {
         editor=sharedPreferences.edit();
@@ -32,14 +35,25 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getString("id","NA");
     }
+
     public boolean islogin()
     {
         return sharedPreferences.getBoolean("islogin",false);
     }
+
     public void setlogin()
     {
         editor=sharedPreferences.edit();
         editor.putBoolean("islogin",true);
         editor.apply();
+    }
+    public boolean is_login()
+    {
+        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(null))
+        {
+            return false;
+        }
+        else
+            return true;
     }
 }

@@ -28,7 +28,10 @@ public class Follower extends Fragment {
 
     RecyclerView recyclerView;
     ApiClient apiClient;
+
+
     TextView nothingtoshow;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

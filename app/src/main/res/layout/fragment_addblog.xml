@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
+
+    <include layout="@layout/groups_header"
+        android:id="@+id/header">
+
+    </include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header">
 
 
     <RelativeLayout
@@ -61,7 +71,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_boundary"
             android:hint="Title"
-            android:id="@+id/title"
+            android:id="@+id/blog_title"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:padding="5dp"
@@ -87,22 +97,22 @@
 
     </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="0dp"
-            android:text="Next"
-            android:id="@+id/next_button"
-            android:textAllCaps="false"
-            android:padding="0dp"
-            android:insetBottom="0dp"
-            android:layout_marginBottom="0dp">
-
-        </com.google.android.material.button.MaterialButton>
-
     </RelativeLayout>
 
+    </ScrollView>
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="0dp"
+        android:text="Next"
+        android:id="@+id/next_button"
+        android:textAllCaps="false"
+        android:padding="0dp"
+        android:insetBottom="0dp"
+        android:layout_marginBottom="0dp">
 
-</ScrollView>
+    </com.google.android.material.button.MaterialButton>
+
+</RelativeLayout>

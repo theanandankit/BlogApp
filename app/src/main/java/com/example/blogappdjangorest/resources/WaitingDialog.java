@@ -34,7 +34,7 @@ public class WaitingDialog {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         message=dialog.findViewById(R.id.progress_message);
         message.setText(s);
-//        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.getWindow().setAttributes(lp);
     }
 

@@ -1,5 +1,6 @@
 package com.example.blogappdjangorest.Models.RetrofitModels.data;
 
+import com.example.blogappdjangorest.Models.RetrofitModels.Nameonlymodel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -22,7 +23,15 @@ public class AuthorName {
     private String category;
     @SerializedName("author")
     @Expose
-    private Integer author;
+    private Nameonlymodel author;
+
+    public Nameonlymodel getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Nameonlymodel author) {
+        this.author = author;
+    }
 
     public Integer getId() {
         return id;
@@ -62,14 +71,6 @@ public class AuthorName {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Integer getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Integer author) {
-        this.author = author;
     }
 
 }

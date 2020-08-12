@@ -4,8 +4,13 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <include layout="@layout/groups_header"
+        android:id="@+id/header">
+    </include>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_below="@id/header"
         android:layout_height="match_parent"
         tools:listitem="@layout/blog_main_item"
         android:id="@+id/recycleView">

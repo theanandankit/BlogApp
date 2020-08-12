@@ -1,14 +1,27 @@
 package com.example.blogappdjangorest.Models.RetrofitModels;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Group_related {
 
     private String date;
 
-    private String author;
+    @SerializedName("author")
+    @Expose
+    private ProfileSearchResponse author;
 
     private String id;
 
     private String title;
+
+    public ProfileSearchResponse getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(ProfileSearchResponse author) {
+        this.author = author;
+    }
 
     private String body;
 
@@ -26,13 +39,6 @@ public class Group_related {
         this.date = date;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getId() {
         return id;

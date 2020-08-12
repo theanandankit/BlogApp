@@ -16,8 +16,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.google.android.material.button.MaterialButton;
-
-import org.w3c.dom.Text;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,7 +40,7 @@ public class ProfileView extends AppCompatActivity {
         setContentView(R.layout.activity_profile_view);
 
         image=findViewById(R.id.profileimage);
-        name=findViewById(R.id.name);
+        name=findViewById(R.id.nameprofile);
         follow=findViewById(R.id.follower);
         following=findViewById(R.id.following);
         blog=findViewById(R.id.total_blog);
@@ -49,10 +48,9 @@ public class ProfileView extends AppCompatActivity {
         follow_button=findViewById(R.id.follow_button);
         apiClient=new ApiClient();
         user_id=getIntent().getStringExtra("user_id");
-
-
         recyclerView=findViewById(R.id.recycleView);
         get_info();
+
 
         follow_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +62,7 @@ public class ProfileView extends AppCompatActivity {
 
     private void get_info()
     {
+        Log.e("ok",user_id);
         Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(Integer.parseInt(user_id));
         call.enqueue(new Callback<ArrayList<ProfileUser>>() {
             @Override
@@ -71,34 +70,37 @@ public class ProfileView extends AppCompatActivity {
 
                 if (response.code()==200)
                 {
+                    Log.e("ok","1");
                     if (!(response.body().size() ==0))
                     {
+                        Log.e("ok","2");
                         ProfileViewBlogAdapter profileViewBlogAdapter=new ProfileViewBlogAdapter(ProfileView.this,response.body().get(0).getAuthorName());
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(profileViewBlogAdapter);
                         set_profile(response.body().get(0));
+                        name.setText(response.body().get(0).getFirstName()+" "+response.body().get(0).getLastName());
                     }
                 }
                 else
                 {
-
+                    Log.e("ok","3");
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<ProfileUser>> call, Throwable t) {
-
+                Log.e("error",t.getMessage());
             }
         });
     }
     private void set_profile(ProfileUser response)
     {
-        name.setText(response.getFirstName()+" "+response.getLastName());
         follow.setText(String.valueOf(response.getPersonList1().size()));
         following.setText(String.valueOf(response.getPersonList2().size()));
         blog.setText(String.valueOf(response.getAuthorName().size()));
         description.setText(response.getUserDetails().get(0).getDescription());
+        Picasso.get().load(response.getUserDetails().get(0).getUrl()).into(image);
     }
 
     private void start_follow()

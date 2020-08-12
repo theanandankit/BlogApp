@@ -28,11 +28,16 @@ import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.activities.EditProfile;
 import com.example.blogappdjangorest.activities.FollowersNFollowing;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,13 +47,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     TextView EditProfileBtn;
-    TextView FollowerBtn,biodescr,blogcount,flowwercount,name;
+    TextView FollowerBtn, biodescr, blogcount, flowwercount, name;
     RecyclerView recyclerView;
-   TabLayout tabLayout;
-   ApiClient apiClient;
-    //This is our viewPager
-   ViewPager viewPager;
-
+    TabLayout tabLayout;
+    ApiClient apiClient;
+    ViewPager viewPager;
+    TextView title;
+    CircleImageView image;
+    PreferencesHelper preferencesHelper;
 
 
     @Nullable
@@ -66,7 +72,11 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 
         super.onViewCreated(view, savedInstanceState);
 
+        title = view.findViewById(R.id.title);
+        title.setText("Profile");
         FollowerBtn = view.findViewById(R.id.followerbtn);
+        image = view.findViewById(R.id.profileimage);
+        preferencesHelper=new PreferencesHelper(getContext());
 
 //        FollowerBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -91,7 +101,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 //                dialog.show();
 //            }
 //        });
-  FollowerBtn = view.findViewById(R.id.followerbtn);
+        FollowerBtn = view.findViewById(R.id.followerbtn);
 
         FollowerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +110,6 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
                 startActivity(i);
             }
         });
-
 
 
         // When swiping between pages, select the
@@ -116,10 +125,10 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
 
 
         //Initializing viewPager
-        viewPager = (ViewPager)view.findViewById(R.id.pager);
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
 
         //Creating our pager adapter
-        ProfileTabLayoutAdapter profileTabLayoutAdapter=new ProfileTabLayoutAdapter(getFragmentManager());
+        ProfileTabLayoutAdapter profileTabLayoutAdapter = new ProfileTabLayoutAdapter(getFragmentManager());
 
         //Adding adapter to pager
         viewPager.setAdapter(profileTabLayoutAdapter);
@@ -130,8 +139,8 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-         //actionBar.setSelectedNavigationItem(postion);
-                tabLayout.setScrollPosition(position,0,true);
+                //actionBar.setSelectedNavigationItem(postion);
+                tabLayout.setScrollPosition(position, 0, true);
                 tabLayout.setSelected(true);
 
             }
@@ -151,28 +160,28 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         flowwercount = view.findViewById(R.id.followercount);
 
 
-        Call<ArrayList<ProfileUser>> call=apiClient.getApiinterface().profileUser(10);
+        Call<ArrayList<ProfileUser>> call = apiClient.getApiinterface().profileUser(Integer.parseInt(preferencesHelper.getid()));
         call.enqueue(new Callback<ArrayList<ProfileUser>>() {
             @Override
             public void onResponse(Call<ArrayList<ProfileUser>> call, Response<ArrayList<ProfileUser>> response) {
-                if (!response.isSuccessful()){
-                    Log.d("maniik",response.code() + "");
+                if (!response.isSuccessful()) {
+                    Log.d("maniik", response.code() + "");
                     return;
                 }
                 biodescr.setText(response.body().get(0).getUserDetails().get(0).getDescription().toString());
                 flowwercount.setText(response.body().get(0).getPersonList2().size() + "");
                 blogcount.setText(response.body().get(0).getAuthorName().size() + "");
                 name.setText(response.body().get(0).getFirstName().toString() + " " + response.body().get(0).getLastName().toString());
+                Picasso.get().load(response.body().get(0).getUserDetails().get(0).getUrl()).into(image);
 
             }
 
             @Override
             public void onFailure(Call<ArrayList<ProfileUser>> call, Throwable t) {
 
-                Log.d("maniik",t.getMessage() + "");
+                Log.d("maniik", t.getMessage() + "");
             }
         });
-
 
 
     }

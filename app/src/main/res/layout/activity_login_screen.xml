@@ -132,10 +132,31 @@
                 android:layout_marginRight="30dp"
                 android:fontFamily="@font/poppins"
                 android:text="Forgot Password ?"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="14dp">
 
             </TextView>
+
+
+            <com.chaos.view.PinView
+                style="@style/PinWidget.PinView"
+                android:id="@+id/otp_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:viewType="rectangle"
+                app:itemCount="6"
+                android:inputType="number"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                app:itemHeight="35dp"
+                app:lineWidth="1dp"
+                app:itemWidth="35dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+            </com.chaos.view.PinView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_button"

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -23,11 +24,11 @@ import retrofit2.Response;
 public class Blog_view extends AppCompatActivity {
 
     CircleImageView user_image;
-    ImageView blog_image;
+    CircleImageView blog_image;
     TextView name,date,category,title,body;
     ApiClient apiClient;
     ProgressBar progressBar;
-    String blog_id;
+    String blog_id,url;
     int process;
 
     @Override
@@ -39,7 +40,8 @@ public class Blog_view extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         blog_id=getIntent().getStringExtra("blog_id");
         process=getIntent().getIntExtra("process",1);
-        Log.e("oki",blog_id);
+        url=getIntent().getStringExtra("url");
+        Picasso.get().load(url).into(user_image);
         call();
 
     }
@@ -68,6 +70,7 @@ public class Blog_view extends AppCompatActivity {
                     if (!response.body().isEmpty())
                     {
                         progressBar.setVisibility(View.INVISIBLE);
+                        Picasso.get().load(response.body().get(0).getUrl()).into(blog_image);
                         name.setText(response.body().get(0).getAuthor().getFirst_name()+" "+response.body().get(0).getAuthor().getLast_name());
                         category.setText(response.body().get(0).getCategory());
                         title.setText(response.body().get(0).getTitle());

@@ -1,5 +1,7 @@
 package com.example.blogappdjangorest.Fragment;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.blogappdjangorest.Dialog.CreateGroup;
@@ -15,11 +18,14 @@ import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.ChangePassword;
 import com.example.blogappdjangorest.activities.EditProfile;
 import com.example.blogappdjangorest.activities.LoginScreen;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class TabSetting extends Fragment {
     RelativeLayout logout,changePassward,joinGroup,createdGroups,createGroup,editProfile;
     JoinGroup join;
     CreateGroup create;
+    AlertDialog.Builder builder;
+    Dialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -82,10 +88,27 @@ public class TabSetting extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getContext(), LoginScreen.class);
-                getContext().startActivity(intent);
+                logout();
             }
         });
+    }
+
+    public void logout()
+    {
+
+        builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("want to logout ?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getContext(),LoginScreen.class));
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        dialog = builder.create();
+        dialog.show();
     }
 
 

@@ -1,8 +1,14 @@
 package com.example.blogappdjangorest.Models.RetrofitModels;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class PublicBlogResponse {
 
-    private Author author;
+
+    @SerializedName("author")
+    @Expose
+    private ProfileSearchResponse author;
 
     private String id;
 
@@ -28,13 +34,11 @@ public class PublicBlogResponse {
         this.date = date;
     }
 
-    public Author getAuthor ()
-    {
+    public ProfileSearchResponse getAuthor() {
         return author;
     }
 
-    public void setAuthor (Author author)
-    {
+    public void setAuthor(ProfileSearchResponse author) {
         this.author = author;
     }
 

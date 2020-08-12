@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.material.button.MaterialButton;
 
@@ -27,12 +28,14 @@ public class CreateGroup {
     ApiClient apiClient;
     WaitingDialog waitingDialog;
     String code;
+    PreferencesHelper preferencesHelper;
 
     public CreateGroup(Context context)
     {
         this.context=context;
         apiClient=new ApiClient();
         waitingDialog=new WaitingDialog(context);
+        preferencesHelper = new PreferencesHelper(context);
     }
 
     public void show() {
@@ -85,7 +88,7 @@ public class CreateGroup {
     {
         waitingDialog.SetDialog("Creating Group");
         waitingDialog.show();
-        Call<String> call=apiClient.getApiinterface().create_group(get_code(),name,"10",get_code());
+        Call<String> call=apiClient.getApiinterface().create_group(get_code(),name,preferencesHelper.getid(),get_code());
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

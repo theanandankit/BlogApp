@@ -15,6 +15,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.editblog.EditBlogList
 import com.example.blogappdjangorest.Models.RetrofitModels.editblog.Editblogput;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 
 import java.util.ArrayList;
 
@@ -27,11 +28,13 @@ public class EditProfile extends AppCompatActivity {
     TextView Chngephotobtn,firstname_blog,lastname_blog,email_blog,username_blog,descr_blog;
     ApiClient apiClient;
     Button button_save;
+    PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        preferencesHelper=new PreferencesHelper(getApplicationContext());
 
         username_blog = findViewById(R.id.username_blog);
         firstname_blog = findViewById(R.id.firstname_blog);
@@ -44,6 +47,7 @@ public class EditProfile extends AppCompatActivity {
         firstname_blog.setEnabled(false);
         lastname_blog.setEnabled(false);
         email_blog.setEnabled(false);
+
 
 
         apiClient=new ApiClient();
@@ -81,7 +85,7 @@ public class EditProfile extends AppCompatActivity {
                 Log.d("men",descr_blog.getText().toString());
 
 
-                Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token b0eec2b06da57b0cc5b84e16dd0d484f1044e802",10,descr_blog.getText().toString(),"evef");
+                Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token "+preferencesHelper.gettoken(),10,descr_blog.getText().toString(),"evef");
 
                 if(descr_blog.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Description cannot be empty",Toast.LENGTH_LONG).show();
