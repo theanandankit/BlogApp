@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.blogappdjangorest.Adapter.FollowListAdapter;
 import com.example.blogappdjangorest.Adapter.FollowingListAdapter;
@@ -28,7 +29,7 @@ public class Following extends Fragment {
 
     RecyclerView recyclerView;
     ApiClient apiClient;
-
+    TextView nothingtoshow;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,10 @@ public class Following extends Fragment {
         View view = inflater.inflate(R.layout.fragment_following, container, false);
 
         recyclerView=view.findViewById(R.id.followingrecycle);
+        nothingtoshow = view.findViewById(R.id.nothingtoshowfollowing);
+
+        nothingtoshow.setVisibility(View.INVISIBLE);
+
 
 
         apiClient=new ApiClient();
@@ -50,10 +55,18 @@ public class Following extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<FollowingList>> call, Response<ArrayList<FollowingList>> response) {
                 if(response.code()==200){
-                    FollowingListAdapter followingListAdapter=new FollowingListAdapter(getContext(),response.body());
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    recyclerView.setAdapter(followingListAdapter);
+
+                    if (response.body().size()==0){
+
+                        nothingtoshow.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        nothingtoshow.setVisibility(View.INVISIBLE);
+                        FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), response.body());
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setAdapter(followingListAdapter);
+                    }
 
                 }
             }
