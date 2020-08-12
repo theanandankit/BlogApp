@@ -1,6 +1,7 @@
 package com.example.blogappdjangorest.Models.RetrofitModels.data;
 
 import com.example.blogappdjangorest.Models.RetrofitModels.Nameonlymodel;
+import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -23,14 +24,24 @@ public class AuthorName {
     private String category;
     @SerializedName("author")
     @Expose
-    private Nameonlymodel author;
+    private ProfileSearchResponse author;
 
-    public Nameonlymodel getAuthor() {
+    public ProfileSearchResponse getAuthor() {
         return author;
     }
 
-    public void setAuthor(Nameonlymodel author) {
+    public void setAuthor(ProfileSearchResponse author) {
         this.author = author;
+    }
+
+    public String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Integer getId() {

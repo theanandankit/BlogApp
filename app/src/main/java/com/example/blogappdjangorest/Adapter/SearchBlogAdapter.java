@@ -2,6 +2,7 @@ package com.example.blogappdjangorest.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,8 @@ public class SearchBlogAdapter extends RecyclerView.Adapter<SearchBlogAdapter.Se
         holder.category.setText(response.get(position).getCategory());
         holder.body.setText(response.get(position).getTitle());
         Picasso.get().load(response.get(position).getAuthor().getUser_details()[0].getUrl()).into(holder.photo);
-        Picasso.get().load(response.get(position).getUrl());
+        Log.e("url",response.get(position).getUrl());
+        Picasso.get().load(response.get(position).getUrl()).into(holder.blog_photo);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

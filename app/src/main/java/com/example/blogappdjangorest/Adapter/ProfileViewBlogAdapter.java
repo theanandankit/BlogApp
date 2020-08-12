@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.AuthorName;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.activities.Blog_view;
+import com.example.blogappdjangorest.activities.LoginScreen;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.grpc.LoadBalancer;
 
 public class ProfileViewBlogAdapter extends RecyclerView.Adapter<ProfileViewBlogAdapter.profileholder> {
 
@@ -48,6 +50,17 @@ public class ProfileViewBlogAdapter extends RecyclerView.Adapter<ProfileViewBlog
         holder.name.setText(String.valueOf(response.get(position).getAuthor().getFirst_name()));
         holder.category.setText(String.valueOf(response.get(position).getCategory()));
         holder.body.setText(String.valueOf(response.get(position).getTitle()));
+
+        if (response.get(position).getStatus().equals("private"))
+        {
+            Log.e("kj","aaya");
+            holder.itemView.setEnabled(false);
+            holder.lock.setVisibility(View.VISIBLE);
+        }
+
+        Picasso.get().load(response.get(position).getUrl()).into(holder.blog_photo);
+        Picasso.get().load(response.get(position).getAuthor().getUser_details()[0].getUrl());
+
 
 
 

@@ -30,6 +30,7 @@ public class ProfileUser {
     private List<PersonList2> personList2 = null;
     @SerializedName("user_details")
     @Expose
+
     private List<UserDetail> userDetails = null;
 
     public Integer getId() {
