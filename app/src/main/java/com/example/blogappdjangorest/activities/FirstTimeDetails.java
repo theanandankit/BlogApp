@@ -22,17 +22,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditProfile extends AppCompatActivity {
+public class FirstTimeDetails extends AppCompatActivity {
+
 
     TextView Chngephotobtn,firstname_blog,lastname_blog,email_blog,username_blog,descr_blog;
     ApiClient apiClient;
     Button button_save;
     PreferencesHelper preferencesHelper;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_first_time_details);
+
         preferencesHelper=new PreferencesHelper(getApplicationContext());
 
         username_blog = findViewById(R.id.username_blog_first);
@@ -61,7 +65,7 @@ public class EditProfile extends AppCompatActivity {
                     firstname_blog.setText(response.body().get(0).getFirstName().toString());
                     lastname_blog.setText(response.body().get(0).getLastName().toString());
                     email_blog.setText(response.body().get(0).getEmail().toString());
-                    descr_blog.setText(response.body().get(0).getUserDetails().get(0).getDescription().toString());
+                    descr_blog.setText("Add some Description about you");
 
                     Log.d("mannik",response.body().get(0).toString());
 
@@ -125,3 +129,4 @@ public class EditProfile extends AppCompatActivity {
         });
     }
 }
+

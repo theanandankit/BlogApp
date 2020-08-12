@@ -25,13 +25,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(null))
+                try {
+
+                    if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(null)) {
+                        startActivity(new Intent(getApplicationContext(), LoginScreen.class));
+                    } else {
+                        startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                    }
+
+                }
+                catch (Exception e)
                 {
                     startActivity(new Intent(getApplicationContext(), LoginScreen.class));
-                }
-                else
-                {
-                    startActivity(new Intent(getApplicationContext(), HomeScreen.class));
                 }
 
             }
