@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.example.blogappdjangorest.Adapter.GroupsAdapter;
 import com.example.blogappdjangorest.Models.RetrofitModels.AddBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
@@ -286,29 +287,56 @@ public class AddBlogFragment extends Fragment {
 
     private void get_group()
     {
-        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group("10");
-        call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
+//        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group("10");
+//        call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<GroupListResponse>> call, Response<ArrayList<GroupListResponse>> response) {
+//
+//                if (response.code()==200)
+//                {
+//                    if (!(response.body().size() ==0))
+//                    {
+//                        group=new String[response.body().size()];
+//                        group_id=new String[response.body().size()];
+//                        for (int a=0;a<response.body().size();a++)
+//                        {
+//                            group[a]=response.body().get(a).getGroup_description();
+//                            group_id[a]=response.body().get(a).getGroup_id();
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<GroupListResponse>> call, Throwable t) {
+//
+//            }
+//        });
+
+        Call<ArrayList<GroupListMemberResponse>> call = apiClient.getApiinterface().get_group_member(preferencesHelper.getid());
+        call.enqueue(new Callback<ArrayList<GroupListMemberResponse>>() {
             @Override
-            public void onResponse(Call<ArrayList<GroupListResponse>> call, Response<ArrayList<GroupListResponse>> response) {
+            public void onResponse(Call<ArrayList<GroupListMemberResponse>> call, Response<ArrayList<GroupListMemberResponse>> response) {
 
                 if (response.code()==200)
                 {
                     if (!(response.body().size() ==0))
                     {
-                        group=new String[response.body().size()];
-                        group_id=new String[response.body().size()];
-                        for (int a=0;a<response.body().size();a++)
+                        group=new String[response.body().get(0).getMemberinfo().size()];
+                        group_id= new String[response.body().get(0).getMemberinfo().size()];
+
+                        for (int a=0;a<response.body().get(0).getMemberinfo().size();a++)
                         {
-                            group[a]=response.body().get(a).getGroup_description();
-                            group_id[a]=response.body().get(a).getGroup_id();
+                            group[a]=response.body().get(0).getMemberinfo().get(a).getGroup_id().getGroup_description();
+                            group_id[a]=response.body().get(0).getMemberinfo().get(a).getGroup_id().getGroup_id();
                         }
                     }
                 }
-
             }
 
             @Override
-            public void onFailure(Call<ArrayList<GroupListResponse>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<GroupListMemberResponse>> call, Throwable t) {
 
             }
         });

@@ -63,6 +63,14 @@ public class CreateGroup {
         create_layout=dialog.findViewById(R.id.create_layout);
         share_layout=dialog.findViewById(R.id.share_layout);
         final TextView passcode=dialog.findViewById(R.id.passcode);
+        MaterialButton cancel=dialog.findViewById(R.id.cancel);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         create_button.setOnClickListener(new View.OnClickListener() {
             @Override

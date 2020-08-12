@@ -168,7 +168,14 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
                     Log.d("maniik", response.code() + "");
                     return;
                 }
-                biodescr.setText(response.body().get(0).getUserDetails().get(0).getDescription().toString());
+                try {
+
+                    biodescr.setText(response.body().get(0).getUserDetails().get(0).getDescription().toString());
+                }
+                catch (Exception e)
+                {
+                    biodescr.setText("Hello there");
+                }
                 flowwercount.setText(response.body().get(0).getPersonList2().size() + "");
                 blogcount.setText(response.body().get(0).getAuthorName().size() + "");
                 name.setText(response.body().get(0).getFirstName().toString() + " " + response.body().get(0).getLastName().toString());

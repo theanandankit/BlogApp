@@ -64,6 +64,6 @@ public class PreferencesHelper {
     }
     public boolean getprofilesetup()
     {
-        return sharedPreferences.getBoolean("profile_setup",true);
+        return sharedPreferences.getBoolean("profile_setup",false);
     }
 }

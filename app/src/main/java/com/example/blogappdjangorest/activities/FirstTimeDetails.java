@@ -74,7 +74,14 @@ public class FirstTimeDetails extends AppCompatActivity {
         button_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upload();
+
+                if (!descr_blog.getText().toString().isEmpty()) {
+                    upload();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Description can't be empty",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
