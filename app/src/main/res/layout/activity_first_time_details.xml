@@ -5,62 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.EditProfile">
+    tools:context=".activities.FirstTimeDetails">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp">
 
-    <LinearLayout
-        android:id="@+id/circleImageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/circleImageView2"
             android:layout_width="100dp"
-            android:layout_height="100dp">
+            android:layout_height="100dp"
+            android:layout_marginTop="72dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <RelativeLayout
                 android:layout_width="100dp"
-                android:src="@drawable/school_back"
-                android:layout_gravity="center_horizontal"
                 android:layout_height="100dp">
-            </de.hdodenhof.circleimageview.CircleImageView>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="100dp"
+                    android:src="@drawable/school_back"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="100dp">
+                </de.hdodenhof.circleimageview.CircleImageView>
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="2dp"
-                android:src="@drawable/edit">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/edit">
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+                </de.hdodenhof.circleimageview.CircleImageView>
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/Chngephotobtn_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Change Profile Photo"
-        android:background="@drawable/bg_profile"
-        android:padding="7dp"
-        android:textSize="14sp"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="@+id/circleImageView2"
-        app:layout_constraintStart_toStartOf="@+id/circleImageView2"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
+        <TextView
+            android:id="@+id/Chngephotobtn_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Change Profile Photo"
+            android:background="@drawable/bg_profile"
+            android:padding="7dp"
+            android:textSize="14sp"
+            android:textColor="#fff"
+            app:layout_constraintEnd_toEndOf="@+id/circleImageView2"
+            app:layout_constraintStart_toStartOf="@+id/circleImageView2"
+            app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -73,9 +73,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView12"
@@ -211,22 +211,22 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
-            <Button
-                android:id="@+id/button_save_first"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Save"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                <Button
+                    android:id="@+id/button_save_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Save"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            </ScrollView>
+        </ScrollView>
 
     </LinearLayout>
 
