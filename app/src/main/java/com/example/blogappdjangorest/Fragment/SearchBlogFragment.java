@@ -59,10 +59,6 @@ public class SearchBlogFragment extends Fragment {
         blog_caution_text.setText("Search and learn something new");
         blog_button.setEnabled(false);
         apiClient = new ApiClient();
-//        SearchBlogAdapter searchBlogAdapter=new SearchBlogAdapter(getContext());
-//        blog_recyclerView.setHasFixedSize(true);
-//        blog_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        blog_recyclerView.setAdapter(searchBlogAdapter);
         get_cat();
 
 
@@ -114,7 +110,6 @@ public class SearchBlogFragment extends Fragment {
         blog_button.setText("Technology");
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Search By:");
-        Log.e("ok","po");
         builder.setSingleChoiceItems(value, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -122,10 +117,10 @@ public class SearchBlogFragment extends Fragment {
             }
         });
 
-
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
             }
         });
         builder.setNegativeButton("Cancel", null);

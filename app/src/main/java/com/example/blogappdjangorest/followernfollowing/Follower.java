@@ -28,7 +28,6 @@ public class Follower extends Fragment {
     RecyclerView recyclerView;
     ApiClient apiClient;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

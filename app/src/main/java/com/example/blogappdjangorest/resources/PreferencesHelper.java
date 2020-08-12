@@ -24,6 +24,7 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getString("token","NA");
     }
+
     public void setid(String id)
     {
         editor=sharedPreferences.edit();
@@ -34,10 +35,12 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getString("id","NA");
     }
+
     public boolean islogin()
     {
         return sharedPreferences.getBoolean("islogin",false);
     }
+
     public void setlogin()
     {
         editor=sharedPreferences.edit();

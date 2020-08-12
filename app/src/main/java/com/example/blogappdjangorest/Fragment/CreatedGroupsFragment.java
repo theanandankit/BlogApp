@@ -15,6 +15,7 @@ import com.example.blogappdjangorest.Adapter.GroupsAdapter;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class CreatedGroupsFragment extends Fragment {
     CreatedGroupsAdapter groupsAdapter;
     TextView title;
     ApiClient apiClient;
+    PreferencesHelper preferencesHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,7 @@ public class CreatedGroupsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         initViews(view);
+        preferencesHelper = new PreferencesHelper(getContext());
         apiClient=new ApiClient();
         get_list();
 
@@ -56,7 +59,7 @@ public class CreatedGroupsFragment extends Fragment {
 
     private void get_list()
     {
-        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group("10");
+        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group(preferencesHelper.getid());
         call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<GroupListResponse>> call, Response<ArrayList<GroupListResponse>> response) {

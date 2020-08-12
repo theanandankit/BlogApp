@@ -67,7 +67,7 @@ public interface RetrofitInterface {
 
     @POST("add-blog/")
     @FormUrlEncoded
-    Call<AddBlogResponse> add_blog(@Field("url") String url,@Field("title") String title,@Field("body") String body,@Field("category") String category,@Field("author") String author,@Field("Status") String status,@Field("group") String group);
+    Call<AddBlogResponse> add_blog(@Field("url") String url,@Field("title") String title,@Field("body") String body,@Field("category") String category,@Field("author") String author,@Field("status") String status,@Field("group") String group);
 
     @POST("start-follow")
     @FormUrlEncoded

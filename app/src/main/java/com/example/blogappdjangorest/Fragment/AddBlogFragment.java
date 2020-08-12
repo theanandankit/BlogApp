@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -47,7 +49,7 @@ public class AddBlogFragment extends Fragment {
     ApiClient apiClient;
     AlertDialog.Builder builder;
     AlertDialog dialog;
-    TextView title,body;
+    EditText blog_title,body;
     String category_text,status,group_text;
     String[] group,group_id;
     Uri uri;
@@ -55,6 +57,7 @@ public class AddBlogFragment extends Fragment {
     StorageReference folder;
     WaitingDialog waitingDialog;
     TextView header_title;
+    PreferencesHelper preferencesHelper;
 
 
     @Nullable
@@ -64,7 +67,7 @@ public class AddBlogFragment extends Fragment {
 
         button=view.findViewById(R.id.next_button);
         category=view.findViewById(R.id.cat_button);
-        title=view.findViewById(R.id.title);
+        blog_title=view.findViewById(R.id.blog_title);
         body=view.findViewById(R.id.body);
         add_image=view.findViewById(R.id.add_image);
         image=view.findViewById(R.id.image);
@@ -73,6 +76,7 @@ public class AddBlogFragment extends Fragment {
         category.setEnabled(false);
         header_title=view.findViewById(R.id.title);
         header_title.setText("Add Blog");
+        preferencesHelper = new PreferencesHelper(getContext());
         get_cat();
         get_group();
 
@@ -141,8 +145,10 @@ public class AddBlogFragment extends Fragment {
                     }
                     else
                     {
+                        status="private";
                         showGroupDialog();
                         dialog.dismiss();
+                        Log.e("value",status);
 
                     }
                 }
@@ -155,6 +161,7 @@ public class AddBlogFragment extends Fragment {
 
     public void showGroupDialog()
     {
+        Log.e("value",status);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Select the group");
         group_text=group_id[0];
@@ -163,6 +170,7 @@ public class AddBlogFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
 
                 group_text=group_id[which];
+                Log.e("value",status);
             }
         });
 
@@ -171,6 +179,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                Log.e("value",status);
                 upload();
                 dialog.dismiss();
             }
@@ -238,8 +247,9 @@ public class AddBlogFragment extends Fragment {
     private void add_blog(Uri uri)
     {
 
+        Log.e("value",status);
         waitingDialog.setext("Saving the data...");
-        Call<AddBlogResponse> call=apiClient.getApiinterface().add_blog(String.valueOf(uri),title.getText().toString(),body.getText().toString(),category_text,"10",status,group_text);
+        Call<AddBlogResponse> call=apiClient.getApiinterface().add_blog(String.valueOf(uri),blog_title.getText().toString(),body.getText().toString(),category_text,preferencesHelper.getid(),status,group_text);
 
         call.enqueue(new Callback<AddBlogResponse>() {
             @Override
@@ -250,7 +260,9 @@ public class AddBlogFragment extends Fragment {
                     if (!response.body().toString().isEmpty())
                     {
                         Toast.makeText(getContext(),"Successfully Added",Toast.LENGTH_LONG).show();
+                        Log.e("value",status);
                         waitingDialog.dismiss();
+
                     }
                     else
                         Log.e("ok","q");
@@ -304,6 +316,7 @@ public class AddBlogFragment extends Fragment {
 
     private void upload()
     {
+        Log.e("value",status);
         folder= FirebaseStorage.getInstance().getReference().child("ImageFolder");
         final StorageReference image_store = folder.child("image" + uri.getLastPathSegment());
         UploadTask uploadTask=image_store.putFile(uri);
@@ -326,6 +339,7 @@ public class AddBlogFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         add_blog(uri);
+                        Log.e("value",status);
                     }
                 });
             }

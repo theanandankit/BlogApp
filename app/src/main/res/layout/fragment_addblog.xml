@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_boundary"
             android:hint="Title"
-            android:id="@+id/title"
+            android:id="@+id/blog_title"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins"
             android:padding="5dp"

@@ -64,8 +64,8 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
             public void onClick(View v) {
                 if (check()) {
                     waitingDialog.SetDialog("Authenticating...");
-                    waitingDialog.show();
-                    signUpupload.exist(email.getEditText().getText().toString());
+//                    signUpupload.exist(email.getEditText().getText().toString());
+                    upload();
                 }
             }
         });
@@ -93,11 +93,18 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
 
                 if (response.code()==200)
                 {
-                    if (!response.body().toString().isEmpty()) {
-                        preferencesHelper.setToken(response.body().getToken());
-                        preferencesHelper.setid(response.body().getId());
-                        waitingDialog.dismiss();
-                        startActivity(new Intent(getApplicationContext(),HomeScreen.class));
+                    try {
+                        if (!response.body().getToken().isEmpty()) {
+                            preferencesHelper.setToken(response.body().getToken());
+                            preferencesHelper.setid(response.body().getId());
+                            Log.e("io", response.body().getId());
+                            waitingDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "successfully Login", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(),"Incorrect email of password",Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -134,7 +141,7 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
     @Override
     public void completed() {
 
-        Toast.makeText(getApplicationContext(),"successfully Login",Toast.LENGTH_LONG).show();
+        waitingDialog.show();
         upload();
     }
 
@@ -164,8 +171,8 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
 
     public void final_confition()
     {
-        email.setVisibility(View.INVISIBLE);
-        password.setVisibility(View.INVISIBLE);
+        email.setVisibility(View.GONE);
+        password.setVisibility(View.GONE);
         pinView.setVisibility(View.VISIBLE);
     }
 }

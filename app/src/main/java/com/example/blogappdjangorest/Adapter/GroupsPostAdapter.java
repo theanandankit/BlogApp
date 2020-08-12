@@ -46,7 +46,7 @@ public class GroupsPostAdapter extends RecyclerView.Adapter<GroupsPostAdapter.Gr
         holder.name.setText(responses[position].getAuthor().getFirst_name());
         holder.date.setText(responses[position].getDate());
         holder.category.setText(responses[position].getCategory());
-        holder.body.setText(responses[position].getBody());
+        holder.body.setText(responses[position].getTitle());
         Picasso.get().load(responses[position].getUrl()).into(holder.blog_photo);
         Picasso.get().load(responses[position].getAuthor().getUser_details()[0].getUrl()).into(holder.photo);
 
