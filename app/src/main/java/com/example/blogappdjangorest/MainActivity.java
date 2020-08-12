@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
+import com.example.blogappdjangorest.activities.FirstTimeDetails;
 import com.example.blogappdjangorest.activities.HomeScreen;
 import com.example.blogappdjangorest.activities.LoginScreen;
 import com.example.blogappdjangorest.resources.PreferencesHelper;
@@ -20,25 +22,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
         preferencesHelper=new PreferencesHelper(getApplicationContext());
+        Log.e("a", String.valueOf(preferencesHelper.getprofilesetup()));
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
 
                 try {
 
                     if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(null)) {
                         startActivity(new Intent(getApplicationContext(), LoginScreen.class));
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), HomeScreen.class));
                     }
-
+                    else
+                    {
+                        if (preferencesHelper.getprofilesetup())
+                        {
+                            startActivity(new Intent(getApplicationContext(),HomeScreen.class));
+                        }
+                        else
+                        {
+                            Log.e("b", String.valueOf(preferencesHelper.getprofilesetup()));
+                            startActivity(new Intent(getApplicationContext(),FirstTimeDetails.class));
+                        }
+                    }
                 }
                 catch (Exception e)
                 {
                     startActivity(new Intent(getApplicationContext(), LoginScreen.class));
                 }
-
             }
         },2000);
     }

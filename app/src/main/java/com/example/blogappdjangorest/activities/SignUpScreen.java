@@ -202,7 +202,7 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
                             preferencesHelper.setid(response.body().getId());
                             waitingDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "successfully Login", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                            startActivity(new Intent(getApplicationContext(),FirstTimeDetails.class));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

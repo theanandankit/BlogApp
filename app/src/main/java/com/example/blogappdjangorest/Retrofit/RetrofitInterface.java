@@ -9,6 +9,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberRespon
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.JoinGroupResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.ProfileInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
@@ -107,5 +108,7 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     Call<StartFollowResponse> check_follow(@Field("who") String who,@Field("whom") String whom);
 
+    @GET("get-profile/")
+    Call<ProfileInfoResponse> get_profile(@Header("Authorization") String Authentication);
 
 }
