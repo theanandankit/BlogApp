@@ -50,6 +50,7 @@ public class ProfileViewBlogAdapter extends RecyclerView.Adapter<ProfileViewBlog
         holder.body.setText(String.valueOf(response.get(position).getTitle()));
 
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,10 +72,12 @@ public class ProfileViewBlogAdapter extends RecyclerView.Adapter<ProfileViewBlog
         CircleImageView photo;
         ImageView blog_photo;
         TextView name,date,category,body;
+        ImageView lock;
 
         public profileholder(@NonNull View itemView) {
             super(itemView);
 
+            lock=itemView.findViewById(R.id.lock);
             photo=itemView.findViewById(R.id.image);
             blog_photo=itemView.findViewById(R.id.body_image);
             name=itemView.findViewById(R.id.name);

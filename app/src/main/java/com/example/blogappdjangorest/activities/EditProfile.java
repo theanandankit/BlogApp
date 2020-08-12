@@ -51,7 +51,7 @@ public class EditProfile extends AppCompatActivity {
 
 
         apiClient=new ApiClient();
-        Call<ArrayList<EditBlogList>> call=apiClient.getApiinterface().EditBlogthing(10);
+        Call<ArrayList<EditBlogList>> call=apiClient.getApiinterface().EditBlogthing(Integer.parseInt(preferencesHelper.getid()));
 
         call.enqueue(new Callback<ArrayList<EditBlogList>>() {
             @Override
@@ -85,7 +85,7 @@ public class EditProfile extends AppCompatActivity {
                 Log.d("men",descr_blog.getText().toString());
 
 
-                Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token "+preferencesHelper.gettoken(),10,descr_blog.getText().toString(),"evef");
+                Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token "+preferencesHelper.gettoken(),Integer.parseInt(preferencesHelper.getid()),descr_blog.getText().toString(),"evef");
 
                 if(descr_blog.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Description cannot be empty",Toast.LENGTH_LONG).show();

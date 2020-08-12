@@ -18,6 +18,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.follower.followerList
 import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingList;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class Following extends Fragment {
 
     RecyclerView recyclerView;
     ApiClient apiClient;
+    PreferencesHelper preferencesHelper;
+
     TextView nothingtoshow;
 
     @Override
@@ -41,8 +44,8 @@ public class Following extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_following, container, false);
-
         recyclerView=view.findViewById(R.id.followingrecycle);
+        preferencesHelper = new PreferencesHelper(getContext());
         nothingtoshow = view.findViewById(R.id.nothingtoshowfollowing);
 
         nothingtoshow.setVisibility(View.INVISIBLE);
@@ -50,7 +53,7 @@ public class Following extends Fragment {
 
 
         apiClient=new ApiClient();
-        Call<ArrayList<FollowingList>> call=apiClient.getApiinterface().followinglistthing(10);
+        Call<ArrayList<FollowingList>> call=apiClient.getApiinterface().followinglistthing(Integer.parseInt(preferencesHelper.getid()));
         call.enqueue(new Callback<ArrayList<FollowingList>>() {
             @Override
             public void onResponse(Call<ArrayList<FollowingList>> call, Response<ArrayList<FollowingList>> response) {
