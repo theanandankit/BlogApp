@@ -2,6 +2,7 @@ package com.example.blogappdjangorest.Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,7 +92,7 @@ public class CreatedGroupsAdapter extends RecyclerView.Adapter<CreatedGroupsAdap
         }
     }
 
-    public void show(String code) {
+    public void show(final String code) {
 
         dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -108,6 +109,23 @@ public class CreatedGroupsAdapter extends RecyclerView.Adapter<CreatedGroupsAdap
         dialog.setCancelable(false);
         TextView passcode;
         MaterialButton done_button;
+        MaterialButton share;
+        share=dialog.findViewById(R.id.share);
+
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+
+                String shareBody = "Hey you can join my group via this group code: "+code;
+                intent.setType("text/plain");
+                /*Applying information Subject and Body.*/
+                intent.putExtra(android.content.Intent.EXTRA_SUBJECT,"My group");
+                intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                /*Fire!*/
+                mContext.startActivity(Intent.createChooser(intent, "my group"));
+            }
+        });
 
         done_button=dialog.findViewById(R.id.done_button);
         passcode=dialog.findViewById(R.id.passcode);

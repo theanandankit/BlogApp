@@ -5,9 +5,11 @@ import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ChangePasswordResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.JoinGroupResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.ProfileInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.SignUpResponse;
@@ -69,7 +71,7 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     Call<AddBlogResponse> add_blog(@Field("url") String url,@Field("title") String title,@Field("body") String body,@Field("category") String category,@Field("author") String author,@Field("status") String status,@Field("group") String group);
 
-    @POST("start-follow")
+    @POST("start-follow/")
     @FormUrlEncoded
     Call<StartFollowResponse> follow(@Field("who") String who,@Field("whom") String whom);
 
@@ -99,5 +101,14 @@ public interface RetrofitInterface {
     @FormUrlEncoded
     Call<Editblogput> EditBlogPut(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
 
+    @GET("group-member-list")
+    Call<ArrayList<GroupListMemberResponse>> get_group_member(@Query("user_id") String user_id);
+
+    @POST("check-follow/")
+    @FormUrlEncoded
+    Call<StartFollowResponse> check_follow(@Field("who") String who,@Field("whom") String whom);
+
+    @GET("get-profile/")
+    Call<ProfileInfoResponse> get_profile(@Header("Authorization") String Authentication);
 
 }

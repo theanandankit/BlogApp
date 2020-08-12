@@ -56,4 +56,14 @@ public class PreferencesHelper {
         else
             return true;
     }
+    public void setprofilesetup(boolean v)
+    {
+        editor=sharedPreferences.edit();
+        editor.putBoolean("profile_setup",v);
+        editor.apply();
+    }
+    public boolean getprofilesetup()
+    {
+        return sharedPreferences.getBoolean("profile_setup",true);
+    }
 }

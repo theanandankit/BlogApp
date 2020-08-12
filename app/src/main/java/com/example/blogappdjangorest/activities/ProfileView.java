@@ -15,6 +15,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.StartFollowResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
@@ -33,6 +34,7 @@ public class ProfileView extends AppCompatActivity {
     MaterialButton follow_button;
     ApiClient apiClient;
     String user_id;
+    PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class ProfileView extends AppCompatActivity {
         apiClient=new ApiClient();
         user_id=getIntent().getStringExtra("user_id");
         recyclerView=findViewById(R.id.recycleView);
+        preferencesHelper = new PreferencesHelper(getApplicationContext());
         get_info();
 
 
@@ -105,15 +108,51 @@ public class ProfileView extends AppCompatActivity {
 
     private void start_follow()
     {
-        Call<StartFollowResponse> call=apiClient.getApiinterface().follow("10","9");
+        Log.e("ok","pk");
+        Call<StartFollowResponse> call=apiClient.getApiinterface().follow(preferencesHelper.getid(),user_id);
+        call.enqueue(new Callback<StartFollowResponse>() {
+            @Override
+            public void onResponse(Call<StartFollowResponse> call, Response<StartFollowResponse> response) {
+
+                if (response.code()==200) {
+                    if (response.body().getResponse().equals("Success")) {
+
+                        follow_button.setText("Already follow");
+                        Toast.makeText(getApplicationContext(), "started Following", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StartFollowResponse> call, Throwable t) {
+
+                Log.e("error","error");
+            }
+        });
+    }
+    private void check_follow()
+    {
+        Call<StartFollowResponse> call=apiClient.getApiinterface().check_follow(preferencesHelper.getid(),user_id);
         call.enqueue(new Callback<StartFollowResponse>() {
             @Override
             public void onResponse(Call<StartFollowResponse> call, Response<StartFollowResponse> response) {
 
                 if (response.code()==200)
                 {
-                    follow_button.setText("Already follow");
-                    Toast.makeText(getApplicationContext(),"started Following",Toast.LENGTH_LONG).show();
+                    if (response.body().getResponse().equals("Not exist"))
+                    {
+                        follow_button.setEnabled(true);
+                        follow_button.setText("Follow");
+                    }
+                    else
+                    {
+                        follow_button.setText("Already follow");
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
                 }
             }
 

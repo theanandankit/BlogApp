@@ -73,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="Share"
                 android:layout_marginRight="10dp"
+                android:id="@+id/share"
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:fontFamily="@font/poppins">

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Fragment.GroupPostFragment;
 import com.example.blogappdjangorest.Fragment.HomeFragment;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
 
@@ -26,13 +27,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemHolder> {
     private Context mContext;
-    ArrayList<GroupListResponse> responses;
+    ArrayList<GroupListMemberResponse> responses;
     androidx.fragment.app.FragmentManager fm;
 
 
 
 
-    public GroupsAdapter(Context context, ArrayList<GroupListResponse> responses){
+    public GroupsAdapter(Context context, ArrayList<GroupListMemberResponse> responses){
         mContext = context;
         fm =((FragmentActivity) mContext).getSupportFragmentManager();
         this.responses=responses;
@@ -50,8 +51,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
     @Override
     public void onBindViewHolder (@NonNull GroupItemHolder holder,final int position){
         setOnClickListener(holder, position);
-        holder.group_name.setText(responses.get(position).getGroup_description());
-
+        holder.group_name.setText(responses.get(0).getMemberinfo().get(position).getGroup_id().getGroup_description());
     }
 
     private void setOnClickListener(final GroupItemHolder holder, final int position) {
@@ -61,16 +61,15 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
                 Fragment fragment=new GroupPostFragment();
                 fm.beginTransaction().replace(R.id.homescreenfragment,fragment).addToBackStack("Groups").commit();
                 Bundle data=new Bundle();
-                data.putString("group_id",responses.get(position).getGroup_id());
+                data.putString("group_id",responses.get(0).getMemberinfo().get(position).getGroup_id().getGroup_id());
                 fragment.setArguments(data);
             }
         });
     }
 
-
     @Override
     public int getItemCount () {
-        return responses.size();
+        return responses.get(0).getMemberinfo().size();
 
     }
 
