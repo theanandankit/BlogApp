@@ -58,11 +58,12 @@ public class SearchBlogFragment extends Fragment {
         blog_recyclerView = v.findViewById(R.id.Search_blog_recycle);
         blog_button = v.findViewById(R.id.Search_blog_button);
         blog_progress = v.findViewById(R.id.progress);
-        blog_progress.setVisibility(View.INVISIBLE);
+        blog_progress.setVisibility(View.VISIBLE);
         blog_caution_image = v.findViewById(R.id.caution);
         blog_caution_text = v.findViewById(R.id.error);
         blog_caution_image.setVisibility(View.INVISIBLE);
         blog_caution_text.setText("Search and learn something new");
+        blog_caution_text.setVisibility(View.INVISIBLE);
         blog_button.setEnabled(false);
         preferencesHelper=new PreferencesHelper(getContext());
         blog_button.setText(preferencesHelper.getLatCategory());
@@ -148,6 +149,7 @@ public class SearchBlogFragment extends Fragment {
                     blog_recyclerView.setHasFixedSize(true);
                     blog_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     blog_recyclerView.setAdapter(searchBlogAdapter);
+                    blog_progress.setVisibility(View.GONE);
                 }
             }
 

@@ -48,11 +48,14 @@ public class ProfileView extends AppCompatActivity {
         blog=findViewById(R.id.total_blog);
         description=findViewById(R.id.description);
         follow_button=findViewById(R.id.follow_button);
+        follow_button.setText("checking");
+        follow_button.setEnabled(false);
         apiClient=new ApiClient();
         user_id=getIntent().getStringExtra("user_id");
         recyclerView=findViewById(R.id.recycleView);
         preferencesHelper = new PreferencesHelper(getApplicationContext());
         get_info();
+        check_follow();
 
 
         follow_button.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +122,8 @@ public class ProfileView extends AppCompatActivity {
 
                         follow_button.setText("Already follow");
                         Toast.makeText(getApplicationContext(), "started Following", Toast.LENGTH_LONG).show();
+                        follow_button.setEnabled(false);
                     }
-
                 }
             }
 
