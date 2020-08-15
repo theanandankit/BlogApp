@@ -1,9 +1,11 @@
 package com.example.blogappdjangorest.Fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Adapter.HomeScreenAdapter;
+import com.example.blogappdjangorest.Models.RetrofitModels.Pagination.HomePagePaginationResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
@@ -33,59 +36,141 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     ApiClient apiClient;
     HomeScreenAdapter homeScreenAdapter;
-    ProgressBar progressBar;
-
+    ProgressBar progressBar,loading;
     TextView title;
-
     TextView nothingtoshow;
+    boolean Isscroll=false,stop=true;
+    ArrayList<PublicBlogResponse> list;
+    int total,current=1;
+    public static int size=8;
+    int currentItem,totalItem,ScrollItem;
+    LinearLayoutManager linearLayoutManager;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_home,container,false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        recyclerView=view.findViewById(R.id.recycleView);
-        progressBar=view.findViewById(R.id.progress);
-        apiClient=new ApiClient();
+        recyclerView = view.findViewById(R.id.recycleView);
+        progressBar = view.findViewById(R.id.progress);
+        apiClient = new ApiClient();
         progressBar.setVisibility(View.VISIBLE);
+        loading=view.findViewById(R.id.loading);
 
-        title=view.findViewById(R.id.title);
+        title = view.findViewById(R.id.title);
         title.setText("Home");
 
         nothingtoshow = view.findViewById(R.id.nothingtoshow);
         nothingtoshow.setVisibility(View.INVISIBLE);
+        list=new ArrayList<>();
+        linearLayoutManager = new LinearLayoutManager(getContext());
 
+        get_data();
 
+        homeScreenAdapter = new HomeScreenAdapter(getActivity(),list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(homeScreenAdapter);
 
-        Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();
-
-        call.enqueue(new Callback<ArrayList<PublicBlogResponse>>() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onResponse(Call<ArrayList<PublicBlogResponse>> call, Response<ArrayList<PublicBlogResponse>> response) {
-                if (response.code()==200)
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState== AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL)
                 {
-                    if (response.body().size()==0){
-
-                        nothingtoshow.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        nothingtoshow.setVisibility(View.INVISIBLE);
-                        progressBar.setVisibility(View.INVISIBLE);
-                        homeScreenAdapter = new HomeScreenAdapter(getActivity(), response.body());
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                        recyclerView.setAdapter(homeScreenAdapter);
-                    }
+                    Isscroll=true;
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<PublicBlogResponse>> call, Throwable t) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItem=linearLayoutManager.getChildCount();
+                totalItem=linearLayoutManager.getItemCount();
+                ScrollItem=linearLayoutManager.findFirstCompletelyVisibleItemPosition();
 
+                if (Isscroll&&(currentItem + ScrollItem == totalItem)&&stop)
+                {
+                    get_data();
+                    loading.setVisibility(View.VISIBLE);
+                    Log.e("1", String.valueOf(stop));
+                    stop=false;
+                }
             }
         });
 
+
+
+
         return view;
+    }
+
+    private void get_data() {
+//        Call<ArrayList<PublicBlogResponse>> call=apiClient.getApiinterface().public_blog();
+//
+//        call.enqueue(new Callback<ArrayList<PublicBlogResponse>>() {
+//            @Override
+//            public void onResponse(Call<ArrayList<PublicBlogResponse>> call, Response<ArrayList<PublicBlogResponse>> response) {
+//                if (response.code()==200)
+//                {
+//                    if (response.body().size()==0){
+//
+//                        nothingtoshow.setVisibility(View.VISIBLE);
+//                    }
+//                    else {
+//                        nothingtoshow.setVisibility(View.INVISIBLE);
+//                        progressBar.setVisibility(View.INVISIBLE);
+//                        homeScreenAdapter = new HomeScreenAdapter(getActivity(), response.body());
+//                        recyclerView.setHasFixedSize(true);
+//                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//                        recyclerView.setAdapter(homeScreenAdapter);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ArrayList<PublicBlogResponse>> call, Throwable t) {
+//
+//            }
+//        });
+
+        Call<HomePagePaginationResponse> call = apiClient.getApiinterface().public_blog(String.valueOf(current));
+        call.enqueue(new Callback<HomePagePaginationResponse>() {
+            @Override
+            public void onResponse(Call<HomePagePaginationResponse> call, Response<HomePagePaginationResponse> response) {
+                nothingtoshow.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
+
+                Log.e("2", String.valueOf(stop));
+
+                total= Integer.parseInt(response.body().getCount());
+
+                for (int a=0;a<response.body().getResults().size();a++)
+                {
+                    list.add(response.body().getResults().get(a));
+                }
+
+                stop=true;
+                if (response.body().getNext()!=null)
+                {
+                    current = current + 1;
+                    Log.e("3", String.valueOf(stop));
+                }
+                else
+                {
+                    Log.e("4", String.valueOf(stop));
+                    stop=false;
+                }
+                loading.setVisibility(View.GONE);
+                homeScreenAdapter.notifyDataSetChanged();
+                Log.e("5", String.valueOf(stop));
+            }
+
+            @Override
+            public void onFailure(Call<HomePagePaginationResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

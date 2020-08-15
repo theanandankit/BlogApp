@@ -6,6 +6,58 @@
     android:orientation="vertical">
     <include layout="@layout/groups_header"/>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:id="@+id/group_image"
+                android:layout_marginVertical="10dp"
+                android:src="@drawable/group_profile"
+                android:layout_marginHorizontal="10dp">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Group"
+                    android:id="@+id/group_name"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14dp">
+                </TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Creater name"
+                    android:id="@+id/group_creator"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="14dp">
+
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerFrameLayout"
         android:layout_width="match_parent"

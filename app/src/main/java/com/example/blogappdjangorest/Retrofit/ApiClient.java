@@ -33,7 +33,7 @@ public class ApiClient {
 
         if(retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://blog-app-django-16.herokuapp.com/api/")
+                    .baseUrl("https://blogappmainapi.herokuapp.com/api/")
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addConverterFactory(ScalarsConverterFactory.create())
