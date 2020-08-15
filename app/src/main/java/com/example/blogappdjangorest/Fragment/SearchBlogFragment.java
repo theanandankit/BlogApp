@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
@@ -15,11 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.blogappdjangorest.Adapter.SearchBlogAdapter;
 import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.Pagination.HomePagePaginationResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.google.android.material.button.MaterialButton;
 
 import org.w3c.dom.Text;
@@ -42,7 +48,7 @@ public class SearchBlogFragment extends Fragment {
     String[] value=new String[22];
     AlertDialog.Builder builder;
     AlertDialog dialog;
-
+    PreferencesHelper preferencesHelper;
 
     @Nullable
     @Override
@@ -58,17 +64,17 @@ public class SearchBlogFragment extends Fragment {
         blog_caution_image.setVisibility(View.INVISIBLE);
         blog_caution_text.setText("Search and learn something new");
         blog_button.setEnabled(false);
+        preferencesHelper=new PreferencesHelper(getContext());
+        blog_button.setText(preferencesHelper.getLatCategory());
         apiClient = new ApiClient();
         get_cat();
-
-
+        set_initial(preferencesHelper.getLatCategory());
         blog_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showFilterDialog();
             }
         });
-
 
         return v;
     }
@@ -114,6 +120,8 @@ public class SearchBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 blog_button.setText(value[which]);
+                preferencesHelper.setlastCategory(value[which]);
+                set_initial(value[which]);
             }
         });
 
@@ -125,5 +133,28 @@ public class SearchBlogFragment extends Fragment {
         });
         builder.setNegativeButton("Cancel", null);
         dialog = builder.create();
+    }
+
+    public void set_initial(String va) {
+
+        Call<HomePagePaginationResponse> call=apiClient.getApiinterface().initial_blog(va,"1");
+        call.enqueue(new Callback<HomePagePaginationResponse>() {
+            @Override
+            public void onResponse(Call<HomePagePaginationResponse> call, Response<HomePagePaginationResponse> response) {
+
+                if (response.code() == 200) {
+
+                    SearchBlogAdapter searchBlogAdapter = new SearchBlogAdapter(getContext(), response.body().getResults());
+                    blog_recyclerView.setHasFixedSize(true);
+                    blog_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    blog_recyclerView.setAdapter(searchBlogAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HomePagePaginationResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
