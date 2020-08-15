@@ -26,9 +26,12 @@
                 android:fontFamily="@font/poppins"
                 android:layout_centerVertical="true"
                 android:background="@null"
+                android:maxLines="1"
+                android:lines="1"
                 android:textSize="14dp"
                 android:hint="Search here..."
-                android:layout_toLeftOf="@id/monitor_search">
+                android:layout_toLeftOf="@id/monitor_search"
+                android:id="@+id/search_field">
 
             </EditText>
 

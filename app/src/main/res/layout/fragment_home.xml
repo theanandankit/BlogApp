@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <include layout="@layout/groups_header"
+        android:id="@+id/header">
+    </include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_below="@id/header"
+        android:layout_above="@id/loading"
         android:layout_height="match_parent"
         tools:listitem="@layout/blog_main_item"
         android:id="@+id/recycleView">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/nothingtoshow"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="You Have Nothing To show"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress">
+
+    </ProgressBar>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/loading">
+
+    </ProgressBar>
+</RelativeLayout>

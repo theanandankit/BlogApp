@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:backgroundTint="@color/white">
 
@@ -113,8 +113,9 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/signup_reenter_email_layout"
+                android:id="@+id/signup_username_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -126,31 +127,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:hint="Re-Enter Password"
-                    android:includeFontPadding="false"
-                    android:inputType="textPassword"
-                    android:singleLine="true" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/signup_username_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="@color/white"
-                android:visibility="gone">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
                     android:hint="Username*"
                     android:includeFontPadding="false"
-                    android:inputType="textPassword"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -162,41 +140,57 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
-                android:backgroundTint="@color/white"
-                android:visibility="gone">
+                android:backgroundTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:hint="First name"
+                    android:hint="Name"
                     android:includeFontPadding="false"
-                    android:inputType="textPassword"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/signup_Last_layout"
+                android:id="@+id/signup_phone_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="20dp"
-                android:backgroundTint="@color/white"
-                android:visibility="gone">
+                android:backgroundTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
-                    android:hint="last name"
+                    android:hint="Phone No."
+                    android:inputType="phone"
                     android:includeFontPadding="false"
-                    android:inputType="textPassword"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <com.chaos.view.PinView
+                style="@style/PinWidget.PinView"
+                android:id="@+id/otp_input"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:viewType="rectangle"
+                app:itemCount="6"
+                android:inputType="number"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:visibility="gone"
+                app:itemHeight="35dp"
+                app:lineWidth="1dp"
+                app:itemWidth="35dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+            </com.chaos.view.PinView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/signup_register"
@@ -230,7 +224,6 @@
         android:layout_gravity="right"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp">
-
 
     </TextView>
 
