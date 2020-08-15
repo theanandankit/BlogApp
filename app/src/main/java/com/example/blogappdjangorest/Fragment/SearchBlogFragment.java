@@ -114,7 +114,6 @@ public class SearchBlogFragment extends Fragment {
     }
     private void build_dialog()
     {
-        blog_button.setText("Technology");
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Search By:");
         builder.setSingleChoiceItems(value, 0, new DialogInterface.OnClickListener() {
