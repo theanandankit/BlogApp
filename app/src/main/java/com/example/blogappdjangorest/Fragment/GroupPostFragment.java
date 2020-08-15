@@ -15,21 +15,25 @@ import android.widget.TextView;
 import com.example.blogappdjangorest.Adapter.GroupsAdapter;
 import com.example.blogappdjangorest.Adapter.GroupsPostAdapter;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupInfoResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GroupPostFragment extends Fragment {
     ShimmerFrameLayout shimmerFrameLayout;
+    CircleImageView group_image;
     RecyclerView groupPosts;
     GroupsPostAdapter groupsPostAdapter;
-    TextView title;
+    TextView title,group_name,group_creator;
     ApiClient apiClient;
     String group_id;
 
@@ -52,11 +56,14 @@ public class GroupPostFragment extends Fragment {
     private void initViews(View view) {
         shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
         groupPosts = view.findViewById(R.id.groupPosts);
-
         title = view.findViewById(R.id.title);
+        group_image=view.findViewById(R.id.group_image);
+        group_creator=view.findViewById(R.id.group_creator);
+        group_name=view.findViewById(R.id.group_name);
         title.setText("Group Blogs");
         apiClient=new ApiClient();
         get_blog();
+        get_group_info();
 
     }
 
@@ -81,6 +88,26 @@ public class GroupPostFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ArrayList<GroupBlogResponse>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void get_group_info()
+    {
+        Call<ArrayList<GroupInfoResponse>> call=apiClient.getApiinterface().group_info(group_id);
+
+        call.enqueue(new Callback<ArrayList<GroupInfoResponse>>() {
+            @Override
+            public void onResponse(Call<ArrayList<GroupInfoResponse>> call, Response<ArrayList<GroupInfoResponse>> response) {
+
+                group_name.setText(response.body().get(0).getGroup_description());
+                Picasso.get().load(response.body().get(0).getUrl()).into(group_image);
+                group_creator.setText(response.body().get(0).getCreator_id().getFirst_name());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<GroupInfoResponse>> call, Throwable t) {
 
             }
         });

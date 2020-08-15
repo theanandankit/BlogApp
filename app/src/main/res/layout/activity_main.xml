@@ -7,6 +7,31 @@
     tools:context=".MainActivity">
 
 
+   <ImageView
+       android:layout_width="400dp"
+       android:layout_height="400dp"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:layout_marginRight="-150dp"
+       android:layout_marginTop="-150dp"
+       android:background="@drawable/circle"
+       >
+   </ImageView>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:layout_marginTop="50dp"
+       android:layout_marginRight="50dp"
+       android:textColor="@color/white"
+       android:fontFamily="cursive"
+       android:text="Create\nshare\nfollow"
+       android:textSize="35dp">
+   </TextView>
+
+
    <LinearLayout
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
@@ -14,23 +39,47 @@
        android:gravity="center"
        android:layout_centerInParent="true">
 
+      <ImageView
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:scaleType="fitXY"
+          android:src="@drawable/splash_screen"
+          android:id="@+id/image">
+
+      </ImageView>
+
+      <TextView
+          android:id="@+id/text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:fontFamily="cursive"
+          android:text="Blogic"
+          android:textSize="35dp">
+
+      </TextView>
+
    <TextView
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="Blogic"
        android:fontFamily="@font/poppins"
-       android:textSize="30dp"
-       android:layout_centerInParent="true">
-
+       android:textSize="10dp"
+       android:text="Version 1.0">
    </TextView>
-
-   <TextView
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="Beta Version 1.0">
-
-   </TextView>
-
 
    </LinearLayout>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:fontFamily="@font/poppins"
+       android:layout_margin="20dp"
+       android:gravity="center"
+       android:text="Project under T.I.I.C. , A.B.V. indian institute of information technology and management\nGwalior"
+       android:layout_alignParentBottom="true"
+       android:textSize="15dp">
+
+   </TextView>
 </RelativeLayout>

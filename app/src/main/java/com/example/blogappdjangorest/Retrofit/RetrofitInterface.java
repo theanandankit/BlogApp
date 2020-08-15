@@ -5,10 +5,12 @@ import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.CategoryResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ChangePasswordResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupBlogResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.GroupInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.JoinGroupResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.LoginResponse;
+import com.example.blogappdjangorest.Models.RetrofitModels.Pagination.HomePagePaginationResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileInfoResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
@@ -42,7 +44,7 @@ public interface RetrofitInterface {
     Call<SignUpResponse> register(@Field("email") String email, @Field("password") String password, @Field("username") String username, @Field("first_name") String first_name, @Field("last_name") String last_name);
 
     @GET("public-blog")
-    Call<ArrayList<PublicBlogResponse>> public_blog();
+    Call<HomePagePaginationResponse> public_blog(@Query("page") String page);
 
     @GET("full-profile-info/")
     Call<ArrayList<ProfileUser>> profileUser(@Query("user_id") int userid);
@@ -110,5 +112,9 @@ public interface RetrofitInterface {
 
     @GET("get-profile/")
     Call<ProfileInfoResponse> get_profile(@Header("Authorization") String Authentication);
+
+    @GET("group-info/")
+    Call<ArrayList<GroupInfoResponse>> group_info(@Query("group_id") String group_id);
+
 
 }

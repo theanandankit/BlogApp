@@ -11,6 +11,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_below="@id/header"
+        android:layout_above="@id/loading"
         android:layout_height="match_parent"
         tools:listitem="@layout/blog_main_item"
         android:id="@+id/recycleView">
@@ -34,4 +35,14 @@
 
     </ProgressBar>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/loading">
+
+    </ProgressBar>
 </RelativeLayout>
