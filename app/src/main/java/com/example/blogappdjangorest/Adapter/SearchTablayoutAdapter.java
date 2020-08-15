@@ -1,5 +1,7 @@
 package com.example.blogappdjangorest.Adapter;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,7 @@ import com.example.blogappdjangorest.Fragment.SearchProfileFragment;
 public class SearchTablayoutAdapter extends FragmentStatePagerAdapter {
 
     Fragment fragment;
+    Context context;
 
     public SearchTablayoutAdapter(@NonNull FragmentManager fm) {
         super(fm);

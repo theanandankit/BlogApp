@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.blogappdjangorest.Adapter.SearchBlogAdapter;
 import com.example.blogappdjangorest.Adapter.SearchProfileAdapter;
 import com.example.blogappdjangorest.Adapter.SearchTablayoutAdapter;
+import com.example.blogappdjangorest.Models.RetrofitModels.Pagination.HomePagePaginationResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileSearchResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
@@ -30,7 +31,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static androidx.core.content.ContextCompat.getSystemService;
 import static com.example.blogappdjangorest.Fragment.SearchBlogFragment.blog_button;
 import static com.example.blogappdjangorest.Fragment.SearchBlogFragment.blog_caution_image;
 import static com.example.blogappdjangorest.Fragment.SearchBlogFragment.blog_caution_text;
@@ -51,6 +51,7 @@ public class SearchFragment extends Fragment {
     public static MaterialCardView bbcardView;
     ApiClient apiClient;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class SearchFragment extends Fragment {
         apiClient = new ApiClient();
         bbcardView = view.findViewById(R.id.monitor_search);
         editText=view.findViewById(R.id.search_field);
+
 
         bbcardView.setOnClickListener(new View.OnClickListener() {
             @Override

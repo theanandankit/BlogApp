@@ -66,4 +66,15 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getBoolean("profile_setup",false);
     }
+    public void setlastCategory(String category)
+    {
+        editor=sharedPreferences.edit();
+        editor.putString("last_category",category);
+        editor.apply();
+    }
+
+    public String getLatCategory()
+    {
+        return sharedPreferences.getString("last_category","Technology");
+    }
 }

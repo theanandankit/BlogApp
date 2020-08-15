@@ -116,5 +116,7 @@ public interface RetrofitInterface {
     @GET("group-info/")
     Call<ArrayList<GroupInfoResponse>> group_info(@Query("group_id") String group_id);
 
+    @GET("category-blog")
+    Call<HomePagePaginationResponse> initial_blog(@Query("category") String category,@Query("page") String page);
 
 }

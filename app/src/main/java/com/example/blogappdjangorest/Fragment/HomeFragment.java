@@ -94,7 +94,6 @@ public class HomeFragment extends Fragment {
                 {
                     get_data();
                     loading.setVisibility(View.VISIBLE);
-                    Log.e("1", String.valueOf(stop));
                     stop=false;
                 }
             }
@@ -139,32 +138,25 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<HomePagePaginationResponse>() {
             @Override
             public void onResponse(Call<HomePagePaginationResponse> call, Response<HomePagePaginationResponse> response) {
-                nothingtoshow.setVisibility(View.INVISIBLE);
-                progressBar.setVisibility(View.INVISIBLE);
 
-                Log.e("2", String.valueOf(stop));
+                if (response.code() == 200) {
+                    nothingtoshow.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
+                    total = Integer.parseInt(response.body().getCount());
 
-                total= Integer.parseInt(response.body().getCount());
+                    for (int a = 0; a < response.body().getResults().size(); a++) {
+                        list.add(response.body().getResults().get(a));
+                    }
 
-                for (int a=0;a<response.body().getResults().size();a++)
-                {
-                    list.add(response.body().getResults().get(a));
+                    stop = true;
+                    if (response.body().getNext() != null) {
+                        current = current + 1;
+                    } else {
+                        stop = false;
+                    }
+                    loading.setVisibility(View.GONE);
+                    homeScreenAdapter.notifyDataSetChanged();
                 }
-
-                stop=true;
-                if (response.body().getNext()!=null)
-                {
-                    current = current + 1;
-                    Log.e("3", String.valueOf(stop));
-                }
-                else
-                {
-                    Log.e("4", String.valueOf(stop));
-                    stop=false;
-                }
-                loading.setVisibility(View.GONE);
-                homeScreenAdapter.notifyDataSetChanged();
-                Log.e("5", String.valueOf(stop));
             }
 
             @Override
