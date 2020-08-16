@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,14 +48,14 @@ import static android.app.Activity.RESULT_OK;
 
 public class AddBlogFragment extends Fragment {
 
-    MaterialButton button,category,add_image;
-    String[] value=new String[22];
+    MaterialButton button, category, add_image;
+    String[] value = new String[22];
     ApiClient apiClient;
     AlertDialog.Builder builder;
     AlertDialog dialog;
-    EditText blog_title,body;
-    String category_text,status,group_text;
-    String[] group,group_id;
+    EditText blog_title, body;
+    String category_text, status, group_text;
+    String[] group, group_id;
     Uri uri;
     CircleImageView image;
     StorageReference folder;
@@ -64,22 +67,23 @@ public class AddBlogFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_addblog,container,false);
+        View view = inflater.inflate(R.layout.fragment_addblog, container, false);
 
-        button=view.findViewById(R.id.next_button);
-        category=view.findViewById(R.id.cat_button);
-        blog_title=view.findViewById(R.id.blog_title);
-        body=view.findViewById(R.id.body);
-        add_image=view.findViewById(R.id.add_image);
-        image=view.findViewById(R.id.image);
-        apiClient=new ApiClient();
-        waitingDialog=new WaitingDialog(getContext());
+        button = view.findViewById(R.id.post_button);
+        category = view.findViewById(R.id.cat_button);
+        blog_title = view.findViewById(R.id.blog_title);
+        body = view.findViewById(R.id.body);
+        add_image = view.findViewById(R.id.add_image);
+        image = view.findViewById(R.id.image);
+        apiClient = new ApiClient();
+        waitingDialog = new WaitingDialog(getContext());
         category.setEnabled(false);
-        header_title=view.findViewById(R.id.title);
+        header_title = view.findViewById(R.id.title);
         header_title.setText("Add Blog");
         preferencesHelper = new PreferencesHelper(getContext());
         get_cat();
         get_group();
+        body_gravity();
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,23 +113,19 @@ public class AddBlogFragment extends Fragment {
         return view;
     }
 
-    public void showpublishDialog()
-    {
+    public void showpublishDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Publish");
         String[] animals = {"public", "Private (In Group)"};
-        status="public";
+        status = "public";
         builder.setSingleChoiceItems(animals, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (which==0)
-                {
-                    status="public";
-                }
-                else
-                {
-                    status="private";
+                if (which == 0) {
+                    status = "public";
+                } else {
+                    status = "private";
                 }
 
             }
@@ -136,20 +136,17 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (status.equals("public")) {
-                    group_text="1";
+                    group_text = "1";
                     upload();
                     dialog.dismiss();
                 } else {
-                    if (group.length==0)
-                    {
-                        Toast.makeText(getContext(),"No group to show, please Create the group or publish it public",Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        status="private";
+                    if (group.length == 0) {
+                        Toast.makeText(getContext(), "No group to show, please Create the group or publish it public", Toast.LENGTH_LONG).show();
+                    } else {
+                        status = "private";
                         showGroupDialog();
                         dialog.dismiss();
-                        Log.e("value",status);
+                        Log.e("value", status);
 
                     }
                 }
@@ -160,18 +157,17 @@ public class AddBlogFragment extends Fragment {
         dialog.show();
     }
 
-    public void showGroupDialog()
-    {
-        Log.e("value",status);
+    public void showGroupDialog() {
+        Log.e("value", status);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Select the group");
-        group_text=group_id[0];
+        group_text = group_id[0];
         builder.setSingleChoiceItems(group, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                group_text=group_id[which];
-                Log.e("value",status);
+                group_text = group_id[which];
+                Log.e("value", status);
             }
         });
 
@@ -180,7 +176,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Log.e("value",status);
+                Log.e("value", status);
                 upload();
                 dialog.dismiss();
             }
@@ -189,6 +185,7 @@ public class AddBlogFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     public void get_cat() {
         Call<ArrayList<CategoryResponse>> call = apiClient.getApiinterface().get_categories();
 
@@ -200,7 +197,7 @@ public class AddBlogFragment extends Fragment {
                     if (!(response.body().size() == 0)) {
                         category.setEnabled(true);
                         for (int a = 0; a < response.body().size(); a++) {
-                            value[a]=(response.body().get(a).getCategory_name());
+                            value[a] = (response.body().get(a).getCategory_name());
                         }
                     } else {
                         category.setText("Something Went Wrong");
@@ -218,9 +215,9 @@ public class AddBlogFragment extends Fragment {
             }
         });
     }
-    private void build_dialog()
-    {
-        category_text="Technology";
+
+    private void build_dialog() {
+        category_text = "Technology";
         category.setText("Technology");
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Search By:");
@@ -228,7 +225,7 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 category.setText(value[which]);
-                category_text=value[which];
+                category_text = value[which];
             }
         });
 
@@ -245,48 +242,42 @@ public class AddBlogFragment extends Fragment {
 
         dialog.show();
     }
-    private void add_blog(Uri uri)
-    {
 
-        Log.e("value",status);
+    private void add_blog(Uri uri) {
+
+        Log.e("value", status);
         waitingDialog.setext("Saving the data...");
-        Call<AddBlogResponse> call=apiClient.getApiinterface().add_blog(String.valueOf(uri),blog_title.getText().toString(),body.getText().toString(),category_text,preferencesHelper.getid(),status,group_text);
+        Call<AddBlogResponse> call = apiClient.getApiinterface().add_blog(String.valueOf(uri), blog_title.getText().toString(), body.getText().toString(), category_text, preferencesHelper.getid(), status, group_text);
 
         call.enqueue(new Callback<AddBlogResponse>() {
             @Override
             public void onResponse(Call<AddBlogResponse> call, Response<AddBlogResponse> response) {
 
-                if (response.code()==200)
-                {
-                    if (!response.body().toString().isEmpty())
-                    {
-                        Toast.makeText(getContext(),"Successfully Added",Toast.LENGTH_LONG).show();
-                        Log.e("value",status);
+                if (response.code() == 200) {
+                    if (!response.body().toString().isEmpty()) {
+                        Toast.makeText(getContext(), "Successfully Added", Toast.LENGTH_LONG).show();
+                        Log.e("value", status);
                         waitingDialog.dismiss();
 
-                    }
-                    else
-                        Log.e("ok","q");
-                }
-                else
-                Log.e("ok","r");
+                    } else
+                        Log.e("ok", "q");
+                } else
+                    Log.e("ok", "r");
             }
 
             @Override
             public void onFailure(Call<AddBlogResponse> call, Throwable t) {
 
-                Log.e("ok","w");
+                Log.e("ok", "w");
             }
         });
     }
 
-    private void check()
-    {
+    private void check() {
 
     }
 
-    private void get_group()
-    {
+    private void get_group() {
 //        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group("10");
 //        call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
 //            @Override
@@ -319,17 +310,14 @@ public class AddBlogFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<GroupListMemberResponse>> call, Response<ArrayList<GroupListMemberResponse>> response) {
 
-                if (response.code()==200)
-                {
-                    if (!(response.body().size() ==0))
-                    {
-                        group=new String[response.body().get(0).getMemberinfo().size()];
-                        group_id= new String[response.body().get(0).getMemberinfo().size()];
+                if (response.code() == 200) {
+                    if (!(response.body().size() == 0)) {
+                        group = new String[response.body().get(0).getMemberinfo().size()];
+                        group_id = new String[response.body().get(0).getMemberinfo().size()];
 
-                        for (int a=0;a<response.body().get(0).getMemberinfo().size();a++)
-                        {
-                            group[a]=response.body().get(0).getMemberinfo().get(a).getGroup_id().getGroup_description();
-                            group_id[a]=response.body().get(0).getMemberinfo().get(a).getGroup_id().getGroup_id();
+                        for (int a = 0; a < response.body().get(0).getMemberinfo().size(); a++) {
+                            group[a] = response.body().get(0).getMemberinfo().get(a).getGroup_id().getGroup_description();
+                            group_id[a] = response.body().get(0).getMemberinfo().get(a).getGroup_id().getGroup_id();
                         }
                     }
                 }
@@ -342,20 +330,19 @@ public class AddBlogFragment extends Fragment {
         });
     }
 
-    private void upload()
-    {
-        Log.e("value",status);
-        folder= FirebaseStorage.getInstance().getReference().child("ImageFolder");
+    private void upload() {
+        Log.e("value", status);
+        folder = FirebaseStorage.getInstance().getReference().child("ImageFolder");
         final StorageReference image_store = folder.child("image" + uri.getLastPathSegment());
-        UploadTask uploadTask=image_store.putFile(uri);
+        UploadTask uploadTask = image_store.putFile(uri);
         waitingDialog.SetDialog("Uploading Your\nfile...");
         waitingDialog.show();
 
         uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                double progress=(100 * taskSnapshot.getBytesTransferred()) /taskSnapshot.getTotalByteCount();
-                waitingDialog.setext((int) progress +" % completed");
+                double progress = (100 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                waitingDialog.setext((int) progress + " % completed");
             }
         });
 
@@ -367,7 +354,7 @@ public class AddBlogFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         add_blog(uri);
-                        Log.e("value",status);
+                        Log.e("value", status);
                     }
                 });
             }
@@ -379,11 +366,37 @@ public class AddBlogFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null)
-        {
-            uri=data.getData();
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            uri = data.getData();
             image.setImageURI(uri);
+            image.setVisibility(View.VISIBLE);
             add_image.setText("Edit Image");
+
         }
+    }
+
+    private void body_gravity() {
+
+        body.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0) {
+                    // position the text type in the left top corner
+                    body.setGravity(Gravity.LEFT | Gravity.TOP);
+                } else {
+                    // no text entered. Center the hint text.
+                    body.setGravity(Gravity.CENTER);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }
