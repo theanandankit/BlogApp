@@ -20,6 +20,7 @@ import com.example.blogappdjangorest.Fragment.HomeFragment;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,7 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.GroupItemH
     public void onBindViewHolder (@NonNull GroupItemHolder holder,final int position){
         setOnClickListener(holder, position);
         holder.group_name.setText(responses.get(0).getMemberinfo().get(position).getGroup_id().getGroup_description());
+        Picasso.get().load(responses.get(0).getMemberinfo().get(position).getGroup_id().getUrl()).into(holder.image);
     }
 
     private void setOnClickListener(final GroupItemHolder holder, final int position) {
