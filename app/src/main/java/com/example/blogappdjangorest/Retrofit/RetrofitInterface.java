@@ -100,9 +100,9 @@ public interface RetrofitInterface {
     @GET("get-user-info/")
     Call<ArrayList<EditBlogList>> EditBlogthing(@Query("user_id") int id_blog);
 
-    @PUT("add-user-info/")
+    @POST("add-user-info/")
     @FormUrlEncoded
-    Call<Editblogput> EditBlogPut(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
+    Call<Editblogput> addBlogPut(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
 
     @GET("group-member-list")
     Call<ArrayList<GroupListMemberResponse>> get_group_member(@Query("user_id") String user_id);

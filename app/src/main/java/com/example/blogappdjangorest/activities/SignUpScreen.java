@@ -194,10 +194,10 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                if (response.code()==200)
+                if (response.code()==202)
                 {
                     try {
-                        if (!response.body().getToken().isEmpty()) {
+                        if (!response.body().getToken().isEmpty()&&response.body().getStatus().equals("Not")) {
                             preferencesHelper.setToken(response.body().getToken());
                             preferencesHelper.setid(response.body().getId());
                             waitingDialog.dismiss();

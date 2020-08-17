@@ -172,7 +172,7 @@ public class EditProfile extends AppCompatActivity {
     }
     private void add_details(Uri uri)
     {
-        Call<Editblogput> callput=apiClient.getApiinterface().EditBlogPut("Token "+preferencesHelper.gettoken(),Integer.parseInt(preferencesHelper.getid()),descr_blog.getText().toString(), String.valueOf(uri));
+        Call<Editblogput> callput=apiClient.getApiinterface().addBlogPut("Token "+preferencesHelper.gettoken(),Integer.parseInt(preferencesHelper.getid()),descr_blog.getText().toString(), String.valueOf(uri));
 
         if(descr_blog.getText().toString().isEmpty()){
             Toast.makeText(getApplicationContext(),"Description cannot be empty",Toast.LENGTH_LONG).show();
