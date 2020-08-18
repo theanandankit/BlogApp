@@ -25,6 +25,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingLi
 import java.util.ArrayList;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -99,9 +100,9 @@ public interface RetrofitInterface {
     @GET("get-user-info/")
     Call<ArrayList<EditBlogList>> EditBlogthing(@Query("user_id") int id_blog);
 
-    @PUT("add-user-info/")
+    @POST("add-user-info/")
     @FormUrlEncoded
-    Call<Editblogput> EditBlogPut(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
+    Call<Editblogput> addBlogPut(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
 
     @GET("group-member-list")
     Call<ArrayList<GroupListMemberResponse>> get_group_member(@Query("user_id") String user_id);
@@ -118,5 +119,9 @@ public interface RetrofitInterface {
 
     @GET("category-blog")
     Call<HomePagePaginationResponse> initial_blog(@Query("category") String category,@Query("page") String page);
+
+    @POST("unfollow/")
+    @FormUrlEncoded
+    Call<StartFollowResponse> unfollow(@Field("who") String who,@Field("whom") String whom);
 
 }

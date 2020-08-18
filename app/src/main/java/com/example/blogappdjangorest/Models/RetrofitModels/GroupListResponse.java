@@ -10,6 +10,16 @@ public class GroupListResponse {
 
     String group_code;
 
+    String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getGroup_id() {
         return group_id;
     }
