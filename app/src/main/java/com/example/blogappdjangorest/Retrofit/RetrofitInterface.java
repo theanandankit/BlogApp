@@ -84,7 +84,7 @@ public interface RetrofitInterface {
 
     @POST("create-group/")
     @FormUrlEncoded
-    Call<String> create_group(@Field("group_id") String group_id,@Field("group_description") String group_description,@Field("creator_id") String creator_id,@Field("group_code") String group_code);
+    Call<String> create_group(@Field("group_id") String group_id,@Field("group_description") String group_description,@Field("creator_id") String creator_id,@Field("group_code") String group_code,@Field("url") String url);
 
     @PUT("change-password/")
     @FormUrlEncoded

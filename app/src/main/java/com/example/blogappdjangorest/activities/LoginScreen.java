@@ -64,9 +64,8 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
             public void onClick(View v) {
                 if (check()) {
                     waitingDialog.SetDialog("Authenticating...");
-                    waitingDialog.show();
-//                    signUpupload.exist(email.getEditText().getText().toString());
-                    upload();
+                    signUpupload.exist(email.getEditText().getText().toString());
+//                    upload();
                 }
             }
         });
@@ -103,7 +102,10 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
                             waitingDialog.dismiss();
                             Toast.makeText(getApplicationContext(), "successfully Login", Toast.LENGTH_LONG).show();
                             if (response.body().getStatus().equals("found")) {
+
                                 startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                                preferencesHelper.setprofilesetup(true);
+                                preferencesHelper.SetWelcome();
                                 finish();
                             }
                             else
@@ -175,6 +177,7 @@ public class LoginScreen extends AppCompatActivity implements Otp_verification.O
         }
         else {
             Toast.makeText(getApplicationContext(),"Email does not registered",Toast.LENGTH_LONG).show();
+            waitingDialog.dismiss();
         }
     }
 

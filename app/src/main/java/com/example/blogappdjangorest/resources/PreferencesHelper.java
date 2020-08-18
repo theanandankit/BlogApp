@@ -77,4 +77,15 @@ public class PreferencesHelper {
     {
         return sharedPreferences.getString("last_category","Technology");
     }
+
+    public void SetWelcome()
+    {
+        editor=sharedPreferences.edit();
+        editor.putBoolean("welcome",true);
+        editor.apply();
+    }
+    public boolean getWelcome()
+    {
+        return sharedPreferences.getBoolean("welcome",false);
+    }
 }

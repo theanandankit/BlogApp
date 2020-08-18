@@ -47,7 +47,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
     TextView EditProfileBtn;
-    TextView FollowerBtn, biodescr, blogcount, flowwercount, name;
+    TextView FollowerBtn, biodescr, blogcount, flowwercount, name,join_count;
     RecyclerView recyclerView;
     TabLayout tabLayout;
     ApiClient apiClient;
@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         title.setText("Profile");
         FollowerBtn = view.findViewById(R.id.followerbtn);
         image = view.findViewById(R.id.profileimage);
+        join_count=view.findViewById(R.id.join_count);
         preferencesHelper=new PreferencesHelper(getContext());
 
 //        FollowerBtn.setOnClickListener(new View.OnClickListener() {
@@ -177,9 +178,10 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
                     biodescr.setText("Hello there");
                 }
                 flowwercount.setText(response.body().get(0).getPersonList2().size() + "");
-                blogcount.setText(response.body().get(0).getAuthorName().size() + "");
+                blogcount.setText(response.body().get(0).getPersonList1().size() + "");
                 name.setText(response.body().get(0).getFirstName().toString() + " " + response.body().get(0).getLastName().toString());
                 Picasso.get().load(response.body().get(0).getUserDetails().get(0).getUrl()).into(image);
+                join_count.setText(String.valueOf(response.body().get(0).getAuthorName().size()));
 
             }
 
