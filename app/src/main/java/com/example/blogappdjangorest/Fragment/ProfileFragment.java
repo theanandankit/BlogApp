@@ -78,30 +78,6 @@ public class ProfileFragment extends Fragment implements TabLayout.OnTabSelected
         image = view.findViewById(R.id.profileimage);
         join_count=view.findViewById(R.id.join_count);
         preferencesHelper=new PreferencesHelper(getContext());
-
-//        FollowerBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final Dialog dialog = new Dialog(getContext());
-//                dialog.setContentView(R.layout.followers_dialog);
-//
-//                Button dialogButton = (Button) dialog.findViewById(R.id.CloseBtn);
-//                // if button is clicked, close the custom dialog
-//                dialogButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                recyclerView=dialog.findViewById(R.id.recycler_follower);
-//                ProfileBlogAdapter profileBlogAdapter=new ProfileBlogAdapter(getContext());
-//                recyclerView.setHasFixedSize(true);
-//                recyclerView.setAdapter(profileBlogAdapter);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-//
-//                dialog.show();
-//            }
-//        });
         FollowerBtn = view.findViewById(R.id.followerbtn);
 
         FollowerBtn.setOnClickListener(new View.OnClickListener() {

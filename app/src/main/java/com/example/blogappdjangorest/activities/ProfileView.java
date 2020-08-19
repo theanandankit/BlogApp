@@ -62,6 +62,11 @@ public class ProfileView extends AppCompatActivity {
         get_info();
         check_follow();
 
+        if (user_id.equals(preferencesHelper.getid()))
+        {
+            follow_button.setVisibility(View.GONE);
+        }
+
 
         follow_button.setOnClickListener(new View.OnClickListener() {
             @Override

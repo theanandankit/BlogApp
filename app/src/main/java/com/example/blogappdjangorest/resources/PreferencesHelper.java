@@ -41,20 +41,11 @@ public class PreferencesHelper {
         return sharedPreferences.getBoolean("islogin",false);
     }
 
-    public void setlogin()
+    public void setlogin(boolean s)
     {
         editor=sharedPreferences.edit();
-        editor.putBoolean("islogin",true);
+        editor.putBoolean("islogin",s);
         editor.apply();
-    }
-    public boolean is_login()
-    {
-        if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(null))
-        {
-            return false;
-        }
-        else
-            return true;
     }
     public void setprofilesetup(boolean v)
     {

@@ -38,7 +38,6 @@
             android:text="Follower"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/profileimage"
             app:layout_constraintStart_toEndOf="@+id/profileimage" />
 
@@ -50,10 +49,7 @@
         android:fontFamily="@font/poppins"
         android:text="Blog"
         android:textColor="@color/black"
-
         android:textSize="14sp"
-
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -82,9 +78,7 @@
         android:fontFamily="@font/poppins"
         android:text="Following"
         android:textColor="@color/black"
-
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/followerbtn"
         app:layout_constraintStart_toEndOf="@+id/followerbtn" />
 
@@ -123,7 +117,6 @@
         android:text=""
         android:textColor="#000"
         android:textSize="15sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/profileimage"
         app:layout_constraintStart_toStartOf="@+id/profileimage"
         app:layout_constraintTop_toBottomOf="@+id/profileimage" />
@@ -135,7 +128,7 @@
         android:layout_marginTop="8dp"
         android:text=""
         android:textColor="#222121"
-        android:textSize="12sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/nameprofile"
         app:layout_constraintTop_toBottomOf="@+id/nameprofile" /><![CDATA[
 

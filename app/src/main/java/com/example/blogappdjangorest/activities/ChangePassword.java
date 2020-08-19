@@ -37,7 +37,7 @@ public class ChangePassword extends AppCompatActivity {
         button=findViewById(R.id.change);
         apiClient=new ApiClient();
         waitingDialog=new WaitingDialog(ChangePassword.this);
-        waitingDialog.SetDialog("Please Wait...");
+        waitingDialog.SetDialog("Updating Password");
         preferencesHelper=new PreferencesHelper(getApplicationContext());
 
         button.setOnClickListener(new View.OnClickListener() {

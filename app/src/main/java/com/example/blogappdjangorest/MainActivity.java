@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
-                    if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(null)) {
+                    if (!preferencesHelper.islogin()) {
 
                         if (!preferencesHelper.getWelcome()) {
                             startActivity(new Intent(getApplicationContext(), Welcome_screen.class));
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Log.e("b", String.valueOf(preferencesHelper.getprofilesetup()));
                             startActivity(new Intent(getApplicationContext(),FirstTimeDetails.class));
                         }
                     }

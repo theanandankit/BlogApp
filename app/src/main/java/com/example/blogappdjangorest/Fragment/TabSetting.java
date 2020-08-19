@@ -109,9 +109,10 @@ public class TabSetting extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                FirebaseAuth.getInstance().signOut();
+                preferencesHelper.setlogin(false);
                 preferencesHelper.setprofilesetup(false);
                 startActivity(new Intent(getContext(),LoginScreen.class));
+                getActivity().finish();
             }
         });
         builder.setNegativeButton("Cancel", null);
