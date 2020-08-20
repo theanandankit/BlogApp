@@ -102,11 +102,13 @@ public class LoginScreen extends AppCompatActivity {
                                 preferencesHelper.SetWelcome();
                                 preferencesHelper.setlogin(true);
                                 startActivity(new Intent(getApplicationContext(),HomeScreen.class));
+                                finish();
                             }
                             else
                             {
                                 preferencesHelper.setlogin(true);
                                 startActivity(new Intent(getApplicationContext(),FirstTimeDetails.class));
+                                finish();
                             }
                         }
                     } catch (Exception e) {

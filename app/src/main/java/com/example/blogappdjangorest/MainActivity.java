@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), LoginScreen.class));
                     }
                 }
+                finish();
             }
         },3000);
     }

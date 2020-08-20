@@ -134,6 +134,9 @@ public class ProfileView extends AppCompatActivity {
                     if (response.body().getResponse().equals("Success")) {
 
                         follow_button.setText("Unfollow");
+                        int a =Integer.parseInt(following.getText().toString());
+                        a++;
+                        following.setText(a);
                         Toast.makeText(getApplicationContext(), "started Following", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -187,6 +190,9 @@ public class ProfileView extends AppCompatActivity {
                     if (response.body().getResponse().equals("Deleted"))
                     {
                         follow_button.setText("Follow");
+                        int a =Integer.parseInt(following.getText().toString());
+                        a--;
+                        following.setText(a);
                     }
                     else
                     {
