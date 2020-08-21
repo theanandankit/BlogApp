@@ -30,7 +30,7 @@ import retrofit2.Response;
 public class SignUpScreen extends AppCompatActivity {
     TextInputLayout email,password,username,firstname;
     MaterialButton button;
-    TextView text;
+    TextView text,login_text;
     WaitingDialog waitingDialog;
     PreferencesHelper preferencesHelper;
     ApiClient apiClient;
@@ -51,11 +51,18 @@ public class SignUpScreen extends AppCompatActivity {
         firstname=findViewById(R.id.signup_first_layout);
         text=findViewById(R.id.signup_main_text);
         button=findViewById(R.id.signup_register);
+        login_text=findViewById(R.id.signup_login_text);
         preferencesHelper=new PreferencesHelper(getApplicationContext());
         waitingDialog=new WaitingDialog(SignUpScreen.this);
         apiClient=new ApiClient();
         pinView=findViewById(R.id.otp_input);
         otp=new Otp_verification();
+        login_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
