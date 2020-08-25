@@ -9,16 +9,15 @@ android {
         applicationId "com.Blogic.BlogApp"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 3
-        versionName "3"
+        versionCode 5
+        versionName "5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
