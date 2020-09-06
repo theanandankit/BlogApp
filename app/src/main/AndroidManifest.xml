@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.blogappdjangorest">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,25 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ChangePassword"></activity>
+        <activity android:name=".activities.Welcome_screen"></activity>
+        <activity android:name=".activities.FirstTimeDetails"></activity>
+        <activity android:name=".activities.ChangePassword" />
         <activity android:name=".activities.FollowersNFollowing" />
         <activity android:name=".activities.Blog_view" />
         <activity android:name=".activities.ProfileView" />
         <activity android:name=".activities.EditProfile" />
         <activity
             android:name=".activities.HomeScreen"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity android:name=".activities.ForgotPasswordRequest" />
-        <activity android:name=".activities.SignUpScreen" />
-        <activity android:name=".activities.LoginScreen">
+        <activity android:name=".activities.SignUpScreen"></activity>
+        <activity android:name=".activities.LoginScreen"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

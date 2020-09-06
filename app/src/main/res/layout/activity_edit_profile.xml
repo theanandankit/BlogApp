@@ -7,142 +7,165 @@
     android:orientation="vertical"
     tools:context=".activities.EditProfile">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
 
-    <LinearLayout
-        android:id="@+id/circleImageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/school_back"
-                android:layout_gravity="center_horizontal">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="2dp"
-                android:src="@drawable/edit">
-
-            </de.hdodenhof.circleimageview.CircleImageView>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/Chngephotobtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Change Profile Photo"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textColor="#1976D2"
-        app:layout_constraintEnd_toEndOf="@+id/circleImageView2"
-        app:layout_constraintStart_toStartOf="@+id/circleImageView2"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginEnd="2dp">
+        android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
 
 
             <TextView
-                android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins"
-                android:text="Edit Your Profile"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="Edit your Profile"
+                android:textColor="#000"
+                android:textSize="16dp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="100dp"
+                android:src="@drawable/group_profile"
+                android:id="@+id/pro_image"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:backgroundTint="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
-                app:layout_constraintTop_toBottomOf="@+id/textView12">
+                android:layout_gravity="center_horizontal"
+                android:layout_height="100dp">
+            </de.hdodenhof.circleimageview.CircleImageView>
 
-                <com.google.android.material.textfield.TextInputEditText
+
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Name"
+                    android:textColor="#000"
+                    android:textSize="16dp" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editTextTextPersonUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:backgroundTint="@color/white"
-                    android:hint="Email"
-                    android:includeFontPadding="false"
-                    android:inputType="text"
-                    android:singleLine="true" />
+                    app:layout_constraintStart_toStartOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/username_blog_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:hint="UserName"
+                        android:clickable="false"
+                        android:fontFamily="@font/poppins"
+                        android:includeFontPadding="false"
+                        android:inputType="text"
+                        android:singleLine="true" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:backgroundTint="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editTextTextPersonfirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:backgroundTint="@color/white"
-                    android:hint="Description"
-                    android:includeFontPadding="false"
-                    android:inputType="text"
-                    android:singleLine="true" />
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonUserName"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonUserName">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstname_blog_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:hint="First Name"
+                        android:fontFamily="@font/poppins"
+                        android:includeFontPadding="false"
+                        android:inputType="text"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editTextTextPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonLastName"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonLastName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_blog_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:hint="Email"
+                        android:fontFamily="@font/poppins"
+                        android:includeFontPadding="false"
+                        android:inputType="text"
+                        android:singleLine="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descr_blog_first"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:hint="Description"
+                        android:fontFamily="@font/poppins"
+                        android:includeFontPadding="false"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
             <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:id="@+id/button_save_first"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="200dp"
+                android:layout_marginTop="32dp"
                 android:text="Save"
+                android:textAllCaps="false"
+                android:layout_marginHorizontal="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>

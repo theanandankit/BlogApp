@@ -32,6 +32,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:id="@+id/code"
             android:hint="Enter the Passcode*"
             android:fontFamily="@font/poppins"
             android:textSize="14dp">
@@ -50,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cancel"
+                android:id="@+id/cancel"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:textAllCaps="false"

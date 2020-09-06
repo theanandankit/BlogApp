@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BlogAppDjangoRest</string>
+    <string name="app_name">Blogic</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="title_activity_edit_profile">EditProfile</string>

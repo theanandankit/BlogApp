@@ -1,24 +1,41 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.blogappdjangorest"
+        applicationId "com.Blogic.BlogApp"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    lintOptions {
+        // Returns whether lint should be quiet (for example, not write informational messages such as paths to report files written)
+        quiet true
+
+        // Whether lint should set the exit code of the process if errors are found
+        abortOnError false
+
+        // Returns whether lint will only check for errors (ignoring warnings)
+        ignoreWarnings true
+
+        // Returns whether lint should check for fatal errors during release builds. Default is true.
+        // If issues with severity "fatal" are found, the release build is aborted.
+        checkReleaseBuilds false
     }
 }
 
@@ -36,10 +53,15 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-firestore:21.5.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.3.0-alpha02'
+    implementation 'com.chaos.view:pinview:1.4.3'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -58,5 +80,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

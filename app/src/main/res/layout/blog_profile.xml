@@ -95,6 +95,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_toLeftOf="@+id/body_image"
                 android:orientation="vertical">
 
@@ -124,19 +125,6 @@
                 </TextView>
 
             </LinearLayout>
-
-
-            <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_alignParentRight="true"
-                android:id="@+id/blog_image"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/github"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp">
-
-            </ImageView>
 
 
         </RelativeLayout>

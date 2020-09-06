@@ -6,154 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#2D2C2C">
+   <ImageView
+       android:layout_width="400dp"
+       android:layout_height="400dp"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:layout_marginRight="-150dp"
+       android:layout_marginTop="-150dp"
+       android:background="@drawable/circle"
+       >
+   </ImageView>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password"
-        android:textColor="@color/white"
-        android:fontFamily="@font/poppins"
-        android:textSize="18dp"
-        android:layout_marginBottom="5dp"
-        android:layout_above="@+id/signup_cardview"
-        android:layout_marginLeft="45dp">
-
-    </TextView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_centerInParent="true"
-        android:background="@color/white"
-        app:cardElevation="5dp"
-        android:id="@+id/signup_cardview"
-        app:cardCornerRadius="10dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp">
-
-            <TextView
-                android:id="@+id/Forgot_main_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Please enter the Registered Email Address."
-                android:textSize="12dp"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/black"
-                android:gravity="left"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-            </TextView>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/forgot_password_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginLeft="20dp"
-                android:backgroundTint="@color/white"
-                app:endIconMode="password_toggle"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:includeFontPadding="false"
-                    android:backgroundTint="@color/white"
-                    android:singleLine="true" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/forgot_reenter_password_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:endIconMode="password_toggle"
-                android:visibility="gone"
-                android:layout_marginLeft="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Re-Enter Password"
-                    android:inputType="textPassword"
-                    android:includeFontPadding="false"
-                    android:backgroundTint="@color/white"
-                    android:singleLine="true" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/Forgot_mobile_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:backgroundTint="@color/white"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email"
-                    android:inputType="number"
-                    android:maxLength="10"
-                    android:backgroundTint="@color/white"
-                    android:singleLine="true" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Send Request"
-                android:id="@+id/Forgot_button"
-                android:fontFamily="@font/poppins"
-                android:textAllCaps="false"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp">
-
-            </com.google.android.material.button.MaterialButton>
-
-        </LinearLayout>
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:layout_marginTop="50dp"
+       android:layout_marginRight="50dp"
+       android:textColor="@color/white"
+       android:fontFamily="cursive"
+       android:text="Create\nshare\nfollow"
+       android:textSize="35dp">
+   </TextView>
 
 
-    </com.google.android.material.card.MaterialCardView>
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:gravity="center"
+       android:layout_centerInParent="true">
 
+      <ImageView
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          android:scaleType="fitXY"
+          android:src="@drawable/splash_screen"
+          android:id="@+id/image">
+
+      </ImageView>
+
+      <TextView
+          android:id="@+id/text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:fontFamily="cursive"
+          android:text="Blogic"
+          android:textSize="35dp">
+
+      </TextView>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/poppins"
+       android:textSize="10dp"
+       android:text="Version 1.0">
+   </TextView>
+
+   </LinearLayout>
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:fontFamily="@font/poppins"
+       android:layout_margin="20dp"
+       android:gravity="center"
+       android:text="Project under T.I.I.C. , A.B.V. indian institute of information technology and management\nGwalior"
+       android:layout_alignParentBottom="true"
+       android:textSize="13dp">
+
+   </TextView>
 </RelativeLayout>

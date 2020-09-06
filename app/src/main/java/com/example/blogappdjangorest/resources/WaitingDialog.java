@@ -13,6 +13,7 @@ public class WaitingDialog {
 
     Dialog dialog;
     Context context;
+    TextView message;
 
     public WaitingDialog(Context context)
     {
@@ -31,9 +32,9 @@ public class WaitingDialog {
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        final TextView message=dialog.findViewById(R.id.progress_message);
+        message=dialog.findViewById(R.id.progress_message);
         message.setText(s);
-//        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.getWindow().setAttributes(lp);
     }
 
@@ -45,6 +46,11 @@ public class WaitingDialog {
     public void dismiss()
     {
         dialog.dismiss();
+    }
+
+    public void setext(String s)
+    {
+        message.setText(s);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.blogappdjangorest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.activities.Blog_view;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -36,13 +40,25 @@ public class SearchBlogAdapter extends RecyclerView.Adapter<SearchBlogAdapter.Se
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchBlogAdapter.Searchholder holder, int position) {
+    public void onBindViewHolder(@NonNull SearchBlogAdapter.Searchholder holder, final int position) {
 
         holder.name.setText(response.get(position).getAuthor().getFirst_name()+" "+response.get(position).getAuthor().getLast_name());
         holder.date.setText(response.get(position).getDate());
         holder.category.setText(response.get(position).getCategory());
         holder.body.setText(response.get(position).getTitle());
+        Picasso.get().load(response.get(position).getAuthor().getUser_details()[0].getUrl()).into(holder.photo);
+        Log.e("url",response.get(position).getUrl());
+        Picasso.get().load(response.get(position).getUrl()).into(holder.blog_photo);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, Blog_view.class);
+                intent.putExtra("blog_id",response.get(position).getId());
+                intent.putExtra("url",response.get(position).getAuthor().getUser_details()[0].getUrl());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -52,7 +68,7 @@ public class SearchBlogAdapter extends RecyclerView.Adapter<SearchBlogAdapter.Se
 
     class Searchholder extends RecyclerView.ViewHolder {
         CircleImageView photo;
-        ImageView blog_photo;
+        CircleImageView blog_photo;
         TextView name, date, category, body;
 
         public Searchholder(@NonNull View itemView) {

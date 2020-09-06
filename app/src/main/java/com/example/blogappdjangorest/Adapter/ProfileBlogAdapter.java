@@ -1,6 +1,8 @@
 package com.example.blogappdjangorest.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.blogappdjangorest.Models.RetrofitModels.PublicBlogResponse;
 import com.example.blogappdjangorest.Models.RetrofitModels.data.ProfileUser;
 import com.example.blogappdjangorest.R;
+import com.example.blogappdjangorest.activities.Blog_view;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,11 +42,23 @@ public class ProfileBlogAdapter  extends RecyclerView.Adapter<ProfileBlogAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProfileBlogAdapter.ProfileHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProfileBlogAdapter.ProfileHolder holder, final int position) {
 
-        holder.name.setText(response.get(0).getAuthorName().get(position).getTitle().toString());
-        holder.body.setText(response.get(0).getAuthorName().get(position).getBody().toString());
+        holder.name.setText(response.get(0).getFirstName());
+        holder.body.setText(response.get(0).getAuthorName().get(position).getTitle());
         holder.category.setText(response.get(0).getAuthorName().get(position).getCategory().toString());
+        Picasso.get().load(response.get(0).getAuthorName().get(position).getUrl()).into(holder.photo);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(new Intent(context, Blog_view.class));
+                intent.putExtra("process",1);
+                intent.putExtra("blog_id",String.valueOf(response.get(0).getAuthorName().get(position).getId()));
+                intent.putExtra("url",response.get(0).getUserDetails().get(0).getUrl());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -55,14 +71,12 @@ public class ProfileBlogAdapter  extends RecyclerView.Adapter<ProfileBlogAdapter
     class ProfileHolder extends RecyclerView.ViewHolder {
 
         CircleImageView photo;
-        ImageView blog_photo;
         TextView name,date,category,body;
 
         public ProfileHolder(@NonNull View itemView) {
             super(itemView);
 
             photo=itemView.findViewById(R.id.image_blog);
-            blog_photo=itemView.findViewById(R.id.blog_image);
             name=itemView.findViewById(R.id.name_blog);
             date=itemView.findViewById(R.id.date_blog);
             category=itemView.findViewById(R.id.category_blog);

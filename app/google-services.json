@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "157166218158",
+    "firebase_url": "https://blogic-c360f.firebaseio.com",
+    "project_id": "blogic-c360f",
+    "storage_bucket": "blogic-c360f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157166218158:android:471a73788f541847c0763f",
+        "android_client_info": {
+          "package_name": "com.Blogic.BlogApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157166218158-7b2qh44kkcargqk41ce0friq6gmlscm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH4_SBlOI4xSi6aF_DE1Fv5UNE78TuZxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157166218158-7b2qh44kkcargqk41ce0friq6gmlscm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
