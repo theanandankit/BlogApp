@@ -42,22 +42,23 @@
             app:layout_constraintBottom_toBottomOf="@+id/profileimage"
             app:layout_constraintStart_toEndOf="@+id/profileimage" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:fontFamily="@font/poppins"
-        android:text="Join"
-        android:textColor="@color/black"
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/poppins"
+            android:text="Join"
 
-        android:textSize="14sp"
+            android:textColor="@color/black"
 
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView3" />
 
         <TextView
             android:layout_width="wrap_content"

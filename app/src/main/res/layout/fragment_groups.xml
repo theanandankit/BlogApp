@@ -6,6 +6,16 @@
     android:orientation="vertical">
     <include layout="@layout/groups_header"/>
 
+    <TextView
+        android:id="@+id/nogrp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:visibility="gone"
+        android:text="No groups Added"/>
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerFrameLayout"
         android:layout_width="match_parent"
@@ -41,6 +51,8 @@
         android:background="@android:color/transparent"
         android:id="@+id/groups"
         />
+
+
 
 
 

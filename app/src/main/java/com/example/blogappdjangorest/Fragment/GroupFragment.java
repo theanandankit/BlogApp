@@ -31,7 +31,7 @@ public class GroupFragment extends Fragment {
     ShimmerFrameLayout shimmerFrameLayout;
     RecyclerView groups;
     GroupsAdapter groupsAdapter;
-    TextView title;
+    TextView title,nogrp;
     ApiClient apiClient;
     PreferencesHelper preferencesHelper;
 
@@ -54,6 +54,7 @@ public class GroupFragment extends Fragment {
     private void initViews(View view) {
         shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
         groups = view.findViewById(R.id.groups);
+        nogrp = view.findViewById(R.id.nogrp);
 
         title = view.findViewById(R.id.title);
         title.setText("My Groups");
@@ -103,6 +104,12 @@ public class GroupFragment extends Fragment {
                         groups.setAdapter(groupsAdapter);
                         shimmerFrameLayout.stopShimmer();
                         shimmerFrameLayout.setVisibility(View.GONE);
+
+                        if (response.body().size() ==0){
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                            nogrp.setVisibility(View.VISIBLE);
+                        }
 
                         Log.e("size", String.valueOf(response.body().get(0).getMemberinfo().size()));
 
