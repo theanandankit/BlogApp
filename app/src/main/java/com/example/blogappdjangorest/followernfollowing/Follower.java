@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.blogappdjangorest.Adapter.FollowListAdapter;
@@ -30,10 +31,7 @@ public class Follower extends Fragment {
     RecyclerView recyclerView;
     ApiClient apiClient;
     PreferencesHelper preferencesHelper;
-
-
-    TextView nothingtoshow;
-
+    LinearLayout empty;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,9 +46,7 @@ public class Follower extends Fragment {
 
         recyclerView=view.findViewById(R.id.followerrecycle);
         preferencesHelper = new PreferencesHelper(getContext());
-        nothingtoshow = view.findViewById(R.id.nothingtoshowfollower);
-
-        nothingtoshow.setVisibility(View.INVISIBLE);
+        empty=view.findViewById(R.id.empty);
 
         apiClient=new ApiClient();
         Call<ArrayList<followerList>> call=apiClient.getApiinterface().followerlistthing(Integer.parseInt(preferencesHelper.getid()));
@@ -61,12 +57,10 @@ public class Follower extends Fragment {
             public void onResponse(Call<ArrayList<followerList>> call, Response<ArrayList<followerList>> response) {
                 if(response.code()==200){
 
-                    if (response.body().size()==0){
-
-                        nothingtoshow.setVisibility(View.VISIBLE);
+                    if (response.body().get(0).getPersonList2Follower().size()==0){
+                        empty.setVisibility(View.VISIBLE);
                     }
                     else {
-                        nothingtoshow.setVisibility(View.INVISIBLE);
                         FollowListAdapter followListAdapter = new FollowListAdapter(getContext(), response.body());
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

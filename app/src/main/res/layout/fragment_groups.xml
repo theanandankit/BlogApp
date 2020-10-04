@@ -6,6 +6,7 @@
     android:orientation="vertical">
     <include layout="@layout/groups_header"/>
 
+
     <TextView
         android:id="@+id/nogrp"
         android:layout_width="match_parent"
@@ -16,13 +17,17 @@
         android:visibility="gone"
         android:text="No groups Added"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,10 +42,6 @@
             <include layout="@layout/groups_placeholder" />
             <include layout="@layout/groups_placeholder" />
 
-
-
-
-
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -52,7 +53,35 @@
         android:id="@+id/groups"
         />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/empty"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:gravity="center">
 
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/box">
+            </ImageView>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="you didn't join any group.\n join group Setting>join group">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 
 

@@ -2,10 +2,12 @@ package com.example.blogappdjangorest.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class Blog_view extends AppCompatActivity {
     ProgressBar progressBar;
     String blog_id,url;
     int process;
+    LinearLayout profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class Blog_view extends AppCompatActivity {
     }
     private void init()
     {
+        profile=findViewById(R.id.profile_section);
         user_image=findViewById(R.id.image);
         blog_image=findViewById(R.id.blog_image);
         name=findViewById(R.id.name);
@@ -56,6 +60,7 @@ public class Blog_view extends AppCompatActivity {
         body=findViewById(R.id.body);
         progressBar=findViewById(R.id.progress);
         apiClient=new ApiClient();
+
     }
     private void call()
     {
@@ -63,7 +68,7 @@ public class Blog_view extends AppCompatActivity {
 
         call.enqueue(new Callback<ArrayList<BlogInfoResponse>>() {
             @Override
-            public void onResponse(Call<ArrayList<BlogInfoResponse>> call, Response<ArrayList<BlogInfoResponse>> response) {
+            public void onResponse(Call<ArrayList<BlogInfoResponse>> call, final Response<ArrayList<BlogInfoResponse>> response) {
 
                 if (response.code()==200)
                 {
@@ -76,6 +81,15 @@ public class Blog_view extends AppCompatActivity {
                         title.setText(response.body().get(0).getTitle());
                         body.setText(response.body().get(0).getBody());
                         date.setText(response.body().get(0).getDate());
+                        Log.e("ok",String.valueOf(response.body().get(0).getAuthor().getId()));
+                        profile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent=new Intent(getApplicationContext(),ProfileView.class);
+                                intent.putExtra("user_id",response.body().get(0).getAuthor().getUser_details()[0].getUser_id());
+                                startActivity(intent);
+                            }
+                        });
                     }
                 }
                 else

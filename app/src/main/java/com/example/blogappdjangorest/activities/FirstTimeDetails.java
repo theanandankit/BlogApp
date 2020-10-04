@@ -1,36 +1,38 @@
 package com.example.blogappdjangorest.activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.blogappdjangorest.Models.RetrofitModels.ProfileInfoResponse;
-import com.example.blogappdjangorest.Models.RetrofitModels.editblog.EditBlogList;
 import com.example.blogappdjangorest.Models.RetrofitModels.editblog.Editblogput;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
 import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URI;
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -40,12 +42,13 @@ import retrofit2.Response;
 public class FirstTimeDetails extends AppCompatActivity {
 
 
-    TextView Chngephotobtn, firstname_blog, email_blog, username_blog, descr_blog;
+    TextView firstname_blog, email_blog, username_blog, descr_blog;
     ApiClient apiClient;
     Button button_save;
     PreferencesHelper preferencesHelper;
     CircleImageView circleImageView;
     Uri uri;
+    MaterialButton button;
     StorageReference folder;
     WaitingDialog waitingDialog;
     StorageReference image_store;
@@ -64,6 +67,7 @@ public class FirstTimeDetails extends AppCompatActivity {
         circleImageView = findViewById(R.id.pro_image);
         waitingDialog = new WaitingDialog(FirstTimeDetails.this);
         Log.e("c", String.valueOf(preferencesHelper.getprofilesetup()));
+
 
         username_blog.setEnabled(false);
         firstname_blog.setEnabled(false);
@@ -85,17 +89,26 @@ public class FirstTimeDetails extends AppCompatActivity {
             }
         });
 
-        Chngephotobtn = (TextView) findViewById(R.id.Chngephotobtn_first);
-        Chngephotobtn.setOnClickListener(new View.OnClickListener() {
 
+        circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
-
+            public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, 1);
+            }
+        });
 
+        button =findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
             }
         });
     }
@@ -107,10 +120,9 @@ public class FirstTimeDetails extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uri = data.getData();
             circleImageView.setImageURI(uri);
-            Chngephotobtn.setText("Edit Image");
+            circleImageView.setVisibility(View.VISIBLE);
         }
     }
-
     private void upload() {
         folder = FirebaseStorage.getInstance().getReference().child("Profile_pic");
         try {
@@ -119,7 +131,17 @@ public class FirstTimeDetails extends AppCompatActivity {
             without_image();
             return;
         }
-        UploadTask uploadTask = image_store.putFile(uri);
+        Bitmap bmp = null;
+        try {
+            bmp = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = image_store.putBytes(data);
         waitingDialog.SetDialog("Uploading Your\nfile...");
         waitingDialog.show();
 
@@ -159,6 +181,7 @@ public class FirstTimeDetails extends AppCompatActivity {
 
                         preferencesHelper.setprofilesetup(true);
                         startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+                        finish();
                     }
 
                 }

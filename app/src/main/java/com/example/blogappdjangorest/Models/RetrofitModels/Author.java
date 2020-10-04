@@ -25,6 +25,16 @@ public class Author {
 
     private String username;
 
+    public User_details[] getUser_details() {
+        return user_details;
+    }
+
+    public void setUser_details(User_details[] user_details) {
+        this.user_details = user_details;
+    }
+
+    private User_details[] user_details;
+
     public String getIs_active ()
     {
         return is_active;

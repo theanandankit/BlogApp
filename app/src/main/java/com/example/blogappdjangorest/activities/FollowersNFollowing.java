@@ -29,8 +29,8 @@ public class FollowersNFollowing extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("Followers"));
         tabLayout.addTab(tabLayout.newTab().setText("Following"));
+        tabLayout.addTab(tabLayout.newTab().setText("Followers"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
 

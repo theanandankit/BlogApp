@@ -2,8 +2,10 @@ package com.example.blogappdjangorest.Fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.example.blogappdjangorest.Models.RetrofitModels.GroupListMemberRespon
 import com.example.blogappdjangorest.Models.RetrofitModels.GroupListResponse;
 import com.example.blogappdjangorest.R;
 import com.example.blogappdjangorest.Retrofit.ApiClient;
+import com.example.blogappdjangorest.activities.FollowersNFollowing;
 import com.example.blogappdjangorest.resources.PreferencesHelper;
 import com.example.blogappdjangorest.resources.WaitingDialog;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,6 +40,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -62,6 +67,7 @@ public class AddBlogFragment extends Fragment {
     WaitingDialog waitingDialog;
     TextView header_title;
     PreferencesHelper preferencesHelper;
+    StorageReference image_store;
 
 
     @Nullable
@@ -90,6 +96,8 @@ public class AddBlogFragment extends Fragment {
             public void onClick(View view) {
 
                 showDialog();
+//                getParentFragmentManager().beginTransaction().replace(R.id.homescreenfragment,new HomeFragment()).commit();
+//                startActivity(new Intent(getContext(), FollowersNFollowing.class));
             }
         });
 
@@ -258,6 +266,7 @@ public class AddBlogFragment extends Fragment {
                         Toast.makeText(getContext(), "Successfully Added", Toast.LENGTH_LONG).show();
                         Log.e("value", status);
                         waitingDialog.dismiss();
+                        getParentFragmentManager().beginTransaction().replace(R.id.homescreenfragment,new HomeFragment()).commit();
 
                     } else
                         Log.e("ok", "q");
@@ -273,38 +282,7 @@ public class AddBlogFragment extends Fragment {
         });
     }
 
-    private void check() {
-
-    }
-
     private void get_group() {
-//        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group("10");
-//        call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<GroupListResponse>> call, Response<ArrayList<GroupListResponse>> response) {
-//
-//                if (response.code()==200)
-//                {
-//                    if (!(response.body().size() ==0))
-//                    {
-//                        group=new String[response.body().size()];
-//                        group_id=new String[response.body().size()];
-//                        for (int a=0;a<response.body().size();a++)
-//                        {
-//                            group[a]=response.body().get(a).getGroup_description();
-//                            group_id[a]=response.body().get(a).getGroup_id();
-//                        }
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<GroupListResponse>> call, Throwable t) {
-//
-//            }
-//        });
-
         Call<ArrayList<GroupListMemberResponse>> call = apiClient.getApiinterface().get_group_member(preferencesHelper.getid());
         call.enqueue(new Callback<ArrayList<GroupListMemberResponse>>() {
             @Override
@@ -333,8 +311,25 @@ public class AddBlogFragment extends Fragment {
     private void upload() {
         Log.e("value", status);
         folder = FirebaseStorage.getInstance().getReference().child("ImageFolder");
-        final StorageReference image_store = folder.child("image" + uri.getLastPathSegment());
-        UploadTask uploadTask = image_store.putFile(uri);
+        try {
+            image_store = folder.child("image" + uri.getLastPathSegment());
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getContext(),"Please add Image",Toast.LENGTH_LONG).show();
+            return;
+        }
+        Bitmap bmp = null;
+        try {
+            bmp = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 25, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = image_store.putBytes(data);
         waitingDialog.SetDialog("Uploading Your\nfile...");
         waitingDialog.show();
 
