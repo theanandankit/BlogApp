@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class GroupFragment extends Fragment {
     TextView title,nogrp;
     ApiClient apiClient;
     PreferencesHelper preferencesHelper;
+    LinearLayout empty;
 
 
     @Nullable
@@ -54,41 +56,20 @@ public class GroupFragment extends Fragment {
     private void initViews(View view) {
         shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
         groups = view.findViewById(R.id.groups);
+
         nogrp = view.findViewById(R.id.nogrp);
+
+
+        empty=view.findViewById(R.id.empty);
 
         title = view.findViewById(R.id.title);
         title.setText("My Groups");
-
         apiClient=new ApiClient();
         get_group();
     }
 
     private void get_group()
     {
-//        Call<ArrayList<GroupListResponse>> call=apiClient.getApiinterface().get_group(preferencesHelper.getid());
-//        call.enqueue(new Callback<ArrayList<GroupListResponse>>() {
-//            @Override
-//            public void onResponse(Call<ArrayList<GroupListResponse>> call, Response<ArrayList<GroupListResponse>> response) {
-//
-//                if (response.code()==200)
-//                {
-//                    if (!(response.body().size() ==0))
-//                    {
-//                        groupsAdapter = new GroupsAdapter(getContext(),response.body());
-//                        groups.setAdapter(groupsAdapter);
-//                        shimmerFrameLayout.stopShimmer();
-//                        shimmerFrameLayout.setVisibility(View.GONE);
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ArrayList<GroupListResponse>> call, Throwable t) {
-//
-//            }
-//        });
-
         Call<ArrayList<GroupListMemberResponse>> call=apiClient.getApiinterface().get_group_member(preferencesHelper.getid());
 
         call.enqueue(new Callback<ArrayList<GroupListMemberResponse>>() {
@@ -105,6 +86,7 @@ public class GroupFragment extends Fragment {
                         shimmerFrameLayout.stopShimmer();
                         shimmerFrameLayout.setVisibility(View.GONE);
 
+
                         if (response.body().size() ==0){
                             shimmerFrameLayout.stopShimmer();
                             shimmerFrameLayout.setVisibility(View.GONE);
@@ -113,9 +95,13 @@ public class GroupFragment extends Fragment {
 
                         Log.e("size", String.valueOf(response.body().get(0).getMemberinfo().size()));
 
+
+                    }
+                    else {
+                        empty.setVisibility(View.VISIBLE);
+
                     }
                 }
-
             }
 
             @Override

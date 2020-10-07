@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.blogappdjangorest.Adapter.FollowListAdapter;
@@ -31,9 +32,7 @@ public class Following extends Fragment {
     RecyclerView recyclerView;
     ApiClient apiClient;
     PreferencesHelper preferencesHelper;
-
-    TextView nothingtoshow;
-
+    LinearLayout empty;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +45,7 @@ public class Following extends Fragment {
         View view = inflater.inflate(R.layout.fragment_following, container, false);
         recyclerView=view.findViewById(R.id.followingrecycle);
         preferencesHelper = new PreferencesHelper(getContext());
-        nothingtoshow = view.findViewById(R.id.nothingtoshowfollowing);
-
-        nothingtoshow.setVisibility(View.INVISIBLE);
-
+        empty=view.findViewById(R.id.empty);
 
 
         apiClient=new ApiClient();
@@ -59,12 +55,10 @@ public class Following extends Fragment {
             public void onResponse(Call<ArrayList<FollowingList>> call, Response<ArrayList<FollowingList>> response) {
                 if(response.code()==200){
 
-                    if (response.body().size()==0){
-
-                        nothingtoshow.setVisibility(View.VISIBLE);
+                    if (response.body().get(0).getPersonList1Follow().size()==0){
+                        empty.setVisibility(View.VISIBLE);
                     }
                     else {
-                        nothingtoshow.setVisibility(View.INVISIBLE);
                         FollowingListAdapter followingListAdapter = new FollowingListAdapter(getContext(), response.body());
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

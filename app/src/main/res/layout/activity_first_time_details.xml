@@ -7,65 +7,52 @@
     android:orientation="vertical"
     tools:context=".activities.FirstTimeDetails">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/circleImageView2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <RelativeLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
-                    android:id="@+id/pro_image"
-                    android:src="@drawable/baseline_person_pin_black_18dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_height="100dp">
-                </de.hdodenhof.circleimageview.CircleImageView>
 
-            </RelativeLayout>
-
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/Chngephotobtn_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Add Profile Photo"
-            android:background="@drawable/bg_profile"
-            android:padding="7dp"
-            android:textSize="14sp"
-            android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="@+id/circleImageView2"
-            app:layout_constraintStart_toStartOf="@+id/circleImageView2"
-            app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:fontFamily="@font/poppins"
+            android:text="One last step to complete"
+            android:textColor="#000"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginEnd="2dp">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/pro_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/baseline_person_pin_black_18dp"
+            android:visibility="gone">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="Add image"
+            android:id="@+id/button"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="false">
+
+        </com.google.android.material.button.MaterialButton>
 
                 <TextView
                     android:id="@+id/textView12"
@@ -73,34 +60,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Set Your Profile"
+                    android:text="All fields are required"
                     android:textColor="#000"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="16dp"/>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editTextTextPersonUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:backgroundTint="@color/white"
-                    app:layout_constraintStart_toStartOf="@+id/textView12"
-                    app:layout_constraintTop_toBottomOf="@+id/textView12">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/username_blog_first"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:hint="UserName"
                         android:clickable="false"
-
+                        android:fontFamily="@font/poppins"
+                        android:hint="UserName"
                         android:includeFontPadding="false"
                         android:inputType="text"
                         android:singleLine="true" />
@@ -112,9 +92,9 @@
                     android:id="@+id/editTextTextPersonfirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:backgroundTint="@color/white"
                     app:layout_constraintStart_toStartOf="@+id/editTextTextPersonUserName"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonUserName">
@@ -125,44 +105,20 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:hint="First Name"
+                        android:fontFamily="@font/poppins"
                         android:includeFontPadding="false"
                         android:inputType="text"
                         android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/editTextTextPersonLastName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:backgroundTint="@color/white"
-                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonfirstName"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonfirstName">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/lastnameblog_first"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
-                        android:hint="Last Name"
-                        android:includeFontPadding="false"
-                        android:inputType="text"
-                        android:singleLine="true" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editTextTextPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:backgroundTint="@color/white"
                     app:layout_constraintStart_toStartOf="@+id/editTextTextPersonLastName"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonLastName">
@@ -173,8 +129,9 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:hint="Email"
+                        android:fontFamily="@font/poppins"
                         android:includeFontPadding="false"
-                        android:inputType="text"
+                        android:inputType="textEmailAddress"
                         android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -183,8 +140,8 @@
                     android:id="@+id/textInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:backgroundTint="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName">
@@ -194,12 +151,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
-                        android:hint="Description"
+                        android:hint="About You"
+                        android:fontFamily="@font/poppins"
                         android:includeFontPadding="false"
-                        android:inputType="text"/>
+                        android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
-
 
                 <Button
                     android:id="@+id/button_save_first"
@@ -207,17 +164,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="Save"
+                    android:layout_marginHorizontal="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </ScrollView>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

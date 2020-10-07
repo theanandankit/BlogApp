@@ -1,6 +1,7 @@
 package com.example.blogappdjangorest.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,10 +27,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUpScreen extends AppCompatActivity implements Otp_verification.OnSuccess, SignUpupload.OnSuccess {
-    TextInputLayout email,password,username,firstname,phone;
+public class SignUpScreen extends AppCompatActivity {
+    TextInputLayout email,password,username,firstname;
     MaterialButton button;
-    TextView text;
+    TextView text,login_text;
     WaitingDialog waitingDialog;
     PreferencesHelper preferencesHelper;
     ApiClient apiClient;
@@ -48,40 +49,30 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
         password=findViewById(R.id.signup_password_layout);
         username=findViewById(R.id.signup_username_layout);
         firstname=findViewById(R.id.signup_first_layout);
-        phone=findViewById(R.id.signup_phone_layout);
         text=findViewById(R.id.signup_main_text);
         button=findViewById(R.id.signup_register);
+        login_text=findViewById(R.id.signup_login_text);
         preferencesHelper=new PreferencesHelper(getApplicationContext());
         waitingDialog=new WaitingDialog(SignUpScreen.this);
         apiClient=new ApiClient();
         pinView=findViewById(R.id.otp_input);
         otp=new Otp_verification();
-        signUpupload=new SignUpupload(SignUpScreen.this);
+        login_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (email.getVisibility()==View.VISIBLE&&check_initial()&&check_final()) {
-                    signUpupload.exist(email.getEditText().getText().toString());
+                if (check_initial()&&check_final()) {
                     waitingDialog.SetDialog("Creating you account\nPlease wait..");
-
-                }else
-                {
-                    if(pinView.getText().toString().length()==6)
-                    {
-                        otp.check(pinView.getText().toString());
-                    }
+                    waitingDialog.show();
+                    register();
                 }
             }
         });
-    }
-    public void final_condition()
-    {
-        email.setVisibility(View.GONE);
-        password.setVisibility(View.GONE);
-        username.setVisibility(View.GONE);
-        firstname.setVisibility(View.GONE);
-        phone.setVisibility(View.GONE);
-        pinView.setVisibility(View.VISIBLE);
     }
     private boolean check_initial()
     {
@@ -111,16 +102,7 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
         {
             if (!firstname.getEditText().getText().toString().isEmpty())
             {
-                if ((!phone.getEditText().getText().toString().isEmpty())&&phone.getEditText().getText().length()==10)
-                {
-                    return true;
-                }
-                else
-                {
-                    phone.setError("This field Is required");
-                    phone.requestFocus();
-                    return false;
-                }
+               return true;
             }
             else
             {
@@ -147,10 +129,19 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
                 {
                     if (!response.body().toString().isEmpty())
                     {
-
-                        signUpupload.upload(new SignupFirestoreModel(email.getEditText().getText().toString(),response.body().getToken(),phone.getEditText().getText().toString(),firstname.getEditText().getText().toString()));
-
+                        try {
+                            if (!response.body().getToken().isEmpty())
+                            {
+                                login();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Toast.makeText(getApplicationContext(),"username or email already exist",Toast.LENGTH_LONG).show();
+                            waitingDialog.dismiss();
+                        }
                     }
+
                 }
             }
 
@@ -159,32 +150,6 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
 
             }
         });
-    }
-
-    @Override
-    public void completed() {
-        register();
-        waitingDialog.show();
-    }
-
-    @Override
-    public void success() {
-        Toast.makeText(getApplicationContext(),"successfully added \nPlease Login",Toast.LENGTH_LONG).show();
-        waitingDialog.setext("Signing In \n Please wait");
-        login();
-    }
-
-    @Override
-    public void exist(boolean value) {
-        if (value)
-        {
-            Toast.makeText(getApplicationContext(),"Email or phone already exist",Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            final_condition();
-            otp.verify("+91"+phone.getEditText().getText().toString(),getApplicationContext(),pinView,SignUpScreen.this);
-        }
     }
 
     public void login()
@@ -201,8 +166,11 @@ public class SignUpScreen extends AppCompatActivity implements Otp_verification.
                             preferencesHelper.setToken(response.body().getToken());
                             preferencesHelper.setid(response.body().getId());
                             waitingDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "successfully Login", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "successfully Registered", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(),FirstTimeDetails.class));
+                            preferencesHelper.SetWelcome();
+                            preferencesHelper.setlogin(true);
+                            finish();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

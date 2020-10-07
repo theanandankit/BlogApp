@@ -25,7 +25,6 @@ import com.example.blogappdjangorest.Models.RetrofitModels.following.FollowingLi
 import java.util.ArrayList;
 
 import retrofit2.Call;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -50,7 +49,6 @@ public interface RetrofitInterface {
     @GET("full-profile-info/")
     Call<ArrayList<ProfileUser>> profileUser(@Query("user_id") int userid);
 
-
     @GET("search-blog/")
     Call<ArrayList<PublicBlogResponse>> blogsearch(@Query("search") String search,@Query("category") String category);
 
@@ -59,7 +57,6 @@ public interface RetrofitInterface {
 
     @GET("blog-info/")
     Call<ArrayList<BlogInfoResponse>> bloginfo(@Query("id") String id);
-
 
     @GET("get-categories")
     Call<ArrayList<CategoryResponse>> get_categories();
@@ -84,12 +81,11 @@ public interface RetrofitInterface {
 
     @POST("create-group/")
     @FormUrlEncoded
-    Call<String> create_group(@Field("group_id") String group_id,@Field("group_description") String group_description,@Field("creator_id") String creator_id,@Field("group_code") String group_code);
+    Call<String> create_group(@Field("group_id") String group_id,@Field("group_description") String group_description,@Field("creator_id") String creator_id,@Field("group_code") String group_code,@Field("url") String url);
 
     @PUT("change-password/")
     @FormUrlEncoded
     Call<ChangePasswordResponse> change_password(@Header("Authorization") String Authorization,@Field("old_password") String old_password,@Field("new_password") String new_password);
-
 
     @GET("follow-list/")
     Call<ArrayList<followerList>> followerlistthing(@Query("id") int id);
@@ -123,5 +119,9 @@ public interface RetrofitInterface {
     @POST("unfollow/")
     @FormUrlEncoded
     Call<StartFollowResponse> unfollow(@Field("who") String who,@Field("whom") String whom);
+
+    @PUT("edit-user-info/")
+    @FormUrlEncoded
+    Call<Editblogput> editUserInfo(@Header("Authorization") String Authorization,@Field("user_id") int usr_id,@Field("description") String Descr,@Field("url") String url);
 
 }
