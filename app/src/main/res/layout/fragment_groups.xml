@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:textSize="30sp"
         android:visibility="gone"
-        android:text="No groups Added"/>
+        android:text="No groups Joined"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
