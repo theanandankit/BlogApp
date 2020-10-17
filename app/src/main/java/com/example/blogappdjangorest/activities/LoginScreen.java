@@ -130,7 +130,8 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
+                waitingDialog.dismiss();
             }
         });
     }
