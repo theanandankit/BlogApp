@@ -146,6 +146,7 @@ public class FirstTimeDetails extends AppCompatActivity {
         try {
             bmp = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
         } catch (IOException e) {
+            Toast.makeText(getApplicationContext(),"Please select image",Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -199,7 +200,7 @@ public class FirstTimeDetails extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Editblogput> call, Throwable t) {
-
+                    Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
                 }
             });
 
