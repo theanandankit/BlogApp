@@ -113,7 +113,7 @@ public class LoginScreen extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(),"Incorrect email or password",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Something went Wrong",Toast.LENGTH_LONG).show();
                         FirebaseAuth.getInstance().signOut();
                         preferencesHelper.setprofilesetup(false);
                         waitingDialog.dismiss();
@@ -130,7 +130,8 @@ public class LoginScreen extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
+                waitingDialog.dismiss();
             }
         });
     }

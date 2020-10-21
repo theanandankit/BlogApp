@@ -1,5 +1,6 @@
 package com.example.blogappdjangorest.activities;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,7 +49,9 @@ public class FirstTimeDetails extends AppCompatActivity {
     PreferencesHelper preferencesHelper;
     CircleImageView circleImageView;
     Uri uri;
-    MaterialButton button;
+    MaterialButton button,logout;
+    AlertDialog.Builder builder;
+    Dialog dialog;
     StorageReference folder;
     WaitingDialog waitingDialog;
     StorageReference image_store;
@@ -67,6 +70,14 @@ public class FirstTimeDetails extends AppCompatActivity {
         circleImageView = findViewById(R.id.pro_image);
         waitingDialog = new WaitingDialog(FirstTimeDetails.this);
         Log.e("c", String.valueOf(preferencesHelper.getprofilesetup()));
+        logout=findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout_dialog();
+            }
+        });
 
 
         username_blog.setEnabled(false);
@@ -135,6 +146,7 @@ public class FirstTimeDetails extends AppCompatActivity {
         try {
             bmp = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
         } catch (IOException e) {
+            Toast.makeText(getApplicationContext(),"Please select image",Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -188,7 +200,7 @@ public class FirstTimeDetails extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Editblogput> call, Throwable t) {
-
+                    Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -246,6 +258,26 @@ public class FirstTimeDetails extends AppCompatActivity {
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    public void logout_dialog()
+    {
+
+        builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("want to logout ?");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                preferencesHelper.setlogin(false);
+                preferencesHelper.setprofilesetup(false);
+                startActivity(new Intent(getApplicationContext(),LoginScreen.class));
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        dialog = builder.create();
+        dialog.show();
     }
 }
 

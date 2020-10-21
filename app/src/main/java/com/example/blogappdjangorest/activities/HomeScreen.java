@@ -34,7 +34,6 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
-
     private void init()
     {
         bottomNavigationView=findViewById(R.id.homescreenbottom);

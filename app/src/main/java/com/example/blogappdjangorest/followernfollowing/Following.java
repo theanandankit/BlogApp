@@ -47,7 +47,6 @@ public class Following extends Fragment {
         preferencesHelper = new PreferencesHelper(getContext());
         empty=view.findViewById(R.id.empty);
 
-
         apiClient=new ApiClient();
         Call<ArrayList<FollowingList>> call=apiClient.getApiinterface().followinglistthing(Integer.parseInt(preferencesHelper.getid()));
         call.enqueue(new Callback<ArrayList<FollowingList>>() {

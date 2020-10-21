@@ -9,22 +9,37 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Welcome_screen"></activity>
-        <activity android:name=".activities.FirstTimeDetails"></activity>
-        <activity android:name=".activities.ChangePassword" />
-        <activity android:name=".activities.FollowersNFollowing" />
-        <activity android:name=".activities.Blog_view" />
-        <activity android:name=".activities.ProfileView" />
-        <activity android:name=".activities.EditProfile" />
+        <activity android:name=".activities.Welcome_screen"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.FirstTimeDetails"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.ChangePassword"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.FollowersNFollowing"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.Blog_view"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ProfileView"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EditProfile"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.HomeScreen"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
-        <activity android:name=".activities.ForgotPasswordRequest" />
-        <activity android:name=".activities.SignUpScreen"></activity>
-        <activity android:name=".activities.LoginScreen"></activity>
-        <activity android:name=".MainActivity">
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.ForgotPasswordRequest"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.SignUpScreen"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activities.LoginScreen"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

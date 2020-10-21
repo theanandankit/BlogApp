@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.blogappdjangorest.Models.RetrofitModels.BlogInfoResponse;
 import com.example.blogappdjangorest.R;
@@ -95,12 +96,13 @@ public class Blog_view extends AppCompatActivity {
                 else
                 {
                     body.setText("Something Went Wrong\n Please check your internet connection");
+                    Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<BlogInfoResponse>> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
             }
         });
     }

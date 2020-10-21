@@ -109,6 +109,7 @@ public class ProfileView extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<ProfileUser>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"something went wrong",Toast.LENGTH_LONG).show();
                 Log.e("error", t.getMessage());
             }
         });
